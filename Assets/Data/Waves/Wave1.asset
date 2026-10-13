@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7511dd9fa8fc284b9ddfe450ec8374b, type: 3}
+  m_Name: Wave1
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.WaveData
+  spawnInterval: 1.5
+  compositions:
+  - enemy: {fileID: 11400000, guid: d1c6e61444eef0e41b2987c2da4270b7, type: 2}
+    prefab: {fileID: 6536791609722930022, guid: cf4fce26e9d61d54f9da7f8b04ce1797, type: 3}
+    baseCount: 5
+    increase: 2

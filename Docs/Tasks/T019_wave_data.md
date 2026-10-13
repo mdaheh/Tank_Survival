@@ -1,5 +1,5 @@
 # T019: SO-данные волн — WaveData + DifficultyData
-- Status: [ ]
+- Status: [x]
 - Phase: 3
 - Files:
   - Assets/Scripts/Data/WaveData.cs
@@ -36,5 +36,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/WaveData.cs: класс WaveData + структура WaveComposition, Assets/Scripts/Data/DifficultyData.cs: класс DifficultyData
+Блокер: —
