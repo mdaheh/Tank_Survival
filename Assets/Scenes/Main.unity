@@ -292,19 +292,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameBootstrap
   sessionState: {fileID: 507898592}
   statBlock: {fileID: 1245404300}
-  playerHealth: {fileID: 1245404298}
   poolManager: {fileID: 249992434}
-  enemyPrefab: {fileID: 6536791609722930022, guid: cf4fce26e9d61d54f9da7f8b04ce1797, type: 3}
-  enemyData: {fileID: 11400000, guid: d1c6e61444eef0e41b2987c2da4270b7, type: 2}
-  playerTransform: {fileID: 1245404301}
-  spawnPoints:
-  - {fileID: 989895939}
-  - {fileID: 1603175577}
-  - {fileID: 850715172}
-  - {fileID: 380532412}
-  spawnCount: 1
   projectilePrefab: {fileID: 1658045355164781374, guid: 326d7bec58d24f74fb0ca1a67d9dc709, type: 3}
   projectileCount: 20
+  waveSpawner: {fileID: 153685795}
+  roundController: {fileID: 1360148710}
 --- !u!114 &507898592
 MonoBehaviour:
   m_ObjectHideFlags: 0

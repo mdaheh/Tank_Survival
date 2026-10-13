@@ -51,7 +51,7 @@ namespace TankSurvival.Round
         private void HandlePlayerDeath()
         {
             phase = RoundPhase.Lose;
-            waveSpawner.Reset();
+            waveSpawner.ClearActiveEnemies();
         }
 
         [ContextMenu("Restart Round")]

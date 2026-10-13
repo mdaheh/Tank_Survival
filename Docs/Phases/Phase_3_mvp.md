@@ -10,12 +10,14 @@
 - T021: `WaveSpawner` + `SpawnPoint` — батч-спавн волн по данным из точек, счётчик живых, событие конца волны.
 - T022: `RoundController` — фазы Playing/Win/Lose, победа/поражение, рестарт без `LoadScene`.
 - T023: `GameBootstrap` — пересборка: убрать временный спавн, prewarm волн, запуск/рестарт раунда.
+- T024: `WaveSpawner` — сброс `_active`/`_spawnIndex` в `BeginWave` (фикс `Restart Round`).
+- T025: `WaveSpawner` — переименовать `Reset()` → `ClearActiveEnemies()` с явным `[ContextMenu]`.
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] Раунд стартует: 3 волны врагов спавнятся по `WaveData` из точек `SpawnPoint_1..4`.
-- [ ] После зачистки 3-й волны `RoundController.phase = Win`.
-- [ ] При HP игрока = 0 → `RoundController.phase = Lose`, враги возвращаются в пул.
-- [ ] `Context Menu → Restart Round` стартует раунд заново без перезагрузки сцены.
-- [ ] Между волнами число активных объектов в иерархии не растёт (нет `Instantiate`/`Destroy` в игре).
-- [ ] В консоли нет ошибок.
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] Раунд стартует: 3 волны врагов спавнятся по `WaveData` из точек `SpawnPoint_1..4`.
+- [x] После зачистки 3-й волны `RoundController.phase = Win`.
+- [x] При HP игрока = 0 → `RoundController.phase = Lose`, враги возвращаются в пул.
+- [x] `Context Menu → Restart Round` стартует раунд заново без перезагрузки сцены.
+- [x] Между волнами число активных объектов в иерархии не растёт (нет `Instantiate`/`Destroy` в игре).
+- [x] В консоли нет ошибок.

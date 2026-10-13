@@ -43,6 +43,9 @@ namespace TankSurvival.Waves
                 poolManager.Release(_active[i].gameObject);
             }
 
+            _active.Clear();
+            _spawnIndex = 0;
+
             for (int c = 0; c < waveData.compositions.Length; c++)
             {
                 WaveComposition composition = waveData.compositions[c];
@@ -107,7 +110,8 @@ namespace TankSurvival.Waves
             }
         }
 
-        public void Reset()
+        [ContextMenu("Release Active Enemies")]
+        public void ClearActiveEnemies()
         {
             _spawning = false;
             _queue.Clear();

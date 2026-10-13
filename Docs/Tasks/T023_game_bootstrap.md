@@ -1,5 +1,5 @@
 # T023: GameBootstrap — пересборка под волны и раунд
-- Status: [ ]
+- Status: [x]
 - Phase: 3
 - Depends: T021, T022
 - Files:
@@ -34,5 +34,5 @@ projectileCount); waveSpawner.Prewarm(); roundController.StartRound();`
 - Запустить Play Mode: раунд стартует через `RoundController` (см. Smoke-тест фазы 3).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameBootstrap.cs: убран временный спавн, добавлены waveSpawner/roundController, Start пересобран под Prewarm + StartRound
+Блокер: —
