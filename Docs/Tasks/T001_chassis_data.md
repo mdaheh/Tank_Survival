@@ -1,5 +1,5 @@
 # T001: ChassisData — ScriptableObject шасси
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: Critical
 - Files:
@@ -24,5 +24,5 @@
 - В Project видны `Standart.asset` и `Fat.asset`; в инспекторе поля заполнены и редактируются; компиляция без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/ChassisData.cs — создан класс ChassisData : ScriptableObject с атрибутом CreateAssetMenu и полями health, speed, turn, abilityId.
+Блокер: —

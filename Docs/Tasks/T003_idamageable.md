@@ -1,5 +1,5 @@
 # T003: IDamageable — контракт урона
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: Critical
 - Files:
@@ -18,5 +18,5 @@
 - Компиляция без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/IDamageable.cs — создан интерфейс IDamageable с одним методом void TakeDamage(float amount).
+Блокер: —

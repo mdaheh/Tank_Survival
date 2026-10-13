@@ -1,5 +1,5 @@
 # T002: StatBlock — единый контейнер статов игрока
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: Critical
 - Depends: T001
@@ -21,5 +21,5 @@
 - Компиляция без ошибок; после сборки сцены в T007 `moveSpeed`/`maxHealth` соответствуют выбранному ChassisData.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/StatBlock.cs — создан класс StatBlock : MonoBehaviour с полями damage, fireRate, moveSpeed, maxHealth и методом Init(ChassisData), задающим moveSpeed = chassis.speed, maxHealth = chassis.health (damage/fireRate не трогаются); Assets/Scripts/Data/ChassisData.cs — без изменений, использован как есть.
+Блокер: —
