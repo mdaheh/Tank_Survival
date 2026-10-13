@@ -15,9 +15,9 @@
 - T007: `GameBootstrap` — composition root: инициализация StatBlock и игрока.
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] Сцена запускается; консоль без ошибок.
-- [ ] Танк движется по вводу (WASD), скорость соответствует ChassisData Standart (medium).
-- [ ] PlayerHealth.current = StatBlock.max_health (значение из ChassisData) — видно в инспекторе.
-- [ ] Смена ChassisData (Standart → Fat) в SessionState меняет скорость и max HP без правки кода.
-- [ ] Поле способности в ChassisData существует, но нигде не используется (компилируется).
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] Сцена запускается; консоль без ошибок.
+- [x] Танк движется по вводу (WASD), скорость соответствует ChassisData Standart (medium).
+- [x] PlayerHealth.current = StatBlock.max_health (значение из ChassisData) — видно в инспекторе.
+- [x] Смена ChassisData (Standart → Fat) в SessionState меняет скорость и max HP без правки кода.
+- [x] Поле способности в ChassisData существует, но нигде не используется (компилируется).

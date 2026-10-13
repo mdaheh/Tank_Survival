@@ -1,5 +1,5 @@
 # T006: PlayerHealth — HP игрока
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: High
 - Depends: T002, T003
@@ -22,5 +22,5 @@
 - Компиляция без ошибок; после T007 `currentHealth` = `maxHealth` из ChassisData.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Player/PlayerHealth.cs — создан класс PlayerHealth : MonoBehaviour, IDamageable со сериализованным statBlock, полем currentHealth (доступ на чтение через CurrentHealth), событием OnDeath (System.Action) и Init() (currentHealth = statBlock.maxHealth); TakeDamage уменьшает currentHealth и при <= 0 вызывает OnDeath; Assets/Scripts/Core/StatBlock.cs и Assets/Scripts/Core/IDamageable.cs — без изменений, использованы как есть.
+Блокер: —

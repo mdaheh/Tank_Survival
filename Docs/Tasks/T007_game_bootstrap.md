@@ -1,5 +1,5 @@
 # T007: GameBootstrap — composition root
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: Critical
 - Depends: T002, T004, T006
@@ -29,5 +29,5 @@
 - Смена `SelectedChassis` на `Fat.asset` (без правки кода) → скорость 2.5, `maxHealth` 200.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameBootstrap.cs — создан класс GameBootstrap : MonoBehaviour с сериализованными полями sessionState, statBlock, playerHealth; в Start() строго по порядку: statBlock.Init(sessionState.SelectedChassis), затем playerHealth.Init(); Assets/Scripts/Core/SessionState.cs, Assets/Scripts/Core/StatBlock.cs, Assets/Scripts/Player/PlayerHealth.cs — без изменений, использованы как есть.
+Блокер: —
