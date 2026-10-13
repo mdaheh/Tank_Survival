@@ -1,5 +1,5 @@
 # T021: WaveSpawner + SpawnPoint — спавн волн
-- Status: [ ]
+- Status: [x]
 - Phase: 3
 - Depends: T019, T020
 - Files:
@@ -63,5 +63,5 @@
   возвращается к исходному.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Waves/SpawnPoint.cs: маркер с OnDrawGizmos, Assets/Scripts/Waves/WaveSpawner.cs: BeginWave/Update/SpawnNext/HandleEnemyDeath/Reset/Prewarm/BeginWave1
+Блокер: —
