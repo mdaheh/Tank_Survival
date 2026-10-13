@@ -1,5 +1,5 @@
 # T004: SessionState — держатель выбора
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: High
 - Depends: T001
@@ -20,5 +20,5 @@
 - Компиляция без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/SessionState.cs — создан класс SessionState : MonoBehaviour с сериализованным полем ChassisData selectedChassis и доступом на чтение SelectedChassis (только хранение выбора); Assets/Scripts/Data/ChassisData.cs — без изменений, использован как есть.
+Блокер: —
