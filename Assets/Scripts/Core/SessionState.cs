@@ -1,8 +1,12 @@
+using TankSurvival.Data;
 using UnityEngine;
 
-public class SessionState : MonoBehaviour
+namespace TankSurvival.Core
 {
-    [SerializeField] private ChassisData selectedChassis;
+    public class SessionState : MonoBehaviour
+    {
+        [SerializeField] private ChassisData selectedChassis;
 
-    public ChassisData SelectedChassis => selectedChassis;
+        public ChassisData SelectedChassis => selectedChassis;
+    }
 }

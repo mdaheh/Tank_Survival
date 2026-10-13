@@ -126,6 +126,10 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 ## 5. Файлы `.cs` для MVP
 
+> **Namespace:** корень `TankSurvival`, подпространства по папкам — `TankSurvival.Data`,
+> `TankSurvival.Core`, `TankSurvival.Round`, `TankSurvival.Player`, `TankSurvival.Combat`,
+> `TankSurvival.Enemy`, `TankSurvival.Waves`, `TankSurvival.Progression`, `TankSurvival.UI`.
+
 **Data (ScriptableObject) — `Assets/Scripts/Data/`**
 
 - `ChassisData.cs` — SO шасси: health/speed/turn, зарезервированное поле способности.
@@ -189,3 +193,26 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 Итого: **34 файла**. Input System `.inputactions`-обёртка генерируется Unity
 (не рукописный `.cs`), поэтому в список не входит.
+
+## 6. Структура папок
+
+- **Контент (ScriptableObject-ассеты) — `Assets/Data/`:**
+  - `Assets/Data/Chassis/`, `Assets/Data/Turrets/`, `Assets/Data/Enemies/`
+  - `Assets/Data/Waves/`, `Assets/Data/Difficulties/`, `Assets/Data/Upgrades/`
+  - `Assets/Data/Delivery/`, `Assets/Data/OnHit/`
+- **Префабы — `Assets/Prefabs/` (игровые) и `Assets/UI/` (интерфейс):**
+  - `Assets/Prefabs/Player/`, `Assets/Prefabs/Enemies/`
+  - `Assets/Prefabs/Projectiles/`, `Assets/Prefabs/VFX/`
+  - `Assets/UI/` — `HUD.prefab`, `LevelUpUI.prefab`, `RoundEndUI.prefab`
+- **Сцены — `Assets/Scenes/`:** `Assets/Scenes/Main.unity`
+- **Скрипты — `Assets/Scripts/`** (подпапки и файлы — в §5):
+  - `Assets/Scripts/Data/`, `Assets/Scripts/Core/`, `Assets/Scripts/Round/`,
+    `Assets/Scripts/Player/`, `Assets/Scripts/Combat/`, `Assets/Scripts/Enemy/`,
+    `Assets/Scripts/Waves/`, `Assets/Scripts/Progression/`, `Assets/Scripts/UI/`
+- **Арт (исходные ресурсы) — `Assets/Art/`:**
+  - `Assets/Art/Models/`, `Assets/Art/Materials/`, `Assets/Art/Textures/`, 
+    `Assets/Audio/SFX/`, `Assets/Audio/Music/`
+- **Системные:**
+  - `Assets/Settings/` — только URP-ассеты (RP-ассеты, рендереры, volume profile,
+    global settings)
+  - `Assets/Input/InputSystem_Actions.inputactions` — Input System

@@ -1,27 +1,31 @@
 using System;
+using TankSurvival.Core;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+namespace TankSurvival.Player
 {
-    [SerializeField] private StatBlock statBlock;
-
-    private float currentHealth;
-
-    public float CurrentHealth => currentHealth;
-
-    public event Action OnDeath;
-
-    public void Init()
+    public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        currentHealth = statBlock.maxHealth;
-    }
+        [SerializeField] private StatBlock statBlock;
 
-    public void TakeDamage(float amount)
-    {
-        currentHealth -= amount;
-        if (currentHealth <= 0f)
+        private float currentHealth;
+
+        public float CurrentHealth => currentHealth;
+
+        public event Action OnDeath;
+
+        public void Init()
         {
-            OnDeath?.Invoke();
+            currentHealth = statBlock.maxHealth;
+        }
+
+        public void TakeDamage(float amount)
+        {
+            currentHealth -= amount;
+            if (currentHealth <= 0f)
+            {
+                OnDeath?.Invoke();
+            }
         }
     }
 }

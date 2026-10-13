@@ -1,18 +1,22 @@
+using TankSurvival.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+namespace TankSurvival.Player
 {
-    [SerializeField] private StatBlock statBlock;
-    [SerializeField] private InputActionReference moveAction;
-
-    private void Update()
+    public class PlayerController : MonoBehaviour
     {
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
-        transform.Translate(
-            input.x * statBlock.moveSpeed * Time.deltaTime,
-            0f,
-            input.y * statBlock.moveSpeed * Time.deltaTime,
-            Space.World);
+        [SerializeField] private StatBlock statBlock;
+        [SerializeField] private InputActionReference moveAction;
+
+        private void Update()
+        {
+            Vector2 input = moveAction.action.ReadValue<Vector2>();
+            transform.Translate(
+                input.x * statBlock.moveSpeed * Time.deltaTime,
+                0f,
+                input.y * statBlock.moveSpeed * Time.deltaTime,
+                Space.World);
+        }
     }
 }

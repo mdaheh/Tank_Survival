@@ -1,15 +1,19 @@
+using TankSurvival.Data;
 using UnityEngine;
 
-public class StatBlock : MonoBehaviour
+namespace TankSurvival.Core
 {
-    public float damage;
-    public float fireRate;
-    public float moveSpeed;
-    public float maxHealth;
-
-    public void Init(ChassisData chassis)
+    public class StatBlock : MonoBehaviour
     {
-        moveSpeed = chassis.speed;
-        maxHealth = chassis.health;
+        public float damage;
+        public float fireRate;
+        public float moveSpeed;
+        public float maxHealth;
+
+        public void Init(ChassisData chassis)
+        {
+            moveSpeed = chassis.speed;
+            maxHealth = chassis.health;
+        }
     }
 }

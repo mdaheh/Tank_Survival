@@ -1,14 +1,18 @@
+using TankSurvival.Player;
 using UnityEngine;
 
-public class GameBootstrap : MonoBehaviour
+namespace TankSurvival.Core
 {
-    [SerializeField] private SessionState sessionState;
-    [SerializeField] private StatBlock statBlock;
-    [SerializeField] private PlayerHealth playerHealth;
-
-    private void Start()
+    public class GameBootstrap : MonoBehaviour
     {
-        statBlock.Init(sessionState.SelectedChassis);
-        playerHealth.Init();
+        [SerializeField] private SessionState sessionState;
+        [SerializeField] private StatBlock statBlock;
+        [SerializeField] private PlayerHealth playerHealth;
+
+        private void Start()
+        {
+            statBlock.Init(sessionState.SelectedChassis);
+            playerHealth.Init();
+        }
     }
 }
