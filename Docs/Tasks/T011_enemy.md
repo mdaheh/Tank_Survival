@@ -1,5 +1,5 @@
 # T011: Враг — EnemyController + EnemyHealth
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: High
 - Depends: T009, T010
@@ -38,5 +38,5 @@ data/target, кэширует `IDamageable targetDamageable = target.GetComponen
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: EnemyHealth.cs: MonoBehaviour + IDamageable + IPoolable — поля data/currentHealth, Init, TakeDamage с event OnDeath при ≤0, OnGetFromPool (восстановление currentHealth), OnReleaseFromPool (сброс подписок), EnemyController.cs: статический реестр Active (наполнение в OnEnable/OnDisable), кэш health в Awake, Init (сохранение data/target, кэш IDamageable, подписка OnDeath→pool.Release), Update — MoveTowards к цели со скоростью data.speed и атака по дистанции ≤1.0 с кулдауном 1с
+Блокер: —

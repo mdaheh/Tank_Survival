@@ -1,5 +1,5 @@
 # T012: Снаряд — Projectile
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: High
 - Depends: T010, T011
@@ -31,5 +31,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Projectile.cs: MonoBehaviour + IPoolable в TankSurvival.Combat — поля damage/speed/range/direction/pool, Init, Update с Translate по direction в Space.World и накоплением пути (Release при путь ≥ range), попадание по sqrMagnitude ≤ 0.25 по списку EnemyController.Active через кэш enemy.health без GetComponent в цикле, OnGetFromPool/OnReleaseFromPool сбрасывают путь и направление
+Блокер: —
