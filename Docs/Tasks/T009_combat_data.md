@@ -1,5 +1,5 @@
 # T009: SO-данные боя — EnemyData, TurretData, DeliveryModuleData
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: Critical
 - Files:
@@ -34,5 +34,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: EnemyData.cs: SO-класс с полями health, speed, damage, xpReward, behavior="melee", DeliveryModuleData.cs: SO-класс с enum DeliveryKind { Projectile, Hitscan } и полями kind, speed, pelletCount, spreadAngle, TurretData.cs: SO-класс с полями aps, range, damage, delivery — все в namespace TankSurvival.Data с CreateAssetMenu
+Блокер: —
