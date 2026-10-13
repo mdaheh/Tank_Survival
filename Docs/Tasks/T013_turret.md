@@ -1,5 +1,5 @@
 # T013: Турель — TurretController + DeliveryHandler + ProjectileDeliveryHandler
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: Critical
 - Depends: T009, T010, T012
@@ -40,5 +40,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DeliveryHandler.cs: абстрактный MonoBehaviour с abstract void Fire(Vector3, float), ProjectileDeliveryHandler.cs: наследник — поля module/projectilePrefab/pool/muzzle (fallback на transform в Awake), Fire — pelletCount шотов через pool.Get, позиция из muzzle, поворот direction на случайный угол в пределах spreadAngle (Quaternion.AngleAxis вокруг Vector3.up), GetComponent<Projectile>().Init(damage, module.speed, spreadDirection, pool), TurretController.cs: поля turret/delivery, Update — ручной цикл по EnemyController.Active через sqrMagnitude до ближайшего в пределах turret.range, Fire направлением к цели и кулдаун 1/turret.aps
+Блокер: —

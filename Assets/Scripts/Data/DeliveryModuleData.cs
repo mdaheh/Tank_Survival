@@ -15,5 +15,8 @@ namespace TankSurvival.Data
         public float speed;
         public int pelletCount;
         public float spreadAngle;
+        public float range;
+        public float aps;
+        public float damage;
     }
 }

@@ -1,5 +1,5 @@
 # T014: GameBootstrap — prewarm пулов и временный спавн
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: High
 - Depends: T010, T011, T013
@@ -36,5 +36,5 @@ StatBlock/PlayerHealth: `poolManager.Prewarm(enemyPrefab, spawnCount)` и
 - Запустить Play Mode (см. Smoke-тест фазы 2).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: GameBootstrap.cs: добавлены сериализуемые поля poolManager/enemyPrefab/enemyData/playerTransform/spawnPoints/spawnCount/projectilePrefab/projectileCount; в Start после существующей инициализации StatBlock/PlayerHealth добавлен Prewarm пулов врагов (spawnCount) и снарядов (projectileCount) и цикл спавна — Get(enemyPrefab), позиция spawnPoints[i % spawnPoints.Length], EnemyController.Init(enemyData, playerTransform, poolManager)
+Блокер: —

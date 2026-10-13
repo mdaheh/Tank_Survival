@@ -16,3 +16,6 @@ MonoBehaviour:
   speed: 15
   pelletCount: 1
   spreadAngle: 0
+  range: 10
+  aps: 2
+  damage: 30

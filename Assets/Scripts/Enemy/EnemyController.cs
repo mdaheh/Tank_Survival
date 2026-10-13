@@ -13,7 +13,9 @@ namespace TankSurvival.Enemy
         public Transform target;
         public EnemyHealth health;
 
-        private const float AttackRange = 1.0f;
+        public IDamageable Damageable => health;
+
+        private const float AttackRange = 1.5f;
         private const float AttackInterval = 1f;
 
         private IDamageable _targetDamageable;
@@ -39,6 +41,11 @@ namespace TankSurvival.Enemy
             this.data = data;
             this.target = target;
             _targetDamageable = target.GetComponent<IDamageable>();
+            if (_targetDamageable == null)
+            {
+                Debug.LogError("EnemyController: target has no IDamageable.", this);
+            }
+
             health.Init(data);
             health.OnDeath += () => pool.Release(gameObject);
         }
@@ -52,8 +59,10 @@ namespace TankSurvival.Enemy
 
             _attackCooldown -= Time.deltaTime;
 
-            float distance = Vector3.Distance(transform.position, target.position);
-            if (distance > AttackRange)
+            float dx = target.position.x - transform.position.x;
+            float dz = target.position.z - transform.position.z;
+            float distanceSqr = dx * dx + dz * dz;
+            if (distanceSqr > AttackRange * AttackRange)
             {
                 transform.position = Vector3.MoveTowards(
                     transform.position, target.position, data.speed * Time.deltaTime);
