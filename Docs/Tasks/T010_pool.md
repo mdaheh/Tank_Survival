@@ -1,5 +1,5 @@
 # T010: Generic-пул — IPoolable + PoolManager
-- Status: [ ]
+- Status: [x]
 - Phase: 2
 - Priority: Critical
 - Files:
@@ -29,5 +29,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: IPoolable.cs: интерфейс с OnGetFromPool/OnReleaseFromPool в TankSurvival.Core, PoolManager.cs: MonoBehaviour с Prewarm/Get/Release, словарями prefab→очередь, инстанс→префаб и кэшем IPoolable[] на инстансе (GetComponents вызывается только в CreateInstance при Prewarm/Get, Update отсутствует)
+Блокер: —
