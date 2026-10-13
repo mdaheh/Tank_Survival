@@ -1,5 +1,5 @@
 # T005: PlayerController — движение игрока
-- Status: [ ]
+- Status: [x]
 - Phase: 1
 - Priority: High
 - Depends: T002
@@ -22,5 +22,5 @@
 - Компиляция без ошибок; после сборки сцены в T007 танк движется по WASD со скоростью из ChassisData.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Player/PlayerController.cs — создан класс PlayerController : MonoBehaviour с сериализованными полями statBlock и moveAction; в Update чтение moveAction.action.ReadValue<Vector2>() и перемещение по X/Z со скоростью statBlock.moveSpeed (Space.World, без аллокаций); Assets/Scripts/Core/StatBlock.cs — без изменений, использован как есть.
+Блокер: —
