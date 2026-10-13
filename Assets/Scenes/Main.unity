@@ -119,6 +119,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &153685794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153685796}
+  - component: {fileID: 153685795}
+  m_Layer: 0
+  m_Name: WaveSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153685795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153685794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da787f35f42bdb541b35eb272f940ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Waves.WaveSpawner
+  waveData: {fileID: 11400000, guid: d5a3d7bc989fd204a8edea30dd248a86, type: 2}
+  difficulty: {fileID: 11400000, guid: aef0216be49a5a548b61ec55cfb13da3, type: 2}
+  spawnPoints:
+  - {fileID: 989895940}
+  - {fileID: 1603175578}
+  - {fileID: 850715173}
+  - {fileID: 380532413}
+  poolManager: {fileID: 249992434}
+  playerTransform: {fileID: 1245404301}
+--- !u!4 &153685796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153685794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249992432
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 380532412}
+  - component: {fileID: 380532413}
   m_Layer: 0
   m_Name: SpawnPoint_4
   m_TagString: Untagged
@@ -194,6 +248,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380532413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380532411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e9c64db0755774c946bbe981f5be46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Waves.SpawnPoint
 --- !u!1 &507898590
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +302,7 @@ MonoBehaviour:
   - {fileID: 1603175577}
   - {fileID: 850715172}
   - {fileID: 380532412}
-  spawnCount: 5
+  spawnCount: 1
   projectilePrefab: {fileID: 1658045355164781374, guid: 326d7bec58d24f74fb0ca1a67d9dc709, type: 3}
   projectileCount: 20
 --- !u!114 &507898592
@@ -276,6 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 850715172}
+  - component: {fileID: 850715173}
   m_Layer: 0
   m_Name: SpawnPoint_3
   m_TagString: Untagged
@@ -298,6 +365,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &850715173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850715171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e9c64db0755774c946bbe981f5be46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Waves.SpawnPoint
 --- !u!1 &881406093
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989895939}
+  - component: {fileID: 989895940}
   m_Layer: 0
   m_Name: SpawnPoint_1
   m_TagString: Untagged
@@ -456,6 +536,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989895940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989895938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e9c64db0755774c946bbe981f5be46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Waves.SpawnPoint
 --- !u!1 &1245404297
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +763,55 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &1360148709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360148711}
+  - component: {fileID: 1360148710}
+  m_Layer: 0
+  m_Name: RoundController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1360148710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360148709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4c19040ef5e474391e8b7294a7e292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Round.RoundController
+  waveSpawner: {fileID: 153685795}
+  difficulty: {fileID: 11400000, guid: aef0216be49a5a548b61ec55cfb13da3, type: 2}
+  playerHealth: {fileID: 1245404298}
+  phase: 0
+  currentWave: 0
+--- !u!4 &1360148711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360148709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1603175576
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603175577}
+  - component: {fileID: 1603175578}
   m_Layer: 0
   m_Name: SpawnPoint_2
   m_TagString: Untagged
@@ -702,6 +844,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603175578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603175576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e9c64db0755774c946bbe981f5be46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Waves.SpawnPoint
 --- !u!1 &2059421236
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,3 +932,5 @@ SceneRoots:
   - {fileID: 1603175577}
   - {fileID: 850715172}
   - {fileID: 380532412}
+  - {fileID: 153685796}
+  - {fileID: 1360148711}

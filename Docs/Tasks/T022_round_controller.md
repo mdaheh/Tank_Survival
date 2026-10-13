@@ -1,5 +1,5 @@
 # T022: RoundController — фазы, победа/поражение, рестарт
-- Status: [ ]
+- Status: [x]
 - Phase: 3
 - Depends: T019, T021
 - Files:
@@ -40,5 +40,5 @@
   (`phase = Playing`, `currentWave = 1`) без перезагрузки сцены.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Round/RoundController.cs: RoundController с фазами, StartRound/HandleWaveCleared/HandlePlayerDeath/Restart
+Блокер: —
