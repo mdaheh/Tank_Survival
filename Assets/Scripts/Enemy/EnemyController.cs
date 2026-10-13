@@ -12,6 +12,7 @@ namespace TankSurvival.Enemy
         public EnemyData data;
         public Transform target;
         public EnemyHealth health;
+        public float speedMultiplier = 1f;
 
         public IDamageable Damageable => health;
 
@@ -65,7 +66,7 @@ namespace TankSurvival.Enemy
             if (distanceSqr > AttackRange * AttackRange)
             {
                 transform.position = Vector3.MoveTowards(
-                    transform.position, target.position, data.speed * Time.deltaTime);
+                    transform.position, target.position, data.speed * speedMultiplier * Time.deltaTime);
                 return;
             }
 

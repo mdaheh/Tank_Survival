@@ -8,6 +8,7 @@ namespace TankSurvival.Enemy
     public class EnemyHealth : MonoBehaviour, IDamageable, IPoolable
     {
         public EnemyData data;
+        public float healthMultiplier = 1f;
         public float currentHealth;
 
         public event Action OnDeath;
@@ -15,7 +16,7 @@ namespace TankSurvival.Enemy
         public void Init(EnemyData data)
         {
             this.data = data;
-            currentHealth = data.health;
+            currentHealth = data.health * healthMultiplier;
         }
 
         public void TakeDamage(float amount)
@@ -39,7 +40,7 @@ namespace TankSurvival.Enemy
                 return;
             }
 
-            currentHealth = data.health;
+            currentHealth = data.health * healthMultiplier;
         }
 
         public void OnReleaseFromPool()

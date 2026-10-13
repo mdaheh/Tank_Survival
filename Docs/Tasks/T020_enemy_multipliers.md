@@ -1,5 +1,5 @@
 # T020: Множители сложности в EnemyHealth и EnemyController
-- Status: [ ]
+- Status: [x]
 - Phase: 3
 - Files:
   - Assets/Scripts/Enemy/EnemyHealth.cs
@@ -29,5 +29,5 @@
   `healthMultiplier` / `speedMultiplier` со значением 1.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Enemy/EnemyHealth.cs: поле healthMultiplier и множитель в Init/OnGetFromPool, Assets/Scripts/Enemy/EnemyController.cs: поле speedMultiplier и скорость data.speed * speedMultiplier в Update
+Блокер: —
