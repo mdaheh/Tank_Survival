@@ -1,5 +1,5 @@
 # Phase 3: Волны и раунд
-- Status: in-progress
+- Status: accepted
 - Цель: `WaveSpawner` гонит 3 волны по `WaveData`/`DifficultyData` из 4 точек;
   `RoundController` ведёт фазы Playing/Win/Lose и рестарт без `LoadScene`; число
   объектов в иерархии между волнами не растёт.

@@ -1,5 +1,5 @@
 # Phase 1: Фундамент — данные и живой танк
-- Status: in-progress
+- Status: accepted
 - Цель: запустить вертикальный срез «живой танк»: игрок управляется по вводу,
   скорость и максимальное HP приходят из `ChassisData` (ScriptableObject) через
   `StatBlock`, а не из констант. `GameBootstrap` поднимает подсистемы.

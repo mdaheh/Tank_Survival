@@ -1,5 +1,5 @@
 # Phase 5: On-hit модули
-- Status: in-progress
+- Status: accepted
 - Цель: on_hit-слой поверх delivery — `IHitHandler` + `OnHitDispatcher` (список по priority) + `StatusEffectSystem` (тики DoT). Explosion наносит AoE-урон + VFX из пула; Burn накладывает DoT с тиками каждые `tick_rate` в течение `duration`; модули берутся из `TurretData.onHitModules`, один выстрел может нести несколько эффектов.
 
 ## Задачи (порядок = приоритет)

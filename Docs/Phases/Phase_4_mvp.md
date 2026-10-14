@@ -1,5 +1,5 @@
 # Phase 4: Beam (hitscan instant)
-- Status: in-progress
+- Status: accepted
 - Цель: второй delivery-пайплайн — hitscan (мгновенный луч) — параллельно projectile. Beam-турель наносит урон через тот же `IDamageable` без спавна объектов; настройки Projectile не ломаются.
 
 ## Задачи (порядок = приоритет)
