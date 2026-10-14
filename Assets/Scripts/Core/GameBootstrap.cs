@@ -6,8 +6,6 @@ namespace TankSurvival.Core
 {
     public class GameBootstrap : MonoBehaviour
     {
-        [SerializeField] private SessionState sessionState;
-        [SerializeField] private StatBlock statBlock;
         [SerializeField] private PoolManager poolManager;
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private int projectileCount;
@@ -16,7 +14,6 @@ namespace TankSurvival.Core
 
         private void Start()
         {
-            statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
             poolManager.Prewarm(projectilePrefab, projectileCount);
             waveSpawner.Prewarm();
             roundController.StartRound();

@@ -1,5 +1,7 @@
+using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Player;
+using TankSurvival.Progression;
 using TankSurvival.Waves;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ namespace TankSurvival.Round
         public enum RoundPhase
         {
             Playing,
+            LevelUp,
             Win,
             Lose
         }
@@ -17,6 +20,9 @@ namespace TankSurvival.Round
         [SerializeField] private WaveSpawner waveSpawner;
         [SerializeField] private DifficultyData difficulty;
         [SerializeField] private PlayerHealth playerHealth;
+        [SerializeField] private StatBlock statBlock;
+        [SerializeField] private SessionState sessionState;
+        [SerializeField] private ProgressionSystem progression;
 
         public RoundPhase phase;
         public int currentWave;
@@ -25,12 +31,16 @@ namespace TankSurvival.Round
         {
             playerHealth.OnDeath += HandlePlayerDeath;
             waveSpawner.OnWaveCleared += HandleWaveCleared;
+            progression.OnLevelUp += HandleLevelUp;
+            progression.OnLevelUpResolved += HandleLevelUpResolved;
         }
 
         public void StartRound()
         {
             currentWave = 1;
             phase = RoundPhase.Playing;
+            statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
+            progression.Reset();
             playerHealth.Init();
             waveSpawner.BeginWave(currentWave);
         }
@@ -52,6 +62,16 @@ namespace TankSurvival.Round
         {
             phase = RoundPhase.Lose;
             waveSpawner.ClearActiveEnemies();
+        }
+
+        private void HandleLevelUp()
+        {
+            phase = RoundPhase.LevelUp;
+        }
+
+        private void HandleLevelUpResolved()
+        {
+            phase = RoundPhase.Playing;
         }
 
         [ContextMenu("Restart Round")]

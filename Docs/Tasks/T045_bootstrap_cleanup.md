@@ -1,5 +1,5 @@
 # T045: GameBootstrap — финальная чистка
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T044
 - Files:
@@ -23,5 +23,5 @@
 - Play Mode: раунд стартует (`currentWave = 1`), статы игрока считаются из `SelectedChassis`/`SelectedTurret` (в `StatBlock`), убийства дают XP (см. Smoke-тест фазы 6).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameBootstrap.cs — удалён вызов statBlock.Init из Start и поля statBlock/sessionState; оставлены poolManager/projectilePrefab/projectileCount/waveSpawner/roundController и prewarm в Start.
+Блокер: —

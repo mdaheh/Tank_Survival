@@ -1,5 +1,5 @@
 # T044: RoundController — фаза LevelUp + сброс раунда
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T039, T041
 - Files:
@@ -27,5 +27,5 @@
 - `Context Menu (⋮) → Restart Round`: `xp = 0`, `level = 1`, статы в `StatBlock` вернулись к базовым.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Round/RoundController.cs — фаза LevelUp в enum, поля statBlock/sessionState/progression, подписки на OnLevelUp/OnLevelUpResolved в Awake, StartRound (StatBlock → Progression.Reset → PlayerHealth → BeginWave), HandleLevelUp/HandleLevelUpResolved.
+Блокер: —
