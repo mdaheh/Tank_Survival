@@ -1,5 +1,5 @@
 # T033: ExplosionOnHitHandler + PooledVFX — AoE + VFX из пула
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T030
 - Files:
@@ -26,5 +26,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: PooledVFX.cs: создан MonoBehaviour, IPoolable с Play/таймером в Update и возвратом в PoolManager, ExplosionOnHitHandler.cs: создан IHitHandler с AoE-уроном по EnemyController.Active в радиусе и спавном VFX из пула
+Блокер: —

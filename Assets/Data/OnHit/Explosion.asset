@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e98415a3cdb7fb4bbd828b4a7ab0465, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.OnHitModuleData
+  kind: 0
+  priority: 10
+  radius: 3
+  damage: 9
+  explosionVfx: {fileID: 3562223652709660232, guid: 20c40de1c5e189f449ba5f2be3d1665f, type: 3}
+  duration: 0
+  tickDamage: 0
+  tickRate: 0

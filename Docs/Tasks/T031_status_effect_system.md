@@ -1,5 +1,5 @@
 # T031: StatusEffectSystem — тики DoT (burn)
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Files:
   - Assets/Scripts/Combat/StatusEffectSystem.cs
@@ -20,5 +20,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: StatusEffectSystem.cs: создан MonoBehaviour со списком burn-статусов, ApplyBurn (обновление/добавление) и Update с обратной итерацией, RemoveAt и тиками урона через health.TakeDamage
+Блокер: —

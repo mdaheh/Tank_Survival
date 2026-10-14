@@ -1,5 +1,5 @@
 # T035: Delivery — вызов ProcessHit при попадании
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T034
 - Files:
@@ -23,5 +23,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DeliveryHandler.cs: добавлено поле onHit, Projectile.cs: добавлено поле onHit, расширен Init и вызов ProcessHit в ветке попадания перед Release, ProjectileDeliveryHandler.cs: onHit передаётся в Init, HitscanDeliveryHandler.cs: вызов ProcessHit после TakeDamage
+Блокер: —

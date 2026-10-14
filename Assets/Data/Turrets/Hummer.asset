@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c177447982b12c4d8904beac4bda8da, type: 3}
   m_Name: Hummer
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.TurretData
-  aps: 2
-  range: 6
-  damage: 30
   delivery: {fileID: 11400000, guid: 50bf4a8b6d4f00447b3d61d719e07ddf, type: 2}
+  onHitModules:
+  - {fileID: 11400000, guid: 41ad34fe8c844b04fa5f4833b1cd4302, type: 2}

@@ -1,5 +1,5 @@
 # T030: IHitHandler — контракт on_hit-модуля
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T029
 - Files:
@@ -19,5 +19,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: IHitHandler.cs: создан интерфейс IHitHandler (namespace TankSurvival.Combat) с методом HandleHit(OnHitModuleData, Vector3, EnemyController)
+Блокер: —

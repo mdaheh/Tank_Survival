@@ -1,5 +1,5 @@
 # T036: TurretController — привязка on_hit-слоя
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T034, T035
 - Files:
@@ -22,5 +22,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: TurretController.cs: добавлено поле onHit и метод Start с SetModules(turret.onHitModules) и привязкой onHit к delivery/hitscanDelivery; Update не изменён
+Блокер: —

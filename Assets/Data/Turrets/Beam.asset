@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Beam
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.TurretData
   delivery: {fileID: 11400000, guid: c2f5b4de4272e6041845ba436d59e2d5, type: 2}
+  onHitModules:
+  - {fileID: 11400000, guid: 02c5bb8c7d8a07f47b438095dcf55d71, type: 2}

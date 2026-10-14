@@ -1,5 +1,5 @@
 # T029: OnHitModuleData + TurretData.onHitModules
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Files:
   - Assets/Scripts/Data/OnHitModuleData.cs
@@ -29,5 +29,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: OnHitModuleData.cs: создан SO с вложенным enum OnHitKind и полями kind/priority/radius/damage/explosionVfx/duration/tickDamage/tickRate, TurretData.cs: добавлено поле OnHitModuleData[] onHitModules
+Блокер: —

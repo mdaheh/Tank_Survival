@@ -12,18 +12,20 @@ namespace TankSurvival.Combat
         public float range;
         public Vector3 direction;
         public PoolManager pool;
+        public OnHitDispatcher onHit;
 
         private const float HitRadiusSqr = 1.0f;
 
         private float _distanceTravelled;
 
-        public void Init(float damage, float speed, float range, Vector3 direction, PoolManager pool)
+        public void Init(float damage, float speed, float range, Vector3 direction, PoolManager pool, OnHitDispatcher onHit)
         {
             this.damage = damage;
             this.speed = speed;
             this.range = range;
             this.direction = direction;
             this.pool = pool;
+            this.onHit = onHit;
         }
 
         private void Update()
@@ -53,6 +55,10 @@ namespace TankSurvival.Combat
                 if (distanceSqr <= HitRadiusSqr)
                 {
                     enemy.Damageable.TakeDamage(damage);
+                    if (onHit != null)
+                    {
+                        onHit.ProcessHit(enemy.transform.position, enemy);
+                    }
                     pool.Release(gameObject);
                     return;
                 }

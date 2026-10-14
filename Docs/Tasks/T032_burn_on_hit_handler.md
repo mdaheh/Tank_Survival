@@ -1,5 +1,5 @@
 # T032: BurnOnHitHandler — наложение DoT
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T030, T031
 - Files:
@@ -20,5 +20,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: BurnOnHitHandler.cs: создан MonoBehaviour, реализующий IHitHandler, с полем statusEffects и делегированием в StatusEffectSystem.ApplyBurn с null-гардами
+Блокер: —

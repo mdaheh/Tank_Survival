@@ -72,6 +72,10 @@ namespace TankSurvival.Combat
                 }
 
                 _candidates[i].Damageable.TakeDamage(module.damage);
+                if (onHit != null)
+                {
+                    onHit.ProcessHit(_candidates[i].transform.position, _candidates[i]);
+                }
             }
         }
 

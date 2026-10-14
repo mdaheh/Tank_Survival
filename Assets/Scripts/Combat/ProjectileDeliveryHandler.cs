@@ -36,7 +36,7 @@ namespace TankSurvival.Combat
                 float spread = Random.Range(-halfSpread, halfSpread);
                 Vector3 spreadDirection = Quaternion.AngleAxis(spread, Vector3.up) * direction;
 
-                projectile.GetComponent<Projectile>().Init(module.damage, module.speed, module.range, spreadDirection, pool);
+                projectile.GetComponent<Projectile>().Init(module.damage, module.speed, module.range, spreadDirection, pool, onHit);
             }
         }
     }

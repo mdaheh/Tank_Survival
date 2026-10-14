@@ -10,8 +10,32 @@ namespace TankSurvival.Combat
         public TurretData turret;
         public DeliveryHandler delivery;
         public DeliveryHandler hitscanDelivery;
+        public OnHitDispatcher onHit;
 
         private float _cooldown;
+
+        private void Start()
+        {
+            if (onHit == null)
+            {
+                return;
+            }
+
+            if (turret != null)
+            {
+                onHit.SetModules(turret.onHitModules);
+            }
+
+            if (delivery != null)
+            {
+                delivery.onHit = onHit;
+            }
+
+            if (hitscanDelivery != null)
+            {
+                hitscanDelivery.onHit = onHit;
+            }
+        }
 
         private void Update()
         {

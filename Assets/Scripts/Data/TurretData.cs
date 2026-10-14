@@ -6,5 +6,6 @@ namespace TankSurvival.Data
     public class TurretData : ScriptableObject
     {
         public DeliveryModuleData delivery;
+        public OnHitModuleData[] onHitModules;
     }
 }

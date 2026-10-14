@@ -1,5 +1,5 @@
 # T034: OnHitDispatcher — маршрутизация on_hit по priority
-- Status: [ ]
+- Status: [x]
 - Phase: 5
 - Depends: T032, T033
 - Files:
@@ -19,5 +19,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: OnHitDispatcher.cs: создан MonoBehaviour с SetModules (копирование не-null модулей и сортировка вставками по priority убыванию) и ProcessHit с маршрутизацией по kind на explosion/burn с null-проверками
+Блокер: —

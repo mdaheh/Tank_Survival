@@ -325,6 +325,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &563435908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563435910}
+  - component: {fileID: 563435909}
+  m_Layer: 0
+  m_Name: ExplosionOnHitHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &563435909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563435908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6af6a768e81eb4b9827eb6884cf9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.ExplosionOnHitHandler
+  pool: {fileID: 249992434}
+--- !u!4 &563435910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563435908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850715171
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,13 +596,14 @@ GameObject:
   - component: {fileID: 999279202}
   - component: {fileID: 999279204}
   - component: {fileID: 999279205}
+  - component: {fileID: 999279206}
   m_Layer: 0
   m_Name: Turret_Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &999279202
 Transform:
   m_ObjectHideFlags: 0
@@ -588,6 +634,7 @@ MonoBehaviour:
   turret: {fileID: 11400000, guid: a57bbc1af71acdd41b36ad370b11d4a0, type: 2}
   delivery: {fileID: 0}
   hitscanDelivery: {fileID: 999279205}
+  onHit: {fileID: 999279206}
 --- !u!114 &999279205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,8 +647,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf7cd311ddc18140a9a2810b34024fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.HitscanDeliveryHandler
+  onHit: {fileID: 0}
   module: {fileID: 11400000, guid: c2f5b4de4272e6041845ba436d59e2d5, type: 2}
   muzzle: {fileID: 999279202}
+--- !u!114 &999279206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999279201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68ce3c3b0074ef498856fe27c283389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
+  explosion: {fileID: 563435909}
+  burn: {fileID: 1533841884}
+--- !u!1 &1139349997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139349999}
+  - component: {fileID: 1139349998}
+  m_Layer: 0
+  m_Name: StatusEffectSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1139349998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139349997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d759cc7e8677e064eac1fd7da271549e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.StatusEffectSystem
+--- !u!4 &1139349999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139349997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245404297
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +779,7 @@ Transform:
   m_GameObject: {fileID: 1245404297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 46.2, y: 0, z: -86.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -867,6 +973,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1533841883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533841885}
+  - component: {fileID: 1533841884}
+  m_Layer: 0
+  m_Name: BurnOnHitHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1533841884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533841883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3277d57281fab914ea352842355eb9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.BurnOnHitHandler
+  statusEffects: {fileID: 1139349998}
+--- !u!4 &1533841885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533841883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1603175576
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,13 +1073,14 @@ GameObject:
   - component: {fileID: 2059421239}
   - component: {fileID: 2059421238}
   - component: {fileID: 2059421237}
+  - component: {fileID: 2059421240}
   m_Layer: 0
   m_Name: Turret_Hummer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2059421237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,6 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07507f939c0cad4ab8be6241d53dd27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.ProjectileDeliveryHandler
+  onHit: {fileID: 0}
   module: {fileID: 11400000, guid: 50bf4a8b6d4f00447b3d61d719e07ddf, type: 2}
   projectilePrefab: {fileID: 1658045355164781374, guid: 326d7bec58d24f74fb0ca1a67d9dc709, type: 3}
   pool: {fileID: 249992434}
@@ -960,6 +1113,7 @@ MonoBehaviour:
   turret: {fileID: 11400000, guid: eda579dde12ec134cb9c409a84c988b7, type: 2}
   delivery: {fileID: 2059421237}
   hitscanDelivery: {fileID: 0}
+  onHit: {fileID: 2059421240}
 --- !u!4 &2059421239
 Transform:
   m_ObjectHideFlags: 0
@@ -975,6 +1129,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1245404301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059421240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059421236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68ce3c3b0074ef498856fe27c283389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
+  explosion: {fileID: 563435909}
+  burn: {fileID: 1533841884}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -990,3 +1158,6 @@ SceneRoots:
   - {fileID: 380532412}
   - {fileID: 153685796}
   - {fileID: 1360148711}
+  - {fileID: 1139349999}
+  - {fileID: 1533841885}
+  - {fileID: 563435910}
