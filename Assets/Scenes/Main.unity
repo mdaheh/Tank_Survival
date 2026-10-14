@@ -216,6 +216,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c06e997c13b94047b0d872e7d8821eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Core.PoolManager
+--- !u!1 &255245126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255245127}
+  - component: {fileID: 255245128}
+  m_Layer: 0
+  m_Name: ProgressionSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &255245127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255245126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &255245128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255245126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57aefdb3e1e85d747bb645f47ff29a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Progression.ProgressionSystem
+  statBlock: {fileID: 1245404300}
+  upgradePool:
+  - {fileID: 11400000, guid: cedb83e5203929840907802ba6793917, type: 2}
+  - {fileID: 11400000, guid: 35e9e256392a68248bcbbfdb3241d57a, type: 2}
+  - {fileID: 11400000, guid: 36ff71bfb67b3e94ab4ecf4b3dda5d57, type: 2}
+  - {fileID: 11400000, guid: 8b56f08393851c645bafaf33d35f1132, type: 2}
+  xp: 0
+  level: 1
 --- !u!1 &380532411
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SessionState
   selectedChassis: {fileID: 11400000, guid: 3b2cd1f8594f26544a68d1f0ad5907ce, type: 2}
+  selectedTurret: {fileID: 11400000, guid: eda579dde12ec134cb9c409a84c988b7, type: 2}
 --- !u!4 &507898593
 Transform:
   m_ObjectHideFlags: 0
@@ -634,7 +687,8 @@ MonoBehaviour:
   turret: {fileID: 11400000, guid: a57bbc1af71acdd41b36ad370b11d4a0, type: 2}
   delivery: {fileID: 0}
   hitscanDelivery: {fileID: 999279205}
-  onHit: {fileID: 999279206}
+  onHit: {fileID: 0}
+  statBlock: {fileID: 1245404300}
 --- !u!114 &999279205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1129,7 @@ GameObject:
   - component: {fileID: 2059421237}
   - component: {fileID: 2059421240}
   m_Layer: 0
-  m_Name: Turret_Hummer
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1114,6 +1168,7 @@ MonoBehaviour:
   delivery: {fileID: 2059421237}
   hitscanDelivery: {fileID: 0}
   onHit: {fileID: 2059421240}
+  statBlock: {fileID: 1245404300}
 --- !u!4 &2059421239
 Transform:
   m_ObjectHideFlags: 0
@@ -1161,3 +1216,4 @@ SceneRoots:
   - {fileID: 1139349999}
   - {fileID: 1533841885}
   - {fileID: 563435910}
+  - {fileID: 255245127}

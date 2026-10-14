@@ -14,6 +14,11 @@ namespace TankSurvival.Player
 
         public event Action OnDeath;
 
+        private void Awake()
+        {
+            statBlock.MaxHealthIncreased += delta => currentHealth += delta;
+        }
+
         public void Init()
         {
             currentHealth = statBlock.maxHealth;

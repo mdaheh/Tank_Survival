@@ -16,3 +16,4 @@ MonoBehaviour:
   countMultiplier: 1
   healthMultiplier: 1
   speedMultiplier: 1
+  xpMultiplier: 1.2

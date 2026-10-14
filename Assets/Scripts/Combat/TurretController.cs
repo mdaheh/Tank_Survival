@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace TankSurvival.Combat
         public DeliveryHandler delivery;
         public DeliveryHandler hitscanDelivery;
         public OnHitDispatcher onHit;
+        public StatBlock statBlock;
 
         private float _cooldown;
 
@@ -73,8 +75,8 @@ namespace TankSurvival.Combat
             if (closest != null && _cooldown <= 0f)
             {
                 Vector3 direction = (closest.transform.position - position).normalized;
-                active.Fire(direction);
-                _cooldown = 1f / turret.delivery.aps;
+                active.Fire(direction, statBlock.damage);
+                _cooldown = 1f / statBlock.fireRate;
             }
         }
     }

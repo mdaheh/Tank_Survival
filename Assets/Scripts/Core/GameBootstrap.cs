@@ -16,7 +16,7 @@ namespace TankSurvival.Core
 
         private void Start()
         {
-            statBlock.Init(sessionState.SelectedChassis);
+            statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
             poolManager.Prewarm(projectilePrefab, projectileCount);
             waveSpawner.Prewarm();
             roundController.StartRound();

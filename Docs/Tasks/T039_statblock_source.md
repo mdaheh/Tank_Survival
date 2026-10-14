@@ -1,5 +1,5 @@
 # T039: StatBlock — источник статов + ApplyUpgrade; SessionState.SelectedTurret
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T038
 - Files:
@@ -34,5 +34,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/StatBlock.cs — Init(chassis, turret) + событие MaxHealthIncreased + ApplyUpgrade; Assets/Scripts/Core/SessionState.cs — selectedTurret/SelectedTurret; Assets/Scripts/Player/PlayerHealth.cs — подписка в Awake; Assets/Scripts/Core/GameBootstrap.cs — Init с двумя аргументами.
+Блокер: —

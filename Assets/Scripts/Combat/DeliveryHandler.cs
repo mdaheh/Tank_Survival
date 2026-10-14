@@ -6,6 +6,6 @@ namespace TankSurvival.Combat
     {
         public OnHitDispatcher onHit;
 
-        public abstract void Fire(Vector3 direction);
+        public abstract void Fire(Vector3 direction, float damage);
     }
 }

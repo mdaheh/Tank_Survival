@@ -1,5 +1,5 @@
 # T038: UpgradeData — SO апгрейда
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Files:
   - Assets/Scripts/Data/UpgradeData.cs
@@ -23,5 +23,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/UpgradeData.cs — создан SO UpgradeData с вложенным enum StatType (Damage, FireRate, MoveSpeed, MaxHealth) и полями stat/value/maxStacks.
+Блокер: —

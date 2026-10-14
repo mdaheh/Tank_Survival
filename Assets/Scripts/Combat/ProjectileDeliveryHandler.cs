@@ -19,7 +19,7 @@ namespace TankSurvival.Combat
             }
         }
 
-        public override void Fire(Vector3 direction)
+        public override void Fire(Vector3 direction, float damage)
         {
             if (module == null || projectilePrefab == null || pool == null)
             {
@@ -36,7 +36,7 @@ namespace TankSurvival.Combat
                 float spread = Random.Range(-halfSpread, halfSpread);
                 Vector3 spreadDirection = Quaternion.AngleAxis(spread, Vector3.up) * direction;
 
-                projectile.GetComponent<Projectile>().Init(module.damage, module.speed, module.range, spreadDirection, pool, onHit);
+                projectile.GetComponent<Projectile>().Init(damage, module.speed, module.range, spreadDirection, pool, onHit);
             }
         }
     }

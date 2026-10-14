@@ -1,5 +1,5 @@
 # T040: Combat читает урон и скорострельность из StatBlock
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T039
 - Files:
@@ -28,5 +28,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/DeliveryHandler.cs — Fire(direction, damage); Assets/Scripts/Combat/ProjectileDeliveryHandler.cs — урон из аргумента damage; Assets/Scripts/Combat/HitscanDeliveryHandler.cs — урон из аргумента damage; Assets/Scripts/Combat/TurretController.cs — поле statBlock, Fire(direction, statBlock.damage), кулдаун 1f / statBlock.fireRate.
+Блокер: —

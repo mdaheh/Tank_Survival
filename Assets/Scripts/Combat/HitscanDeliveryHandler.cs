@@ -22,7 +22,7 @@ namespace TankSurvival.Combat
             }
         }
 
-        public override void Fire(Vector3 direction)
+        public override void Fire(Vector3 direction, float damage)
         {
             if (module == null)
             {
@@ -71,7 +71,7 @@ namespace TankSurvival.Combat
                     _candidates[nearest] = swap;
                 }
 
-                _candidates[i].Damageable.TakeDamage(module.damage);
+                _candidates[i].Damageable.TakeDamage(damage);
                 if (onHit != null)
                 {
                     onHit.ProcessHit(_candidates[i].transform.position, _candidates[i]);

@@ -1,5 +1,5 @@
 # T037: DifficultyData.xpMultiplier
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Files:
   - Assets/Scripts/Data/DifficultyData.cs
@@ -22,5 +22,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/DifficultyData.cs — добавлено поле `public float xpMultiplier = 1f;` после существующих полей.
+Блокер: —

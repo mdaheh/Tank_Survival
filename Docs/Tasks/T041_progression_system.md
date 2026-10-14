@@ -1,5 +1,5 @@
 # T041: ProgressionSystem — XP, кривая уровней, level-up
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T037, T038, T039
 - Files:
@@ -45,5 +45,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Progression/ProgressionSystem.cs — создан ProgressionSystem: AddXp с кривой 5 + level*3 и капом 30, ChooseUpgrade со стеками, RollUpgrades (Fisher–Yates), Reset, события OnLevelUp/OnLevelUpResolved.
+Блокер: —

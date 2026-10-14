@@ -9,5 +9,6 @@ namespace TankSurvival.Data
         public float countMultiplier = 1f;
         public float healthMultiplier = 1f;
         public float speedMultiplier = 1f;
+        public float xpMultiplier = 1f;
     }
 }
