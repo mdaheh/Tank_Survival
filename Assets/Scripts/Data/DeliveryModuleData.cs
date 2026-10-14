@@ -18,5 +18,6 @@ namespace TankSurvival.Data
         public float range;
         public float aps;
         public float damage;
+        public int maxTargets;
     }
 }

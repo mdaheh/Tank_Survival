@@ -1,5 +1,5 @@
 # T026: DeliveryModuleData — hitscan-поле maxTargets
-- Status: [ ]
+- Status: [x]
 - Phase: 4
 - Files:
   - Assets/Scripts/Data/DeliveryModuleData.cs
@@ -25,5 +25,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DeliveryModuleData.cs: добавлено публичное поле `int maxTargets`
+Блокер: —
