@@ -1,5 +1,5 @@
 # T028: TurretController — маршрутизация по delivery.kind
-- Status: [ ]
+- Status: [x]
 - Phase: 4
 - Depends: T026, T027
 - Files:
@@ -27,5 +27,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: TurretController.cs: добавлено поле `hitscanDelivery`, в `Update` выбор handler'а по `turret.delivery.kind` (Hitscan → hitscanDelivery, иначе → delivery), ранняя проверка перенесена на выбранный handler, выстрел через `active.Fire(direction)`
+Блокер: —

@@ -9,6 +9,7 @@ namespace TankSurvival.Combat
     {
         public TurretData turret;
         public DeliveryHandler delivery;
+        public DeliveryHandler hitscanDelivery;
 
         private float _cooldown;
 
@@ -16,7 +17,15 @@ namespace TankSurvival.Combat
         {
             _cooldown -= Time.deltaTime;
 
-            if (turret == null || turret.delivery == null || delivery == null)
+            if (turret == null || turret.delivery == null)
+            {
+                return;
+            }
+
+            DeliveryHandler active = turret.delivery.kind == DeliveryModuleData.DeliveryKind.Hitscan
+                ? hitscanDelivery
+                : delivery;
+            if (active == null)
             {
                 return;
             }
@@ -25,10 +34,10 @@ namespace TankSurvival.Combat
             float closestDistanceSqr = turret.delivery.range * turret.delivery.range;
             EnemyController closest = null;
 
-            List<EnemyController> active = EnemyController.Active;
-            for (int i = 0; i < active.Count; i++)
+            List<EnemyController> enemies = EnemyController.Active;
+            for (int i = 0; i < enemies.Count; i++)
             {
-                EnemyController enemy = active[i];
+                EnemyController enemy = enemies[i];
                 float distanceSqr = (enemy.transform.position - position).sqrMagnitude;
                 if (distanceSqr <= closestDistanceSqr)
                 {
@@ -40,7 +49,7 @@ namespace TankSurvival.Combat
             if (closest != null && _cooldown <= 0f)
             {
                 Vector3 direction = (closest.transform.position - position).normalized;
-                delivery.Fire(direction);
+                active.Fire(direction);
                 _cooldown = 1f / turret.delivery.aps;
             }
         }
