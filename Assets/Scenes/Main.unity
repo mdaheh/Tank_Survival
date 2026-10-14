@@ -625,8 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade821f3bfb0cac428df600ae0d4d41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameBootstrap
-  sessionState: {fileID: 507898592}
-  statBlock: {fileID: 1245404300}
   poolManager: {fileID: 249992434}
   projectilePrefab: {fileID: 1658045355164781374, guid: 326d7bec58d24f74fb0ca1a67d9dc709, type: 3}
   projectileCount: 20
@@ -763,7 +761,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1670,6 +1668,9 @@ MonoBehaviour:
   waveSpawner: {fileID: 153685795}
   difficulty: {fileID: 11400000, guid: aef0216be49a5a548b61ec55cfb13da3, type: 2}
   playerHealth: {fileID: 1245404298}
+  statBlock: {fileID: 1245404300}
+  sessionState: {fileID: 507898592}
+  progression: {fileID: 255245128}
   phase: 0
   currentWave: 0
 --- !u!4 &1360148711
@@ -2077,7 +2078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2175,7 +2176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1833148988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,7 +2318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
