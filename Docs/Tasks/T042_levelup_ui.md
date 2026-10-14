@@ -1,5 +1,5 @@
 # T042: LevelUpUI — пауза + 3 карточки
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T041
 - Files:
@@ -33,5 +33,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/UI/LevelUpUI.cs — создан LevelUpUI: подписка на OnLevelUp в Awake, Show (RollUpgrades(3), до 3 карточек, пауза Time.timeScale = 0), Choose (снятие паузы после успешного ChooseUpgrade).
+Блокер: —

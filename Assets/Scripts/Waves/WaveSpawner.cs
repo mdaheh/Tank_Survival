@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
+using TankSurvival.Progression;
 using UnityEngine;
 
 namespace TankSurvival.Waves
@@ -14,6 +15,7 @@ namespace TankSurvival.Waves
         public SpawnPoint[] spawnPoints;
         public PoolManager poolManager;
         public Transform playerTransform;
+        public ProgressionSystem progression;
 
         public event Action OnWaveCleared;
 
@@ -95,7 +97,7 @@ namespace TankSurvival.Waves
             EnemyController controller = go.GetComponent<EnemyController>();
             controller.health.healthMultiplier = difficulty.healthMultiplier;
             controller.speedMultiplier = difficulty.speedMultiplier;
-            controller.health.OnDeath += () => HandleEnemyDeath(controller);
+            controller.health.OnDeath += () => { HandleEnemyDeath(controller); progression.AddXp(controller.data.xpReward * difficulty.xpMultiplier); };
             controller.Init(order.enemy, playerTransform, poolManager);
             _active.Add(controller);
         }

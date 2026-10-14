@@ -1,5 +1,5 @@
 # T043: XP за убийство — WaveSpawner
-- Status: [ ]
+- Status: [x]
 - Phase: 6
 - Depends: T037, T041
 - Files:
@@ -24,5 +24,5 @@
 - Play Mode: убийство врага увеличивает `ProgressionSystem.xp` (видно в инспекторе).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Waves/WaveSpawner.cs — using TankSurvival.Progression, поле progression, в подписке OnDeath при смерти вызывается progression.AddXp(xpReward * difficulty.xpMultiplier); подписка осталась до controller.Init.
+Блокер: —
