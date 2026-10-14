@@ -7,8 +7,10 @@ namespace TankSurvival.Core
     {
         [SerializeField] private ChassisData selectedChassis;
         [SerializeField] private TurretData selectedTurret;
+        [SerializeField] private DifficultyData selectedDifficulty;
 
         public ChassisData SelectedChassis => selectedChassis;
         public TurretData SelectedTurret => selectedTurret;
+        public DifficultyData SelectedDifficulty => selectedDifficulty;
     }
 }

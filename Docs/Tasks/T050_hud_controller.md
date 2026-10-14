@@ -1,5 +1,5 @@
 # T050: HUDController — HP/XP/волна/убийства
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Depends: T048, T049
 - Files:
@@ -36,5 +36,5 @@
 - Зачистка волны → `WaveText` растёт.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/UI/HUDController.cs — создан класс: поля ссылок (playerHealth/progression/roundController + 7 UI-элементов), подписки в `Awake`, обработчики `UpdateHealth`/`UpdateProgression`/`UpdateWave`/`UpdateKills` строго по ТЗ (только чтение, без `Update()`, без аллокаций).
+Блокер: —

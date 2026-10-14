@@ -1,5 +1,5 @@
 # T047: SessionState — selectedDifficulty
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Files:
   - Assets/Scripts/Core/SessionState.cs
@@ -21,5 +21,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/SessionState.cs — добавлено поле `selectedDifficulty` (SerializeField) и свойство `SelectedDifficulty` рядом с выбором шасси/турели.
+Блокер: —

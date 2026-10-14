@@ -13,9 +13,12 @@ namespace TankSurvival.Progression
 
         public event Action OnLevelUp;
         public event Action OnLevelUpResolved;
+        public event Action OnProgressChanged;
 
         public float xp;
         public int level = 1;
+
+        public float XpNeeded => 5f + level * 3f;
 
         private const int LevelCap = 30;
         private bool _pending;
@@ -24,6 +27,7 @@ namespace TankSurvival.Progression
         public void AddXp(float amount)
         {
             xp += amount;
+            OnProgressChanged?.Invoke();
             if (_pending || level >= LevelCap)
             {
                 return;
@@ -34,6 +38,7 @@ namespace TankSurvival.Progression
             {
                 xp -= need;
                 level++;
+                OnProgressChanged?.Invoke();
                 _pending = true;
                 OnLevelUp?.Invoke();
             }
@@ -102,6 +107,7 @@ namespace TankSurvival.Progression
             level = 1;
             _pending = false;
             _stacks.Clear();
+            OnProgressChanged?.Invoke();
         }
     }
 }

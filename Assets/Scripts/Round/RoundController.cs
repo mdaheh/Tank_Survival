@@ -1,5 +1,5 @@
+using System;
 using TankSurvival.Core;
-using TankSurvival.Data;
 using TankSurvival.Player;
 using TankSurvival.Progression;
 using TankSurvival.Waves;
@@ -18,7 +18,6 @@ namespace TankSurvival.Round
         }
 
         [SerializeField] private WaveSpawner waveSpawner;
-        [SerializeField] private DifficultyData difficulty;
         [SerializeField] private PlayerHealth playerHealth;
         [SerializeField] private StatBlock statBlock;
         [SerializeField] private SessionState sessionState;
@@ -26,11 +25,20 @@ namespace TankSurvival.Round
 
         public RoundPhase phase;
         public int currentWave;
+        public int kills;
+
+        public int TotalWaves => sessionState.SelectedDifficulty.waveCount;
+
+        public event Action<RoundPhase> OnPhaseChanged;
+        public event Action OnWaveChanged;
+        public event Action OnKillsChanged;
 
         private void Awake()
         {
+            waveSpawner.difficulty = sessionState.SelectedDifficulty;
             playerHealth.OnDeath += HandlePlayerDeath;
             waveSpawner.OnWaveCleared += HandleWaveCleared;
+            waveSpawner.OnEnemyKilled += HandleEnemyKilled;
             progression.OnLevelUp += HandleLevelUp;
             progression.OnLevelUpResolved += HandleLevelUpResolved;
         }
@@ -38,40 +46,57 @@ namespace TankSurvival.Round
         public void StartRound()
         {
             currentWave = 1;
-            phase = RoundPhase.Playing;
+            kills = 0;
+            waveSpawner.difficulty = sessionState.SelectedDifficulty;
+            SetPhase(RoundPhase.Playing);
             statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
             progression.Reset();
             playerHealth.Init();
+            OnWaveChanged?.Invoke();
+            OnKillsChanged?.Invoke();
             waveSpawner.BeginWave(currentWave);
         }
 
         private void HandleWaveCleared()
         {
-            if (currentWave >= difficulty.waveCount)
+            if (currentWave >= sessionState.SelectedDifficulty.waveCount)
             {
-                phase = RoundPhase.Win;
+                SetPhase(RoundPhase.Win);
             }
             else
             {
                 currentWave++;
+                OnWaveChanged?.Invoke();
                 waveSpawner.BeginWave(currentWave);
             }
         }
 
         private void HandlePlayerDeath()
         {
-            phase = RoundPhase.Lose;
+            SetPhase(RoundPhase.Lose);
             waveSpawner.ClearActiveEnemies();
         }
 
         private void HandleLevelUp()
         {
-            phase = RoundPhase.LevelUp;
+            SetPhase(RoundPhase.LevelUp);
         }
 
         private void HandleLevelUpResolved()
         {
-            phase = RoundPhase.Playing;
+            SetPhase(RoundPhase.Playing);
+        }
+
+        private void HandleEnemyKilled()
+        {
+            kills++;
+            OnKillsChanged?.Invoke();
+        }
+
+        private void SetPhase(RoundPhase value)
+        {
+            phase = value;
+            OnPhaseChanged?.Invoke(phase);
         }
 
         [ContextMenu("Restart Round")]

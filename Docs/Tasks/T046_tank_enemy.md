@@ -1,5 +1,5 @@
 # T046: Враг Tank (data-only)
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Files:
   - (нет — задача data-only, правок `.cs` нет)

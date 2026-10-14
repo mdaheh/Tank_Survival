@@ -18,3 +18,7 @@ MonoBehaviour:
     prefab: {fileID: 6536791609722930022, guid: cf4fce26e9d61d54f9da7f8b04ce1797, type: 3}
     baseCount: 5
     increase: 2
+  - enemy: {fileID: 11400000, guid: 919506f26364f284aa9990a918b2b85a, type: 2}
+    prefab: {fileID: 6536791609722930022, guid: 23649b66fb699004890d1e412689c708, type: 3}
+    baseCount: 1
+    increase: 1

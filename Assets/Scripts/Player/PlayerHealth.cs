@@ -13,6 +13,7 @@ namespace TankSurvival.Player
         public float CurrentHealth => currentHealth;
 
         public event Action OnDeath;
+        public event Action<float, float> OnHealthChanged;
 
         private void Awake()
         {
@@ -22,11 +23,13 @@ namespace TankSurvival.Player
         public void Init()
         {
             currentHealth = statBlock.maxHealth;
+            OnHealthChanged?.Invoke(currentHealth, statBlock.maxHealth);
         }
 
         public void TakeDamage(float amount)
         {
             currentHealth -= amount;
+            OnHealthChanged?.Invoke(currentHealth, statBlock.maxHealth);
             if (currentHealth <= 0f)
             {
                 OnDeath?.Invoke();

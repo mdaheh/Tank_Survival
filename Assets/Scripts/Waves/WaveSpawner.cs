@@ -18,6 +18,7 @@ namespace TankSurvival.Waves
         public ProgressionSystem progression;
 
         public event Action OnWaveCleared;
+        public event Action OnEnemyKilled;
 
         private readonly List<EnemyController> _active = new List<EnemyController>();
         private readonly List<SpawnOrder> _queue = new List<SpawnOrder>();
@@ -104,6 +105,7 @@ namespace TankSurvival.Waves
 
         private void HandleEnemyDeath(EnemyController controller)
         {
+            OnEnemyKilled?.Invoke();
             _active.Remove(controller);
             if (_queue.Count == 0 && _active.Count == 0)
             {

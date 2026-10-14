@@ -1,5 +1,5 @@
 # T049: PlayerHealth/ProgressionSystem — события HP/XP для HUD
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Files:
   - Assets/Scripts/Player/PlayerHealth.cs
@@ -26,5 +26,5 @@
 - Отображение HP/XP через эти события проверяется в T050 (HUDController).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Player/PlayerHealth.cs — событие `OnHealthChanged` + вызовы в `Init()` и `TakeDamage()` (до проверки смерти); Assets/Scripts/Progression/ProgressionSystem.cs — событие `OnProgressChanged`, свойство `XpNeeded`, вызовы в `AddXp()` (после `xp +=` и после `level++`) и в конце `Reset()`.
+Блокер: —

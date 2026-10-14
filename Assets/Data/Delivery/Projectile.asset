@@ -19,3 +19,4 @@ MonoBehaviour:
   range: 10
   aps: 2
   damage: 30
+  maxTargets: 0

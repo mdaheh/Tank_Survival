@@ -1,5 +1,5 @@
 # T051: RoundEndUI — победа/поражение + рестарт
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Depends: T048
 - Files:
@@ -31,5 +31,5 @@
 - Клик «Рестарт» → панель скрыта, `Time.timeScale = 1`, новый раунд: `currentWave = 1`, `kills = 0`, `xp = 0`, `level = 1`, статы в `StatBlock` вернулись к базовым.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/UI/RoundEndUI.cs — создан класс: 4 публичных поля, подписка на `OnPhaseChanged` + `onClick` в `Awake`, `HandlePhaseChanged` (Win → «Победа», Lose → «Поражение», иначе ничего), `Show` (`timeScale = 0`), `Restart` (`timeScale = 1` → скрыть панель → `roundController.Restart()`).
+Блокер: —

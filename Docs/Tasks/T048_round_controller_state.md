@@ -1,5 +1,5 @@
 # T048: RoundController/WaveSpawner — сложность из SessionState + kills + события
-- Status: [ ]
+- Status: [x]
 - Phase: 7
 - Depends: T047
 - Files:
@@ -41,5 +41,5 @@
 - Смена `SessionState.selectedDifficulty` (Recruit ↔ Sergeant) меняет `waveCount` — проверяется через HUD в T050.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Waves/WaveSpawner.cs — событие `OnEnemyKilled` + вызов первой строкой в `HandleEnemyDeath`; Assets/Scripts/Round/RoundController.cs — сложность из `SessionState` (поле `difficulty` убрано), `kills`/`TotalWaves`, события `OnPhaseChanged`/`OnWaveChanged`/`OnKillsChanged`, `SetPhase`/`HandleEnemyKilled`, обновлённые `Awake`/`StartRound`/обработчики фаз.
+Блокер: —
