@@ -38,5 +38,3 @@ tags:
 **Отличие от Piercing cannon:** Piercing cannon стреляет снарядом (летит, может промахнуться). Railgun — мгновенный (всегда попадает). У Piercing cannon выше aps, у Railgun — выше урон и дальность.
 
 **Синергия:** С [[Beam Split]] — выстрел разделяется на несколько лучей. Это подчёркивает разницу между Railgun и Piercing cannon: Piercing cannon работает через Pierce, Railgun — через Beam Split.
-
-**ДПС:** `extreme (27) × very_slow (0.5) = 13.5` на цель × 5 целей = **67.5** общего урона за выстрел.

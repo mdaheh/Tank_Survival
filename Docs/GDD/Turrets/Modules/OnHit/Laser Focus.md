@@ -7,6 +7,7 @@ added_tags:
   - dot
 required_tags:
   - hitscan
+  - continuous
 conflicts_with: []
 conflict_group: none
 fields:

@@ -15,14 +15,6 @@ fields:
   tick_rate: none
   onhit_tick_rate: none
   projectile_prefab: GameObject
-presets:
-  default:
-    aps: medium
-    speed: medium
-    range: medium
-    damage: medium
-    pellet_count: 1
-    spread_angle: none
 description: Создаёт летящий снаряд. Может создавать несколько снарядов (pellet-система).
 tags:
   - delivery

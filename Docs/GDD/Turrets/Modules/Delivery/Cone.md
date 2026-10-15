@@ -13,21 +13,6 @@ fields:
   tick_rate: none
   cone_vfx: GameObject
   onhit_tick_rate: none
-presets:
-  flamethrower:
-    angle: medium
-    range: medium
-    aps: fast
-    damage: low
-    tick_rate: fast
-    onhit_tick_rate: medium
-  shotgun:
-    angle: low
-    range: medium
-    aps: slow
-    damage: high
-    tick_rate: none
-    onhit_tick_rate: none
 description: Наносит урон всем врагам в конусе перед турелью.
 tags:
   - delivery

@@ -7,7 +7,7 @@ base_turret: "[[Flamethrower]]"
 delivery_module: "[[Cone]]"
 delivery_config:
   duration: continuous
-  angle: high
+  angle: medium
   range: medium
   damage: medium
   tick_rate: fast
