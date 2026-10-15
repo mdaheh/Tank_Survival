@@ -9,10 +9,10 @@ conflicts_with: []
 conflict_group: none
 fields:
   force: medium
-  duration: fast
+  duration: short
   damage_scaling: 0.5
 priority: 3
-description: Отталкивает врага. Сила зависит от урона и скорости атаки.
+description: Отталкивает врага. Сила зависит от урона.
 tags:
   - on_hit
   - module

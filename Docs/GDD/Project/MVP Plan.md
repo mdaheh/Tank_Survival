@@ -25,7 +25,7 @@ type: project
 
 ### Turrets (2)
 - **Hammer** — базовый cannon, delivery `Projectile`.
-- **Beam** —  специализация класса laser (delivery Hitscan, режим instant). В MVP используется как единственная турель класса laser вместо базового Laser (у базового — continuous, в MVP не реализуется).
+- **Beam** —  специализация ветки laser (delivery Hitscan, режим instant). В MVP используется как единственная турель ветки laser вместо базового Laser (у базового — continuous, в MVP не реализуется).
   (raycast раз в `1/aps`, мгновенный урон, короткий VFX луча).
 - Continuous hitscan (Laser) в MVP **не делаем** — переносится в v1.0.
 
