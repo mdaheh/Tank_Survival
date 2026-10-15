@@ -11,7 +11,7 @@ type: system
 
 | Тип | Счётчик | Что открывает |
 |---|---|---|
-| **Турели** | Убийства в классе | Специализации |
+| **Турели** | Убийства в ветке | Специализации |
 | **Шасси** | Общие убийства | Новые шасси |
 | **Сложности** | Прогресс прохождения | Новые сложности |
 
@@ -19,23 +19,20 @@ type: system
 
 ## 1. Открытие турелей
 
-**Счётчик:** убийства, накопленные **на конкретном классе**.
+**Счётчик**: убийства, накопленные внутри ветки (см. Legend §4.3).
+**Правило**: убийства на любой турели ветки — базовой или специализации —
+идут в общий счётчик этой ветки. Счётчики трёх веток независимы.
 
-**Правило:** убийства на любой турели класса идут в общий счётчик класса.
-
-| Класс | Счётчик | Открывает |
+| Ветка | Счётчик | Открывает |
 |---|---|---|
 | cannon | `cannon_kills` | Пулемёт (1500), Дробовик (2000), Бомбарда (2500), Пробивная (3000) |
 | flamethrower | `flamethrower_kills` | Freezer (1500), Hellfire (2500) |
 | laser | `laser_kills` | Луч (1500), Рейлган (3000) |
-| tesla | `tesla_kills` | (отложено) |
 
 **Пример:**
 - Игрок играет на Молотке → 500 убийств → `cannon_kills: 500`.
 - Играет на Пулемёте → ещё 1000 убийств → `cannon_kills: 1500`.
 - Открывается Дробовик (2000) — нужен ещё 500.
-
-**Счётчики классов — независимые.** Убийства на cannon не идут в flamethrower.
 
 ---
 
@@ -82,7 +79,6 @@ type: system
 | `cannon_kills` | ✅ Да |
 | `flamethrower_kills` | ✅ Да |
 | `laser_kills` | ✅ Да |
-| `tesla_kills` | ✅ Да |
 | Открытые сложности | ✅ Да |
 | Открытые шасси | ✅ Да |
 | Открытые турели | ✅ Да |
@@ -106,12 +102,11 @@ LocalStorage (JSON):
   "cannon_kills": 3200,
   "flamethrower_kills": 800,
   "laser_kills": 1500,
-  "tesla_kills": 0,
-  "unlocked_chassis": ["Standart", "Fat"],
-  "unlocked_turrets": ["Hammer", "Machine gun", "Shotgun"],
-  "unlocked_difficulties": ["Recruit", "Soldier", "Sergeant", "Lieutenant"],
-  "selected_chassis": "Fat",
-  "selected_turret": "Shotgun"
+  "unlocked_chassis": ["chassis_standart", "chassis_fat"],
+  "unlocked_turrets": ["hammer", "machine_gun", "shotgun"],
+  "unlocked_difficulties": ["recruit", "soldier", "sergeant", "lieutenant"],
+  "selected_chassis": "chassis_fat",
+  "selected_turret": "shotgun"
 }
 ```
 

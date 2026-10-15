@@ -13,7 +13,6 @@ fields:
   duration: medium
   slow_amount: high
   freeze_threshold: 3
-  chance: 1
 priority: 5
 description: Замораживает врага. Сначала замедляет, потом останавливает.
 tags:
@@ -23,8 +22,7 @@ tags:
 
 ## Behavior
 
-1. Если `Random.value > chance` — выйти.
-2. Наложить на врага статус `freeze`.
-3. Замедлить врага на `slow_amount`.
-4. Если враг получил `freeze_threshold` стаков — заморозить полностью.
-5. Через `duration` секунд снять статус.
+1. Наложить на врага статус `freeze`.
+2. Замедлить врага на `slow_amount`.
+3. Если враг получил `freeze_threshold` стаков — заморозить полностью.
+4. Через `duration` секунд снять статус.

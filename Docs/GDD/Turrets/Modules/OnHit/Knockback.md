@@ -11,7 +11,6 @@ fields:
   force: medium
   duration: fast
   damage_scaling: 0.5
-  chance: 1
 priority: 3
 description: Отталкивает врага. Сила зависит от урона и скорости атаки.
 tags:
@@ -21,7 +20,6 @@ tags:
 
 ## Behavior
 
-1. Если `Random.value > chance` — выйти.
-2. Оттолкнуть врага от точки попадания.
-3. Сила = `force × damage_scaling × (1 / tick_rate)`.
-4. Длительность = `duration` секунд.
+1. Оттолкнуть врага от точки попадания.
+2. Сила = `force × damage_scaling`.
+3. Длительность = `duration` секунд.

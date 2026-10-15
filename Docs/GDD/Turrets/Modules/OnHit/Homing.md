@@ -11,7 +11,6 @@ conflict_group: none
 fields:
   homing_strength: medium
   homing_radius: medium
-  chance: 1
 priority: 1
 description: Снаряд самонаводится на ближайшего врага. Требует projectile.
 tags:
@@ -21,7 +20,6 @@ tags:
 
 ## Behavior
 
-1. Если `Random.value > chance` — выйти.
-2. Снаряд меняет направление на ближайшего врага.
-3. Сила наведения = `homing_strength`.
-4. Радиус поиска = `homing_radius`.
+1. Снаряд меняет направление на ближайшего врага.
+2. Сила наведения = `homing_strength`.
+3. Радиус поиска = `homing_radius`.

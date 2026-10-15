@@ -6,7 +6,6 @@ weapon_class: laser
 delivery_module: "[[Hitscan]]"
 delivery_config:
   duration: continuous
-  aps: none
   tick_rate: fast
   onhit_tick_rate: medium
   max_targets: 1
@@ -40,8 +39,6 @@ tags:
 ## Описание
 
 Футуристичная башня с батарейками. Непрерывный поток энергии. Урон растёт, пока цель в луче.
-
-**Роль:** фокус на одной цели. Хорош против одиночных сильных врагов (элиты, боссы).
 
 **Особенность:** [[Laser Focus]] — стартовый OnHit. Урон накапливается.
 

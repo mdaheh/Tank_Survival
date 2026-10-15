@@ -8,8 +8,8 @@ added_tags:
 fields:
   angle: medium
   range: medium
-  aps: medium
   damage: low
+  duration: continuous
   tick_rate: none
   cone_vfx: GameObject
   onhit_tick_rate: none

@@ -10,7 +10,6 @@ conflict_group: none
 fields:
   duration: medium
   slow_amount: medium
-  chance: 1
 priority: 4
 description: Замедляет врага.
 tags:
@@ -20,6 +19,5 @@ tags:
 
 ## Behavior
 
-1. Если `Random.value > chance` — выйти.
-2. Замедлить врага на `slow_amount`.
-3. Через `duration` секунд снять эффект.
+1. Замедлить врага на `slow_amount`.
+2. Через `duration` секунд снять эффект.

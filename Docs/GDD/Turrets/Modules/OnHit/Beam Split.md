@@ -12,7 +12,6 @@ conflict_group: none
 fields:
   split_count: 3
   split_angle: medium
-  chance: 1
 priority: 6
 description: Луч разделяется на несколько лучей. Требует hitscan.
 tags:
@@ -22,7 +21,6 @@ tags:
 
 ## Behavior
 
-1. Если `Random.value > chance` — выйти.
-2. Создать `split_count` новых лучей из точки попадания.
-3. Распределить их по `split_angle`.
-4. Каждый луч наследует билд турели.
+1. Создать `split_count` новых лучей из точки попадания.
+2. Распределить их по `split_angle`.
+3. Каждый луч наследует билд турели.
