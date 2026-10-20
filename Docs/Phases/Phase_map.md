@@ -35,9 +35,9 @@
 
 ### Контент / «играть дольше и стабильнее»
 
-- **Phase 8 — Враги v1.0: Brute, Shooter, Boss.** [planned]
-- **Phase 9 — Delivery полностью: Cone + continuous Hitscan.** [in-progress]
-- **Phase 10 — On-hit контроль: Freeze, Slow, Knockback, Ground.** [planned]
+- **Phase 8 — Враги v1.0: Brute, Shooter, Boss.** [accepted]
+- **Phase 9 — Delivery полностью: Cone + continuous Hitscan.** [accepted]
+- **Phase 10 — On-hit контроль: Freeze, Slow, Knockback, Ground.** [in-progress]
 - **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [planned]
 - **Phase 12 — Специализации турелей (8) и три ветки.** [planned]
 - **Phase 13 — Шасси v1.0: Fancy, Veteran + каркас способностей + Boost.** [planned]
