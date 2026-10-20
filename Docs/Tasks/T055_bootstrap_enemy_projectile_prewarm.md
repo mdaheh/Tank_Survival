@@ -1,5 +1,5 @@
 # T055: GameBootstrap — prewarm вражеских снарядов
-- Status: [ ]
+- Status: [x]
 - Phase: 8
 - Depends: T053
 - Files:
@@ -30,5 +30,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: GameBootstrap.cs — поля enemyProjectilePrefab/enemyProjectileCount и `poolManager.Prewarm(enemyProjectilePrefab, enemyProjectileCount)` после существующего prewarm; порядок вызовов Start() сохранён.
+Блокер: —

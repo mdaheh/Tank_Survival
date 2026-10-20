@@ -1,5 +1,5 @@
 # T053: EnemyProjectile — вражеский снаряд (пул)
-- Status: [ ]
+- Status: [x]
 - Phase: 8
 - Files:
   - Assets/Scripts/Enemy/EnemyProjectile.cs (новый)
@@ -53,5 +53,5 @@
 - Поведение снаряда проверяется в T054/T056 (Shooter стреляет).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: EnemyProjectile.cs — новый класс MonoBehaviour, IPoolable (пул, Init, Update по ТЗ, сброс в OnGet/OnRelease).
+Блокер: —

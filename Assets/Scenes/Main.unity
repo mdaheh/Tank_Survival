@@ -786,6 +786,8 @@ MonoBehaviour:
   poolManager: {fileID: 249992434}
   projectilePrefab: {fileID: 1658045355164781374, guid: 326d7bec58d24f74fb0ca1a67d9dc709, type: 3}
   projectileCount: 20
+  enemyProjectilePrefab: {fileID: 7257706215166978221, guid: 77efb9dcfee8ee74b82a5a18b74093ca, type: 3}
+  enemyProjectileCount: 20
   waveSpawner: {fileID: 153685795}
   roundController: {fileID: 1360148710}
 --- !u!114 &507898592

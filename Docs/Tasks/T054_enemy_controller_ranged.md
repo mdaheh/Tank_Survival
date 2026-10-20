@@ -1,5 +1,5 @@
 # T054: EnemyController — ranged-поведение (стрельба)
-- Status: [ ]
+- Status: [x]
 - Phase: 8
 - Depends: T052, T053
 - Files:
@@ -52,5 +52,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: EnemyController.cs — ranged-ветка: поля projectilePrefab/_pool/_shootCooldown, `_pool = pool` в Init, кулдаун и стрельба из пула в Update (range = shootRange * 2f); melee-блок без изменений.
+Блокер: —
