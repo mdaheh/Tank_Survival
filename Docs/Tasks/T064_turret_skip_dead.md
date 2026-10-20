@@ -1,5 +1,5 @@
 # T064: TurretController — пропуск мёртвых врагов при поиске цели
-- Status: [ ]
+- Status: [x]
 - Phase: 9.5
 - Depends: T063
 - Files:
@@ -20,5 +20,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/TurretController.cs — в цикле поиска ближайшего врага добавлен пропуск мёртвых (enemy.health == null || enemy.health.currentHealth <= 0f) перед вычислением дистанции.
+Блокер: —

@@ -1,5 +1,5 @@
 # T065: ExplosionOnHitHandler — убрать снапшот после Deferred Release
-- Status: [ ]
+- Status: [x]
 - Phase: 9.5
 - Depends: T063
 - Files:
@@ -20,5 +20,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/ExplosionOnHitHandler.cs — удалены поле _buffer, его заполнение и using System.Collections.Generic; в HandleHit перебор EnemyController.Active напрямую.
+Блокер: —

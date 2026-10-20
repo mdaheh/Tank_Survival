@@ -1,5 +1,5 @@
 # T063: Смерть врага — постановка в очередь, а не немедленный Release
-- Status: [ ]
+- Status: [x]
 - Phase: 9.5
 - Depends: T062
 - Files:
@@ -24,5 +24,5 @@
 - Инспектор `WaveSpawner`: поле `Kill System` ссылается на `EnemyKillSystem`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Enemy/EnemyController.cs — Init расширен до (data, target, pool, killSystem), подписка смерти теперь killSystem.Enqueue(gameObject); Assets/Scripts/Waves/WaveSpawner.cs — добавлено поле killSystem и передача его в controller.Init.
+Блокер: —

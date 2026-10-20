@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
@@ -10,20 +9,15 @@ namespace TankSurvival.Combat
     {
         public PoolManager pool;
 
-        private readonly List<EnemyController> _buffer = new List<EnemyController>(32);
-
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target)
         {
             if (module == null)
                 return;
 
-            _buffer.Clear();
-            _buffer.AddRange(EnemyController.Active);
-
             float radiusSq = module.radius * module.radius;
-            for (int i = 0; i < _buffer.Count; i++)
+            for (int i = 0; i < EnemyController.Active.Count; i++)
             {
-                EnemyController enemy = _buffer[i];
+                EnemyController enemy = EnemyController.Active[i];
                 if (enemy == null)
                     continue;
 

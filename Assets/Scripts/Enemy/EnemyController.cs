@@ -40,7 +40,7 @@ namespace TankSurvival.Enemy
             Active.Remove(this);
         }
 
-        public void Init(EnemyData data, Transform target, PoolManager pool)
+        public void Init(EnemyData data, Transform target, PoolManager pool, EnemyKillSystem killSystem)
         {
             this.data = data;
             this.target = target;
@@ -52,7 +52,7 @@ namespace TankSurvival.Enemy
 
             _pool = pool;
             health.Init(data);
-            health.OnDeath += () => pool.Release(gameObject);
+            health.OnDeath += () => killSystem.Enqueue(gameObject);
         }
 
         private void Update()

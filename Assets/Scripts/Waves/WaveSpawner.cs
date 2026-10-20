@@ -14,6 +14,7 @@ namespace TankSurvival.Waves
         public DifficultyData difficulty;
         public SpawnPoint[] spawnPoints;
         public PoolManager poolManager;
+        public EnemyKillSystem killSystem;
         public Transform playerTransform;
         public ProgressionSystem progression;
 
@@ -99,7 +100,7 @@ namespace TankSurvival.Waves
             controller.health.healthMultiplier = difficulty.healthMultiplier;
             controller.speedMultiplier = difficulty.speedMultiplier;
             controller.health.OnDeath += () => { HandleEnemyDeath(controller); progression.AddXp(controller.data.xpReward * difficulty.xpMultiplier); };
-            controller.Init(order.enemy, playerTransform, poolManager);
+            controller.Init(order.enemy, playerTransform, poolManager, killSystem);
             _active.Add(controller);
         }
 

@@ -1,5 +1,5 @@
 # T062: EnemyKillSystem — отложенное освобождение мёртвых врагов
-- Status: [ ]
+- Status: [x]
 - Phase: 9.5
 - Files:
   - Assets/Scripts/Enemy/EnemyKillSystem.cs
@@ -23,5 +23,5 @@
 - Инспектор `EnemyKillSystem`: поле `Pool` ссылается на `PoolManager`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Enemy/EnemyKillSystem.cs — создан EnemyKillSystem (Enqueue в _pending, флаш pool.Release по всем элементам в LateUpdate, затем _pending.Clear()).
+Блокер: —

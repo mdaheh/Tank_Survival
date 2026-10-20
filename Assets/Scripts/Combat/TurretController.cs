@@ -91,6 +91,11 @@ namespace TankSurvival.Combat
             for (int i = 0; i < enemies.Count; i++)
             {
                 EnemyController enemy = enemies[i];
+                if (enemy.health == null || enemy.health.currentHealth <= 0f)
+                {
+                    continue;
+                }
+
                 float distanceSqr = (enemy.transform.position - position).sqrMagnitude;
                 if (distanceSqr <= closestDistanceSqr)
                 {

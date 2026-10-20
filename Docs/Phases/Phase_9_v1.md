@@ -1,5 +1,5 @@
 # Phase 9: Delivery полностью — Cone + continuous Hitscan
-- Status: in-progress
+- Status: accepted
 - Цель: закрыть delivery-пайплайн — третий модуль Cone (конусный урон) и режим `continuous` у Hitscan (непрерывный луч с тиками). Projectile и Hitscan `instant` (Beam/Railgun) не ломаются.
 
 ## Задачи (порядок = приоритет)
