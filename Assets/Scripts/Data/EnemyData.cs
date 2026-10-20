@@ -10,5 +10,7 @@ namespace TankSurvival.Data
         public float damage;
         public int xpReward;
         public string behavior = "melee";
+        public float shootRange = 8f;
+        public float shootInterval = 1.5f;
     }
 }

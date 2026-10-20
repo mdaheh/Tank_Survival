@@ -1,5 +1,5 @@
 # T052: EnemyData — поля стрельбы (shootRange, shootInterval)
-- Status: [ ]
+- Status: [x]
 - Phase: 8
 - Files:
   - Assets/Scripts/Data/EnemyData.cs
@@ -25,5 +25,5 @@ ranged-поведения: `public float shootRange = 8f;` и
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: EnemyData.cs — добавлены поля `shootRange = 8f` и `shootInterval = 1.5f`.
+Блокер: —
