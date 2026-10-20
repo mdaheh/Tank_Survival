@@ -87,6 +87,16 @@
 Сброс раунда = ресет состояний подсистем (StatBlock/Progression/RoundController/
 WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перезагрузки сцены.
 
+**Правило `EnemyController.Active`:** живой реестр активных врагов. Наполняется и очищается
+только в `OnEnable`/`OnDisable` (спавн/возврат в пул). Смерть врага не мутирует `Active`
+сразу: `TakeDamage` → `OnDeath` лишь помечает врага мёртвым (`currentHealth <= 0`) и
+рассылает бухгалтерию (XP, счётчик волны), а фактическое освобождение
+(`pool.Release` → `SetActive(false)` → `OnDisable` → `Active.Remove`) выполняет
+`EnemyKillSystem` одной отложенной фазой в `LateUpdate`. Поэтому `Active` стабилен на всём
+протяжении игровой логики кадра: циклы (AoE, конус, hitscan, поиск цели) итерируют его
+напрямую, без снапшотов. Мёртвых (ещё не возвращённых в пул) врагов потребители пропускают
+по `currentHealth <= 0`.
+
 ## 3. Ключевые решения (WebGL-first)
 
 - **Одна сцена на всю сессию.** Сброс раунда — ресет состояния + возврат объектов

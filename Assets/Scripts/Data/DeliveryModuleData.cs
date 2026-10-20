@@ -8,7 +8,14 @@ namespace TankSurvival.Data
         public enum DeliveryKind
         {
             Projectile,
-            Hitscan
+            Hitscan,
+            Cone
+        }
+
+        public enum DeliveryDuration
+        {
+            Instant,
+            Continuous
         }
 
         public DeliveryKind kind;
@@ -19,5 +26,9 @@ namespace TankSurvival.Data
         public float aps;
         public float damage;
         public int maxTargets;
+        public DeliveryDuration duration;
+        public float tickRate;
+        public float angle;
+        public GameObject coneVfx;
     }
 }

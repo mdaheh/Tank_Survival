@@ -11,6 +11,7 @@ namespace TankSurvival.Combat
         public TurretData turret;
         public DeliveryHandler delivery;
         public DeliveryHandler hitscanDelivery;
+        public DeliveryHandler coneDelivery;
         public OnHitDispatcher onHit;
         public StatBlock statBlock;
 
@@ -37,6 +38,11 @@ namespace TankSurvival.Combat
             {
                 hitscanDelivery.onHit = onHit;
             }
+
+            if (coneDelivery != null)
+            {
+                coneDelivery.onHit = onHit;
+            }
         }
 
         private void Update()
@@ -48,13 +54,34 @@ namespace TankSurvival.Combat
                 return;
             }
 
-            DeliveryHandler active = turret.delivery.kind == DeliveryModuleData.DeliveryKind.Hitscan
-                ? hitscanDelivery
-                : delivery;
+            DeliveryHandler active;
+            if (turret.delivery.kind == DeliveryModuleData.DeliveryKind.Hitscan)
+            {
+                active = hitscanDelivery;
+            }
+            else if (turret.delivery.kind == DeliveryModuleData.DeliveryKind.Cone)
+            {
+                active = coneDelivery;
+            }
+            else
+            {
+                active = delivery;
+            }
+
             if (active == null)
             {
                 return;
             }
+
+            bool continuous = turret.delivery.duration == DeliveryModuleData.DeliveryDuration.Continuous;
+            if (continuous && turret.delivery.tickRate <= 0f)
+            {
+                return;
+            }
+
+            float interval = continuous
+                ? 1f / turret.delivery.tickRate
+                : 1f / statBlock.fireRate;
 
             Vector3 position = transform.position;
             float closestDistanceSqr = turret.delivery.range * turret.delivery.range;
@@ -76,7 +103,7 @@ namespace TankSurvival.Combat
             {
                 Vector3 direction = (closest.transform.position - position).normalized;
                 active.Fire(direction, statBlock.damage);
-                _cooldown = 1f / statBlock.fireRate;
+                _cooldown = interval;
             }
         }
     }

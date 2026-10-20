@@ -1,5 +1,5 @@
 # T061: TurretController — маршрутизация Cone и каденция по duration
-- Status: [ ]
+- Status: [x]
 - Phase: 9
 - Depends: T059
 - Files:
@@ -26,12 +26,12 @@
 - `HitscanDeliveryHandler`/`ProjectileDeliveryHandler`/`ConeDeliveryHandler` в этой задаче не менять (continuous-луч — это каденция в `TurretController`; сам `Fire` уже делает один свип).
 
 ## Unity (человеку)
-Не требуется (поле `coneDelivery` заполняется в T062).
+Не требуется (поле `coneDelivery` заполняется в разделе «Setup for smoke test (human)» фазы 9).
 
 ## Проверка человеком
 - Проект компилируется без ошибок.
 - Инспектор существующей турели: `TurretController` показывает новое поле `coneDelivery` (пустое для Hammer/Beam).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: TurretController.cs: поле coneDelivery + привязка onHit в Start, маршрутизация по kind (Hitscan/Cone/иначе), каденция interval по duration (Continuous → 1/tickRate с guard tickRate<=0, иначе 1/statBlock.fireRate), _cooldown = interval
+Блокер: —

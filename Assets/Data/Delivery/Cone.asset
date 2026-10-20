@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c25f301a311bad4db6ed2e377223691, type: 3}
+  m_Name: Cone
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.DeliveryModuleData
+  kind: 2
+  speed: 0
+  pelletCount: 0
+  spreadAngle: 0
+  range: 6
+  aps: 0
+  damage: 10
+  maxTargets: 0
+  duration: 1
+  tickRate: 4
+  angle: 60
+  coneVfx: {fileID: 6573913348435610070, guid: 84197da41449c84498f945d6aa908411, type: 3}

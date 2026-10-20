@@ -1,5 +1,5 @@
 # T059: DeliveryModuleData — Cone + duration/tickRate/angle/coneVfx
-- Status: [ ]
+- Status: [x]
 - Phase: 9
 - Files:
   - Assets/Scripts/Data/DeliveryModuleData.cs
@@ -10,7 +10,7 @@
 2. Добавить `public enum DeliveryDuration { Instant, Continuous }` и поле `public DeliveryDuration duration;`.
 3. Добавить поля `public float tickRate;`, `public float angle;`, `public GameObject coneVfx;`.
 
-Источники: `Docs/GDD/Turrets/Modules/Delivery/Cone.md` (`angle`, `range`, `damage`, `duration: continuous`, `tick_rate`, `cone_vfx`) и `Docs/GDD/Turrets/Modules/Delivery/Hitscan.md` (`duration: instant|continuous`, `tick_rate`). Значения полей задаёт человек в `.asset` (инспектор) в T062; в коде значения не хардкодить.
+Источники: `Docs/GDD/Turrets/Modules/Delivery/Cone.md` (`angle`, `range`, `damage`, `duration: continuous`, `tick_rate`, `cone_vfx`) и `Docs/GDD/Turrets/Modules/Delivery/Hitscan.md` (`duration: instant|continuous`, `tick_rate`). Значения полей задаёт человек в `.asset` (инспектор) — см. раздел «Setup for smoke test (human)» в `Phase_9_v1.md`; в коде значения не хардкодить.
 
 ## Ограничения
 - Существующие поля (`kind`, `speed`, `pelletCount`, `spreadAngle`, `range`, `aps`, `damage`, `maxTargets`) не трогать.
@@ -20,12 +20,12 @@
 - `using UnityEngine;` уже есть (нужен для `GameObject`); новых `using` не нужно.
 
 ## Unity (человеку)
-Не требуется (поля появляются в инспекторе после компиляции; заполнение — в T062).
+Не требуется (поля появляются в инспекторе после компиляции; заполнение — в разделе «Setup for smoke test (human)» фазы 9).
 
 ## Проверка человеком
 - Проект компилируется без ошибок.
 - Создать временный `DeliveryModuleData`-ассет → в инспекторе видны новые поля: `kind` (в т.ч. `Cone`), `duration` (`Instant`/`Continuous`), `tickRate`, `angle`, `coneVfx`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/DeliveryModuleData.cs: enum `DeliveryKind.Cone`, enum `DeliveryDuration` + поля `duration`/`tickRate`/`angle`/`coneVfx`
+Блокер: —

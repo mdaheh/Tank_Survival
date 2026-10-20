@@ -865,6 +865,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &563864562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563864563}
+  - component: {fileID: 563864566}
+  - component: {fileID: 563864565}
+  - component: {fileID: 563864564}
+  m_Layer: 0
+  m_Name: Turret_Flamethrower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &563864563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563864562}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.265, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1245404301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563864564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563864562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeff8b1d6d5a3f04997deec688e85a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.ConeDeliveryHandler
+  onHit: {fileID: 0}
+  module: {fileID: 11400000, guid: c59d3e9a8dd1b2f4a9b9baa5b42595d0, type: 2}
+  pool: {fileID: 249992434}
+  muzzle: {fileID: 563864563}
+--- !u!114 &563864565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563864562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68ce3c3b0074ef498856fe27c283389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
+  explosion: {fileID: 563435909}
+  burn: {fileID: 1533841884}
+--- !u!114 &563864566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563864562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57dba0563cd47374387dc847d0f1ac12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
+  turret: {fileID: 11400000, guid: 872844f46610956429e8a923500c86f1, type: 2}
+  delivery: {fileID: 0}
+  hitscanDelivery: {fileID: 0}
+  coneDelivery: {fileID: 563864564}
+  onHit: {fileID: 563864565}
+  statBlock: {fileID: 1245404300}
 --- !u!1 &661100207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1227,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798991136}
   m_CullTransparentMesh: 1
+--- !u!1 &849836579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849836580}
+  - component: {fileID: 849836583}
+  - component: {fileID: 849836581}
+  - component: {fileID: 849836584}
+  m_Layer: 0
+  m_Name: Turret_Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &849836580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849836579}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.265, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1245404301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &849836581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849836579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68ce3c3b0074ef498856fe27c283389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
+  explosion: {fileID: 563435909}
+  burn: {fileID: 1533841884}
+--- !u!114 &849836583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849836579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57dba0563cd47374387dc847d0f1ac12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
+  turret: {fileID: 11400000, guid: fbd5563e79b1ed24d9249917b2459b5b, type: 2}
+  delivery: {fileID: 0}
+  hitscanDelivery: {fileID: 849836584}
+  coneDelivery: {fileID: 0}
+  onHit: {fileID: 849836581}
+  statBlock: {fileID: 1245404300}
+--- !u!114 &849836584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849836579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf7cd311ddc18140a9a2810b34024fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.HitscanDeliveryHandler
+  onHit: {fileID: 0}
+  module: {fileID: 11400000, guid: 849a7dd2d2fd9884c8f1a5f2b480058c, type: 2}
+  muzzle: {fileID: 849836580}
 --- !u!1 &850715171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1730,7 @@ MonoBehaviour:
   turret: {fileID: 11400000, guid: a57bbc1af71acdd41b36ad370b11d4a0, type: 2}
   delivery: {fileID: 0}
   hitscanDelivery: {fileID: 999279205}
+  coneDelivery: {fileID: 0}
   onHit: {fileID: 0}
   statBlock: {fileID: 1245404300}
 --- !u!114 &999279205
@@ -1842,6 +2006,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2059421239}
+  - {fileID: 563864563}
+  - {fileID: 849836580}
   - {fileID: 999279202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3547,7 +3713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2059421237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3580,6 +3746,7 @@ MonoBehaviour:
   turret: {fileID: 11400000, guid: eda579dde12ec134cb9c409a84c988b7, type: 2}
   delivery: {fileID: 2059421237}
   hitscanDelivery: {fileID: 0}
+  coneDelivery: {fileID: 0}
   onHit: {fileID: 2059421240}
   statBlock: {fileID: 1245404300}
 --- !u!4 &2059421239
