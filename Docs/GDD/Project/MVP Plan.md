@@ -149,3 +149,78 @@ type: project
   тот же пул врагов, тот же `IDamageable`.
 - **Прогон C:** Fat + (любая турель), оба врага.
   Проверяет: второе шасси как данные, а не хардкод.
+
+---
+
+## v1.0 — релиз
+
+Полная игра по GDD. MVP доказал фундамент (данные + пулы, замкнутый цикл
+«спавн → урон → смерть → XP → level-up → победа/поражение»). v1.0
+достраивает всё, что в MVP было заложено структурно, но не реализовано.
+
+### Контент
+
+- **Шасси (4):** Standart, Fat, Fancy, Veteran. Активные способности Boost /
+  Nova / Phase / Shield (ввод, кулдаун, HUD-иконка).
+- **Турели (3 ветки × база + специализации):**
+  - cannon (Hammer) → Machine gun, Shotgun, Bombard, Piercing cannon;
+  - flamethrower (Flamethrower, Cone) → Freezer, Hellfire;
+  - laser (Laser, continuous hitscan) → Beam, Railgun.
+- **Delivery-модули (3):** Projectile, Hitscan (instant + continuous), Cone.
+- **On-hit-модули (10):** Explosion, Burn, Freeze, Ground, Knockback, Slow,
+  Pierce, Homing, Beam Split, Laser Focus (+ conflict_groups, priority,
+  max_depth).
+- **Враги (5):** Runner, Brute, Tank, Shooter (ranged), Boss.
+- **Апгрейды (51):** турелей 37 (16 tag + 12 unique + 9 module), шасси 14
+  (3 base + 8 ability + 3 unique).
+
+### Волны и прогрессия
+
+- 8 сложностей (Recruit..General) с множителями и числом волн.
+- Полная формула состава, спавн-батч 20, босс каждую 10-ю волну, модульный
+  апгрейд каждую 5-ю волну.
+- Полная кривая уровней (30) + level cap.
+- Полный пул level-up по тегам/цели билда (tag/unique/ability), стеки
+  additive → multiplicative, max_stacks.
+
+### Мета-прогрессия
+
+- Счётчики убийств: `total_kills`, `cannon_kills`, `flamethrower_kills`,
+  `laser_kills`.
+- Сохранение в LocalStorage (JSON) после раунда / выхода в меню.
+- Разблокировки: специализации (по убийствам в ветке), шасси (общие
+  убийства), сложности 4–8 (победа на предыдущей).
+
+### UI
+
+- Полные экраны: Main Menu, Hangar, Difficulty Selection, Round (HUD +
+  пауза), Round End (итоги + уведомления об открытиях).
+- Локализация RU/EN.
+
+### Монетизация и аудио
+
+- Rewarded video: продолжить после смерти (×1/забег), ×2 результата.
+- SDK: Yandex Games, GamePush.
+- Фоновая музыка + SFX (попадание, смерть врага, level-up, wave reward,
+  смерть игрока).
+
+### WebGL
+
+- Стабильная WebGL-сборка, 60 FPS (мин. 30), ноль аллокаций/Instantiate в
+  цикле, деградация при превышении лимитов.
+
+### Критерий готовности v1.0
+
+1. Полный проход раунда на всех 8 сложностях.
+2. Все 4 шасси + 4 способности работают.
+3. Все 3 ветки + 8 специализаций стреляют по GDD.
+4. Все 10 on-hit-модулей работают, конфликты/priority/max_depth соблюдены.
+5. Все 5 врагов спавнятся и ведут себя по GDD (Shooter стреляет, Boss на
+   10-й волне).
+6. Level-up предлагает корректный пул по билду, стеки и cap работают.
+7. Wave reward каждую 5-ю волну добавляет модуль.
+8. Мета-прогрессия сохраняется и разблокировки применяются.
+9. Полная навигация по 6 экранам + пауза + локализация RU/EN.
+10. Rewarded-сценарии работают через SDK.
+11. Аудио на всех ключевых событиях.
+12. WebGL-сборка стабильна, лимиты соблюдены, ноль аллокаций.
