@@ -13,6 +13,7 @@ namespace TankSurvival.Enemy
         public Transform target;
         public EnemyHealth health;
         public float speedMultiplier = 1f;
+        public float controlSpeedMultiplier = 1f;
         public GameObject projectilePrefab;
 
         public IDamageable Damageable => health;
@@ -24,6 +25,10 @@ namespace TankSurvival.Enemy
         private float _attackCooldown;
         private PoolManager _pool;
         private float _shootCooldown;
+
+        private Vector3 _knockbackVelocity;
+        private float _knockbackDuration;
+        private float _knockbackTimer;
 
         private void Awake()
         {
@@ -53,6 +58,18 @@ namespace TankSurvival.Enemy
             _pool = pool;
             health.Init(data);
             health.OnDeath += () => killSystem.Enqueue(gameObject);
+
+            controlSpeedMultiplier = 1f;
+            _knockbackVelocity = Vector3.zero;
+            _knockbackTimer = 0f;
+            _knockbackDuration = 0f;
+        }
+
+        public void ApplyKnockback(Vector3 velocity, float duration)
+        {
+            _knockbackVelocity = velocity;
+            _knockbackDuration = Mathf.Max(0.0001f, duration);
+            _knockbackTimer = duration;
         }
 
         private void Update()
@@ -60,6 +77,12 @@ namespace TankSurvival.Enemy
             if (data == null || target == null)
             {
                 return;
+            }
+
+            if (_knockbackTimer > 0f)
+            {
+                transform.position += _knockbackVelocity * (_knockbackTimer / _knockbackDuration) * Time.deltaTime;
+                _knockbackTimer -= Time.deltaTime;
             }
 
             _attackCooldown -= Time.deltaTime;
@@ -74,7 +97,8 @@ namespace TankSurvival.Enemy
                 if (distanceSqr > data.shootRange * data.shootRange)
                 {
                     transform.position = Vector3.MoveTowards(
-                        transform.position, target.position, data.speed * speedMultiplier * Time.deltaTime);
+                        transform.position, target.position,
+                        data.speed * speedMultiplier * controlSpeedMultiplier * Time.deltaTime);
                     return;
                 }
 
@@ -93,7 +117,8 @@ namespace TankSurvival.Enemy
             if (distanceSqr > AttackRange * AttackRange)
             {
                 transform.position = Vector3.MoveTowards(
-                    transform.position, target.position, data.speed * speedMultiplier * Time.deltaTime);
+                    transform.position, target.position,
+                    data.speed * speedMultiplier * controlSpeedMultiplier * Time.deltaTime);
                 return;
             }
 

@@ -1,5 +1,5 @@
 # T067: EnemyController — controlSpeedMultiplier + knockback
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Files:
   - Assets/Scripts/Enemy/EnemyController.cs
@@ -19,5 +19,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Enemy/EnemyController.cs: добавлены controlSpeedMultiplier = 1f, приватные _knockbackVelocity/_knockbackDuration/_knockbackTimer и ApplyKnockback(velocity, duration); в Update после null-проверки применяется затухающий knockback, обе ветки движения учитывают controlSpeedMultiplier; в Init сброшены controlSpeedMultiplier и параметры knockback.
+Блокер: —
