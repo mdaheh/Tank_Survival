@@ -1,5 +1,5 @@
 # T069: SlowOnHitHandler
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Depends: T066, T068
 - Files:
@@ -18,5 +18,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/SlowOnHitHandler.cs: создан MonoBehaviour с интерфейсом IHitHandler и полем controlEffects; HandleHit с guard'ами делегирует ApplySlow(target, module.slowAmount, module.duration).
+Блокер: —
