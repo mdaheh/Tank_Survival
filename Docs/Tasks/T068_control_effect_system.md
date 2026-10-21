@@ -1,5 +1,5 @@
 # T068: ControlEffectSystem — slow/freeze
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Depends: T067
 - Files:
@@ -23,5 +23,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/ControlEffectSystem.cs: создан MonoBehaviour с вложенным ControlStatus и списком _statuses; реализованы ApplySlow, ApplyFreeze, RemoveFreeze и Update с обратной итерацией, затуханием по duration и сбросом controlSpeedMultiplier.
+Блокер: —
