@@ -1236,6 +1236,51 @@ MonoBehaviour:
   levelText: {fileID: 1750478465}
   waveText: {fileID: 1836580892}
   killsText: {fileID: 1831597355}
+--- !u!1 &717840220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717840222}
+  - component: {fileID: 717840221}
+  m_Layer: 0
+  m_Name: FreezeOnHitHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &717840221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717840220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080658d234ae49a4cbf41321473e1f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.FreezeOnHitHandler
+  controlEffects: {fileID: 167885810}
+--- !u!4 &717840222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717840220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.97405, y: -0, z: 0.62686}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798991136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,3 +3984,4 @@ SceneRoots:
   - {fileID: 1658408462}
   - {fileID: 167885811}
   - {fileID: 360254950}
+  - {fileID: 717840222}
