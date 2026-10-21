@@ -297,6 +297,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &197047628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197047630}
+  - component: {fileID: 197047629}
+  m_Layer: 0
+  m_Name: GroundOnHitHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &197047629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197047628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab97ab445161a047bf9c2a48f7d3a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.GroundOnHitHandler
+  pool: {fileID: 249992434}
+  onHit: {fileID: 2059421240}
+--- !u!4 &197047630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197047628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249992432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
+  ground: {fileID: 0}
 --- !u!114 &563864566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
+  ground: {fileID: 0}
 --- !u!114 &849836583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,6 +1989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
+  ground: {fileID: 0}
 --- !u!1 &1139349997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4002,6 +4051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
+  ground: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4030,3 +4080,4 @@ SceneRoots:
   - {fileID: 360254950}
   - {fileID: 717840222}
   - {fileID: 851749685}
+  - {fileID: 197047630}

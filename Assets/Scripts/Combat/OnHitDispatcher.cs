@@ -9,6 +9,7 @@ namespace TankSurvival.Combat
     {
         public ExplosionOnHitHandler explosion;
         public BurnOnHitHandler burn;
+        public GroundOnHitHandler ground;
 
         private readonly List<OnHitModuleData> _modules = new List<OnHitModuleData>();
 
@@ -40,6 +41,14 @@ namespace TankSurvival.Combat
 
         public void ProcessHit(Vector3 position, EnemyController target)
         {
+            ProcessHit(position, target, 0);
+        }
+
+        public void ProcessHit(Vector3 position, EnemyController target, int depth)
+        {
+            if (target == null)
+                return;
+
             for (int i = 0; i < _modules.Count; i++)
             {
                 OnHitModuleData module = _modules[i];
@@ -53,6 +62,10 @@ namespace TankSurvival.Combat
                     case OnHitModuleData.OnHitKind.Burn:
                         if (burn != null)
                             burn.HandleHit(module, position, target);
+                        break;
+                    case OnHitModuleData.OnHitKind.Ground:
+                        if (ground != null && depth < module.maxDepth)
+                            ground.HandleHit(module, position, target, depth);
                         break;
                 }
             }

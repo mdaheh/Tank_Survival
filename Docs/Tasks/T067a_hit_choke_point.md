@@ -1,5 +1,5 @@
-# T075: Hit choke point — TryApplyHit + ProcessHit(depth)
-- Status: [ ]
+# T067a: Hit choke point — TryApplyHit + ProcessHit(depth)
+- Status: [x]
 - Phase: 10
 - Files:
   - Assets/Scripts/Enemy/EnemyController.cs
@@ -29,5 +29,5 @@
 - Hammer/Beam/Flamethrower наносят урон как раньше; Explosion/Burn при наличии on-hit срабатывают.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Enemy/EnemyController.cs: добавлен using TankSurvival.Combat и TryApplyHit(damage, hitPos, onHit, depth = 0) с guard'ом «живой?»; Assets/Scripts/Combat/OnHitDispatcher.cs: ProcessHit(position, target) делегирует в ProcessHit(position, target, depth) с проверкой target == null; Assets/Scripts/Combat/Projectile.cs, HitscanDeliveryHandler.cs, ConeDeliveryHandler.cs: пары TakeDamage + ProcessHit заменены на TryApplyHit.
+Блокер: —

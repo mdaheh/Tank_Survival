@@ -71,11 +71,7 @@ namespace TankSurvival.Combat
                     _candidates[nearest] = swap;
                 }
 
-                _candidates[i].Damageable.TakeDamage(damage);
-                if (onHit != null)
-                {
-                    onHit.ProcessHit(_candidates[i].transform.position, _candidates[i]);
-                }
+                _candidates[i].TryApplyHit(damage, _candidates[i].transform.position, onHit);
             }
         }
 

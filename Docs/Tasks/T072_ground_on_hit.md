@@ -1,7 +1,7 @@
 # T072: GroundOnHitHandler + GroundZone + роутинг Ground
-- Status: [ ]
+- Status: [x]
 - Phase: 10
-- Depends: T066, T075
+- Depends: T066, T067a
 - Files:
   - Assets/Scripts/Combat/GroundOnHitHandler.cs
   - Assets/Scripts/Combat/GroundZone.cs
@@ -13,7 +13,7 @@
 3) В `OnHitDispatcher`: поле `public GroundOnHitHandler ground;` и в `ProcessHit(..., int depth)` добавить `case OnHitModuleData.OnHitKind.Ground: if (ground != null && depth < module.maxDepth) ground.HandleHit(module, position, target, depth); break;`.
 
 ## Ограничения
-- Зона — pooled (без Instantiate/Destroy). Урон/ре-триггер через `TryApplyHit` (T075). XZ-дистанция, как в `ExplosionOnHitHandler`.
+- Зона — pooled (без Instantiate/Destroy). Урон/ре-триггер через `TryApplyHit` (T067a). XZ-дистанция, как в `ExplosionOnHitHandler`.
 - Без `new`/LINQ/`GetComponent` в `Update`. `IHitHandler` не менять (перегрузка `HandleHit(..., int depth)` — только у `GroundOnHitHandler`).
 - namespace `TankSurvival.Combat`; `using TankSurvival.Core` (PoolManager, IPoolable), `using TankSurvival.Enemy` (EnemyController), `using TankSurvival.Data` (OnHitModuleData), `using UnityEngine`.
 
@@ -27,5 +27,5 @@
 - `GroundOnHitHandler.pool` = PoolManager; `GroundOnHitHandler.onHit` = OnHitDispatcher.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/GroundOnHitHandler.cs: HandleHit с depth и выдачей зоны из пула; Assets/Scripts/Combat/GroundZone.cs: IPoolable-зона с тиками по _tickRate, XZ-радиусом и TryApplyHit(_depth + 1), Release по _duration, сброс в OnGetFromPool/OnReleaseFromPool; Assets/Scripts/Combat/OnHitDispatcher.cs: поле ground и case OnHitKind.Ground с проверкой depth < module.maxDepth.
+Блокер: —

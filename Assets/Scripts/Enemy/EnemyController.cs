@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Combat;
 using TankSurvival.Core;
 using TankSurvival.Data;
 using UnityEngine;
@@ -70,6 +71,18 @@ namespace TankSurvival.Enemy
             _knockbackVelocity = velocity;
             _knockbackDuration = Mathf.Max(0.0001f, duration);
             _knockbackTimer = duration;
+        }
+
+        public bool TryApplyHit(float damage, Vector3 hitPos, OnHitDispatcher onHit, int depth = 0)
+        {
+            if (health == null || health.currentHealth <= 0f)
+            {
+                return false;
+            }
+
+            health.TakeDamage(damage);
+            onHit?.ProcessHit(hitPos, this, depth);
+            return true;
         }
 
         private void Update()

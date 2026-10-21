@@ -42,11 +42,7 @@ namespace TankSurvival.Combat
 
                 if (toEnemy.sqrMagnitude <= rangeSqr && Vector3.Angle(flatDir, toEnemy) <= halfAngle)
                 {
-                    enemy.Damageable.TakeDamage(damage);
-                    if (onHit != null)
-                    {
-                        onHit.ProcessHit(enemy.transform.position, enemy);
-                    }
+                    enemy.TryApplyHit(damage, enemy.transform.position, onHit);
                 }
             }
 

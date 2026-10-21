@@ -5,7 +5,7 @@
 ## Задачи (порядок = приоритет)
 - T066: `OnHitModuleData` — kind Slow/Freeze/Knockback/Ground + поля slowAmount/freezeThreshold/force/damageScaling/groundVfx/maxDepth.
 - T067: `EnemyController` — `controlSpeedMultiplier` + knockback (`ApplyKnockback`) + сброс в Init.
-- T075: hit choke point — `TryApplyHit` + `ProcessHit(..., depth)` + перевод Cone/Hitscan/Projectile.
+- T067a: hit choke point — `TryApplyHit` + `ProcessHit(..., depth)` + перевод Cone/Hitscan/Projectile.
 - T068: `ControlEffectSystem` — ApplySlow/ApplyFreeze/RemoveFreeze.
 - T069: `SlowOnHitHandler`.
 - T070: `FreezeOnHitHandler`.
@@ -51,7 +51,7 @@
 - [ ] Ground (Hammer + Ground): в точке попадания зона; враги в радиусе получают урон тиками; зона исчезает через `duration`; число объектов не растёт (зона из пула).
 - [ ] Ground + Slow: враги в зоне замедляются каждый тик (ре-триггер on-hit работает).
 - [ ] Ground рекурсия ограничена `maxDepth`: при нескольких врагах в зоне нет вечного каскада/зависания, консоль чистая.
-- [ ] Труп не источник on-hit (T075): мёртвый враг не триггерит on-hit — зона в позиции трупа не создаётся; взрыв/зона по убивающему выстрелу срабатывает.
+- [ ] Труп не источник on-hit (T067a): мёртвый враг не триггерит on-hit — зона в позиции трупа не создаётся; взрыв/зона по убивающему выстрелу срабатывает.
 - [ ] Конфликт burn/freeze: Burn+Freeze на одной турели — активен один (freeze снимает burn, burn снимает freeze).
 - [ ] Регресс: Explosion/Burn и все delivery (Projectile / Hitscan instant / Hitscan continuous / Cone) не сломаны.
 - [ ] Консоль чистая.
