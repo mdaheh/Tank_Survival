@@ -54,7 +54,7 @@ namespace TankSurvival.Combat
                 float distanceSqr = DistanceToSegmentXZSqr(enemy.transform.position, previous, current);
                 if (distanceSqr <= HitRadiusSqr)
                 {
-                    enemy.TryApplyHit(damage, enemy.transform.position, onHit);
+                    enemy.TryApplyHit(damage, transform.position, onHit);
                     pool.Release(gameObject);
                     return;
                 }

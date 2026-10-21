@@ -1,5 +1,5 @@
 # T074: Конфликт burn ↔ freeze
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Depends: T068, T070
 - Files:
@@ -32,5 +32,5 @@ Element group {burn, freeze}: активен один.
 - `FreezeOnHitHandler.statusEffects` = StatusEffectSystem; `BurnOnHitHandler.controlEffects` = ControlEffectSystem.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/StatusEffectSystem.cs: добавлен RemoveBurn(enemy) с удалением статуса через обратный проход (без урона); Assets/Scripts/Combat/FreezeOnHitHandler.cs: поле statusEffects, RemoveBurn перед ApplyFreeze; Assets/Scripts/Combat/BurnOnHitHandler.cs: поле controlEffects, RemoveFreeze перед ApplyBurn.
+Блокер: —

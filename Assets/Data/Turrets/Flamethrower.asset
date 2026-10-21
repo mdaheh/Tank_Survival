@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Flamethrower
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.TurretData
   delivery: {fileID: 11400000, guid: c59d3e9a8dd1b2f4a9b9baa5b42595d0, type: 2}
-  onHitModules: []
+  onHitModules:
+  - {fileID: 11400000, guid: 37e9c693137629d4eb79b51219267b6a, type: 2}

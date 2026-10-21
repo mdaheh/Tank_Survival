@@ -55,6 +55,21 @@ namespace TankSurvival.Combat
             burns.Add(status);
         }
 
+        public void RemoveBurn(EnemyController enemy)
+        {
+            if (enemy == null)
+                return;
+
+            for (int i = burns.Count - 1; i >= 0; i--)
+            {
+                if (burns[i].enemy == enemy)
+                {
+                    burns.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
         private void Update()
         {
             float dt = Time.deltaTime;

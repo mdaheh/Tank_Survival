@@ -1065,10 +1065,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
-  ground: {fileID: 0}
-  slow: {fileID: 0}
-  freeze: {fileID: 0}
-  knockback: {fileID: 0}
+  ground: {fileID: 197047629}
+  slow: {fileID: 360254949}
+  freeze: {fileID: 717840221}
+  knockback: {fileID: 851749684}
 --- !u!114 &563864566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,6 +1316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.FreezeOnHitHandler
   controlEffects: {fileID: 167885810}
+  statusEffects: {fileID: 1139349998}
 --- !u!4 &717840222
 Transform:
   m_ObjectHideFlags: 0
@@ -1460,10 +1461,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
-  ground: {fileID: 0}
-  slow: {fileID: 0}
-  freeze: {fileID: 0}
-  knockback: {fileID: 0}
+  ground: {fileID: 197047629}
+  slow: {fileID: 360254949}
+  freeze: {fileID: 717840221}
+  knockback: {fileID: 851749684}
 --- !u!114 &849836583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,7 +1933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &999279202
 Transform:
   m_ObjectHideFlags: 0
@@ -1995,10 +1996,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
-  ground: {fileID: 0}
-  slow: {fileID: 0}
-  freeze: {fileID: 0}
-  knockback: {fileID: 0}
+  ground: {fileID: 197047629}
+  slow: {fileID: 360254949}
+  freeze: {fileID: 717840221}
+  knockback: {fileID: 851749684}
 --- !u!1 &1139349997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2989,6 +2990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.BurnOnHitHandler
   statusEffects: {fileID: 1139349998}
+  controlEffects: {fileID: 167885810}
 --- !u!4 &1533841885
 Transform:
   m_ObjectHideFlags: 0
@@ -3995,7 +3997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2059421237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4060,7 +4062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.OnHitDispatcher
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
-  ground: {fileID: 0}
+  ground: {fileID: 197047629}
   slow: {fileID: 360254949}
   freeze: {fileID: 717840221}
   knockback: {fileID: 851749684}

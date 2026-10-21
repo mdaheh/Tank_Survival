@@ -7,10 +7,21 @@ namespace TankSurvival.Combat
     public class FreezeOnHitHandler : MonoBehaviour, IHitHandler
     {
         public ControlEffectSystem controlEffects;
+        public StatusEffectSystem statusEffects;
 
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target)
         {
-            if (module == null || controlEffects == null || target == null)
+            if (module == null || target == null)
+            {
+                return;
+            }
+
+            if (statusEffects != null)
+            {
+                statusEffects.RemoveBurn(target);
+            }
+
+            if (controlEffects == null)
             {
                 return;
             }
