@@ -1,5 +1,5 @@
 # T071: KnockbackOnHitHandler
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Depends: T066, T067
 - Files:
@@ -18,5 +18,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/KnockbackOnHitHandler.cs: создан MonoBehaviour с интерфейсом IHitHandler; HandleHit с guard'ами по module/target/health считает XZ-направление от точки попадания и вызывает ApplyKnockback(dir * (module.force * module.damageScaling), module.duration).
+Блокер: —
