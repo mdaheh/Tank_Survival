@@ -235,6 +235,7 @@ MonoBehaviour:
   - {fileID: 850715173}
   - {fileID: 380532413}
   poolManager: {fileID: 249992434}
+  killSystem: {fileID: 1658408461}
   playerTransform: {fileID: 1245404301}
   progression: {fileID: 255245128}
 --- !u!4 &153685796

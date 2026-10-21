@@ -8,7 +8,11 @@ namespace TankSurvival.Data
         public enum OnHitKind
         {
             Explosion,
-            Burn
+            Burn,
+            Slow,
+            Freeze,
+            Knockback,
+            Ground
         }
 
         public OnHitKind kind;
@@ -21,5 +25,12 @@ namespace TankSurvival.Data
         public float duration;
         public float tickDamage;
         public float tickRate;
+
+        public float slowAmount;
+        public int freezeThreshold;
+        public float force;
+        public float damageScaling;
+        public GameObject groundVfx;
+        public int maxDepth = 5;
     }
 }

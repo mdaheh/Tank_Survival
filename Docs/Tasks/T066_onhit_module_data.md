@@ -1,5 +1,5 @@
 # T066: OnHitModuleData — новые kind и поля
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Files:
   - Assets/Scripts/Data/OnHitModuleData.cs
@@ -20,5 +20,5 @@
 - `Create → Tank Survival → OnHit Module Data`: в инспекторе видны enum `Slow/Freeze/Knockback/Ground` и поля `slowAmount`, `freezeThreshold`, `force`, `damageScaling`, `groundVfx`, `maxDepth`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Data/OnHitModuleData.cs: в enum OnHitKind добавлены Slow/Freeze/Knockback/Ground после Burn; добавлены поля slowAmount, freezeThreshold, force, damageScaling, groundVfx, maxDepth = 5.
+Блокер: —
