@@ -10,6 +10,9 @@ namespace TankSurvival.Combat
         public ExplosionOnHitHandler explosion;
         public BurnOnHitHandler burn;
         public GroundOnHitHandler ground;
+        public SlowOnHitHandler slow;
+        public FreezeOnHitHandler freeze;
+        public KnockbackOnHitHandler knockback;
 
         private readonly List<OnHitModuleData> _modules = new List<OnHitModuleData>();
 
@@ -66,6 +69,18 @@ namespace TankSurvival.Combat
                     case OnHitModuleData.OnHitKind.Ground:
                         if (ground != null && depth < module.maxDepth)
                             ground.HandleHit(module, position, target, depth);
+                        break;
+                    case OnHitModuleData.OnHitKind.Slow:
+                        if (slow != null)
+                            slow.HandleHit(module, position, target);
+                        break;
+                    case OnHitModuleData.OnHitKind.Freeze:
+                        if (freeze != null)
+                            freeze.HandleHit(module, position, target);
+                        break;
+                    case OnHitModuleData.OnHitKind.Knockback:
+                        if (knockback != null)
+                            knockback.HandleHit(module, position, target);
                         break;
                 }
             }

@@ -1,5 +1,5 @@
 # T073: OnHitDispatcher — роутинг Slow/Freeze/Knockback
-- Status: [ ]
+- Status: [x]
 - Phase: 10
 - Depends: T066, T069, T070, T071
 - Files:
@@ -22,5 +22,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/OnHitDispatcher.cs: добавлены поля slow/freeze/knockback и case'ы Slow/Freeze/Knockback в ProcessHit(position, target, depth) с null-проверками хендлеров.
+Блокер: —

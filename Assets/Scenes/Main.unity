@@ -1066,6 +1066,9 @@ MonoBehaviour:
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
   ground: {fileID: 0}
+  slow: {fileID: 0}
+  freeze: {fileID: 0}
+  knockback: {fileID: 0}
 --- !u!114 &563864566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,6 +1461,9 @@ MonoBehaviour:
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
   ground: {fileID: 0}
+  slow: {fileID: 0}
+  freeze: {fileID: 0}
+  knockback: {fileID: 0}
 --- !u!114 &849836583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,6 +1996,9 @@ MonoBehaviour:
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
   ground: {fileID: 0}
+  slow: {fileID: 0}
+  freeze: {fileID: 0}
+  knockback: {fileID: 0}
 --- !u!1 &1139349997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,6 +4061,9 @@ MonoBehaviour:
   explosion: {fileID: 563435909}
   burn: {fileID: 1533841884}
   ground: {fileID: 0}
+  slow: {fileID: 360254949}
+  freeze: {fileID: 717840221}
+  knockback: {fileID: 851749684}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
