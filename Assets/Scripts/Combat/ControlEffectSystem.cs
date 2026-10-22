@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Core;
 using TankSurvival.Enemy;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ namespace TankSurvival.Combat
         }
 
         private readonly List<ControlStatus> _statuses = new List<ControlStatus>();
+
+        private void Awake()
+        {
+            GameServices.Register(this);
+        }
 
         public void ApplySlow(EnemyController enemy, float slowAmount, float duration)
         {

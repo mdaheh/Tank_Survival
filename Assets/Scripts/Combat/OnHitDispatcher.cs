@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
@@ -15,6 +16,11 @@ namespace TankSurvival.Combat
         public KnockbackOnHitHandler knockback;
 
         private readonly List<OnHitModuleData> _modules = new List<OnHitModuleData>();
+
+        private void Awake()
+        {
+            GameServices.Register(this);
+        }
 
         public void SetModules(OnHitModuleData[] modules)
         {

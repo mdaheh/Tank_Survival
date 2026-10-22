@@ -1,5 +1,5 @@
 # T075: GameServices — service locator базовых систем
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Files:
   - Assets/Scripts/Core/GameServices.cs
@@ -39,5 +39,5 @@ API:
   (хендлеры всё ещё используют ссылки из Inspector — поведение не меняется).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameServices.cs: создан статический локатор (Dictionary<Type, object>, Register<T>/TryGet<T>/Get<T>); Assets/Scripts/Core/PoolManager.cs: Awake() с GameServices.Register(this); Assets/Scripts/Combat/StatusEffectSystem.cs: using TankSurvival.Core + Awake() с саморегистрацией; Assets/Scripts/Combat/ControlEffectSystem.cs: using TankSurvival.Core + Awake() с саморегистрацией; Assets/Scripts/Combat/OnHitDispatcher.cs: using TankSurvival.Core + Awake() с саморегистрацией.
+Блокер: —

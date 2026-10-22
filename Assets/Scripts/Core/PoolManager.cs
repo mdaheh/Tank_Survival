@@ -9,6 +9,11 @@ namespace TankSurvival.Core
         private readonly Dictionary<GameObject, GameObject> _instancePrefabs = new Dictionary<GameObject, GameObject>();
         private readonly Dictionary<GameObject, IPoolable[]> _instancePoolables = new Dictionary<GameObject, IPoolable[]>();
 
+        private void Awake()
+        {
+            GameServices.Register(this);
+        }
+
         public void Prewarm(GameObject prefab, int count)
         {
             if (prefab == null)

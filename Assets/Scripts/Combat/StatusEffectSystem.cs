@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Core;
 using TankSurvival.Enemy;
 using UnityEngine;
 
@@ -18,6 +19,11 @@ namespace TankSurvival.Combat
         }
 
         private readonly List<BurnStatus> burns = new List<BurnStatus>();
+
+        private void Awake()
+        {
+            GameServices.Register(this);
+        }
 
         public void ApplyBurn(EnemyController enemy, float tickDamage, float tickRate, float duration)
         {
