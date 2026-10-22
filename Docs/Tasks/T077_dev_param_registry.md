@@ -1,5 +1,5 @@
 # T077: DevParamRegistry — авто-регистрация параметров
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Files:
   - Assets/Scripts/Dev/DevParam.cs
@@ -40,5 +40,5 @@
 - Полная проверка авто-регистрации выполняется в T078 (временное поле `EnemyData` видно в Dev Menu).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevParam.cs: создана модель параметра (public readonly Group/Label/IsInteger/Min/Max, GetValue через Convert.ToSingle(field.GetValue(target)), SetValue с Mathf.RoundToInt для int, диапазон Min=0/Max=max(10,current*4) с округлением для int), файл целиком в #if UNITY_EDITOR || DEVELOPMENT_BUILD; Assets/Scripts/Dev/DevParamRegistry.cs: создан реестр (Reflect(object,string) — рефлексия public float/int полей с пропуском прочих, public static All и Init() со сбором SessionState.SelectedChassis/SelectedTurret(+delivery,+onHitModules[])/SelectedDifficulty и WaveSpawner.waveData.compositions[].enemy через Object.FindFirstObjectByType, метки групп ChassisData.<имя>/TurretData.<имя>/TurretData.<имя>.delivery/OnHitModuleData.<имя>/DifficultyData.<имя>/EnemyData.<имя>), файл целиком в #if UNITY_EDITOR || DEVELOPMENT_BUILD.
+Блокер: —
