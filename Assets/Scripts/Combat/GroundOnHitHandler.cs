@@ -7,8 +7,14 @@ namespace TankSurvival.Combat
 {
     public class GroundOnHitHandler : MonoBehaviour, IHitHandler
     {
-        public PoolManager pool;
-        public OnHitDispatcher onHit;
+        private PoolManager _pool;
+        private OnHitDispatcher _onHit;
+
+        private PoolManager Pool =>
+            _pool != null ? _pool : (_pool = GameServices.Get<PoolManager>());
+
+        private OnHitDispatcher OnHit =>
+            _onHit != null ? _onHit : (_onHit = GameServices.Get<OnHitDispatcher>());
 
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target)
         {
@@ -17,14 +23,14 @@ namespace TankSurvival.Combat
 
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target, int depth)
         {
-            if (module == null || module.groundVfx == null || pool == null || onHit == null)
+            if (module == null || module.groundVfx == null || Pool == null || OnHit == null)
             {
                 return;
             }
 
-            GameObject zone = pool.Get(module.groundVfx);
+            GameObject zone = Pool.Get(module.groundVfx);
             zone.transform.position = position;
-            zone.GetComponent<GroundZone>().Init(module, position, pool, onHit, depth);
+            zone.GetComponent<GroundZone>().Init(module, position, Pool, OnHit, depth);
         }
     }
 }

@@ -1,5 +1,5 @@
 # T076: Миграция on-hit-хендлеров на GameServices
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Depends: T075
 - Files:
@@ -46,5 +46,5 @@ private ControlEffectSystem ControlEffects =>
 - Play Mode: Slow/Freeze/Burn/Explosion/Ground работают как в Phase 10 (поведение не изменилось).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/SlowOnHitHandler.cs: удалено публичное поле controlEffects → private _controlEffects + ленивое свойство ControlEffects (using TankSurvival.Core); Assets/Scripts/Combat/FreezeOnHitHandler.cs: удалены controlEffects/statusEffects → _controlEffects/_statusEffects + свойства ControlEffects/StatusEffects (using TankSurvival.Core); Assets/Scripts/Combat/BurnOnHitHandler.cs: удалены statusEffects/controlEffects → _statusEffects/_controlEffects + свойства StatusEffects/ControlEffects (using TankSurvival.Core); Assets/Scripts/Combat/ExplosionOnHitHandler.cs: удалено поле pool → _pool + свойство Pool через GameServices.Get<PoolManager>(); Assets/Scripts/Combat/GroundOnHitHandler.cs: удалены pool/onHit → _pool/_onHit + свойства Pool/OnHit через GameServices.
+Блокер: —

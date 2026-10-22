@@ -1,3 +1,4 @@
+using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
@@ -6,8 +7,14 @@ namespace TankSurvival.Combat
 {
     public class BurnOnHitHandler : MonoBehaviour, IHitHandler
     {
-        public StatusEffectSystem statusEffects;
-        public ControlEffectSystem controlEffects;
+        private StatusEffectSystem _statusEffects;
+        private ControlEffectSystem _controlEffects;
+
+        private StatusEffectSystem StatusEffects =>
+            _statusEffects != null ? _statusEffects : (_statusEffects = GameServices.Get<StatusEffectSystem>());
+
+        private ControlEffectSystem ControlEffects =>
+            _controlEffects != null ? _controlEffects : (_controlEffects = GameServices.Get<ControlEffectSystem>());
 
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target)
         {
@@ -16,17 +23,17 @@ namespace TankSurvival.Combat
                 return;
             }
 
-            if (controlEffects != null)
+            if (ControlEffects != null)
             {
-                controlEffects.RemoveFreeze(target);
+                ControlEffects.RemoveFreeze(target);
             }
 
-            if (statusEffects == null)
+            if (StatusEffects == null)
             {
                 return;
             }
 
-            statusEffects.ApplyBurn(target, module.tickDamage, module.tickRate, module.duration);
+            StatusEffects.ApplyBurn(target, module.tickDamage, module.tickRate, module.duration);
         }
     }
 }

@@ -7,7 +7,10 @@ namespace TankSurvival.Combat
 {
     public class ExplosionOnHitHandler : MonoBehaviour, IHitHandler
     {
-        public PoolManager pool;
+        private PoolManager _pool;
+
+        private PoolManager Pool =>
+            _pool != null ? _pool : (_pool = GameServices.Get<PoolManager>());
 
         public void HandleHit(OnHitModuleData module, Vector3 position, EnemyController target)
         {
@@ -28,11 +31,11 @@ namespace TankSurvival.Combat
                     enemy.Damageable.TakeDamage(module.damage);
             }
 
-            if (module.explosionVfx != null && pool != null)
+            if (module.explosionVfx != null && Pool != null)
             {
-                GameObject vfx = pool.Get(module.explosionVfx);
+                GameObject vfx = Pool.Get(module.explosionVfx);
                 vfx.transform.position = position;
-                vfx.GetComponent<PooledVFX>().Play(pool);
+                vfx.GetComponent<PooledVFX>().Play(Pool);
             }
         }
     }
