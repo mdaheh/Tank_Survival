@@ -1,5 +1,5 @@
 # T080: SceneOrganizer — группировка иерархии сцены
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Files:
   - Assets/Editor/SceneOrganizer.cs
@@ -38,5 +38,5 @@
 - Игра после группировки работает как раньше (регресс не сломан).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Editor/SceneOrganizer.cs: создан Editor-скрипт TankSurvival.Editor.SceneOrganizer с пунктом меню Tools/Dev/Organize Scene Hierarchy — создаёт отсутствующие пустые заголовки _Managers/_Player/_Combat/_SpawnPoints/_UI/_Dev (Undo.RegisterCreatedObjectUndo) и раскладывает по ним только корневые объекты активной сцены (SceneManager.GetActiveScene().GetRootGameObjects() + проверка transform.parent == null) через Undo.SetTransformParent, приоритет при нескольких категориях — в порядке перечисления (Managers → Player → Combat → SpawnPoints → UI → Dev), _Dev матчит компоненты с именем типа, начинающимся на Dev, объекты без совпадений не перемещаются, имена и вложенность внутри категорий не меняются, сцена помечается EditorSceneManager.MarkSceneDirty.
+Блокер: —
