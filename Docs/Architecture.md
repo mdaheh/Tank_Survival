@@ -125,7 +125,7 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
   (hitscan, конус, AoE-взрыв, ground-зона; в будущем — Pierce, Homing, способности
   шасси) получают dev-маркер (линия/сектор/окружность), визуально совпадающий с
   реальными параметрами из SO. Маркер живёт в dev-слое
-  (`#if UNITY_EDITOR || DEVELOPMENT_BUILD`), в релиз не попадает и не влияет на геймплей.
+  (`#if UNITY_EDITOR || DEBUG`), в релиз не попадает и не влияет на геймплей.
 
 ## 4. Заложено под v1.0
 

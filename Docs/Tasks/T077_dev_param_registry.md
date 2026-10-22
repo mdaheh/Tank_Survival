@@ -6,7 +6,7 @@
   - Assets/Scripts/Dev/DevParamRegistry.cs
 
 ## Задача
-Создать dev-слой `TankSurvival.Dev` (оба файла обёрнуты в `#if UNITY_EDITOR || DEVELOPMENT_BUILD`).
+Создать dev-слой `TankSurvival.Dev` (оба файла обёрнуты в `#if UNITY_EDITOR || DEBUG`).
 `DevParam` — модель параметра: `string Group`, `string Label`, `bool IsInteger`, `float Min`, `float Max`,
 `float GetValue()`, `void SetValue(float)`. Get/Set через кэшированный `FieldInfo` целевого объекта
 (`GetValue` = `Convert.ToSingle(field.GetValue(target))`; `SetValue` для `int` округляет
@@ -24,7 +24,7 @@
 Диапазон по умолчанию: `Min = 0`, `Max = max(10, current * 4)` (для `int` — округление); если значение 0 — диапазон `0..10`.
 
 ## Ограничения
-- Весь код — только в `#if UNITY_EDITOR || DEVELOPMENT_BUILD`; в релизе не компилируется.
+- Весь код — только в `#if UNITY_EDITOR || DEBUG`; в релизе не компилируется.
 - Рефлексия — только при `Init()`/по требованию; `GetValue`/`SetValue` — по событию UI, не в `Update`.
 - `SetValue` пишет в инстанс SO/компонента в памяти через `FieldInfo.SetValue` — не трогает `.asset` на диске и не использует `SerializedObject`/`AssetDatabase`.
 - Новое поле в зарегистрированном типе появляется само; новый тип SO — одна строка в `Init()`.
@@ -40,5 +40,5 @@
 - Полная проверка авто-регистрации выполняется в T078 (временное поле `EnemyData` видно в Dev Menu).
 
 ## Отчёт Исполнителя
-Готово: Assets/Scripts/Dev/DevParam.cs: создана модель параметра (public readonly Group/Label/IsInteger/Min/Max, GetValue через Convert.ToSingle(field.GetValue(target)), SetValue с Mathf.RoundToInt для int, диапазон Min=0/Max=max(10,current*4) с округлением для int), файл целиком в #if UNITY_EDITOR || DEVELOPMENT_BUILD; Assets/Scripts/Dev/DevParamRegistry.cs: создан реестр (Reflect(object,string) — рефлексия public float/int полей с пропуском прочих, public static All и Init() со сбором SessionState.SelectedChassis/SelectedTurret(+delivery,+onHitModules[])/SelectedDifficulty и WaveSpawner.waveData.compositions[].enemy через Object.FindFirstObjectByType, метки групп ChassisData.<имя>/TurretData.<имя>/TurretData.<имя>.delivery/OnHitModuleData.<имя>/DifficultyData.<имя>/EnemyData.<имя>), файл целиком в #if UNITY_EDITOR || DEVELOPMENT_BUILD.
+Готово: Assets/Scripts/Dev/DevParam.cs: создана модель параметра (public readonly Group/Label/IsInteger/Min/Max, GetValue через Convert.ToSingle(field.GetValue(target)), SetValue с Mathf.RoundToInt для int, диапазон Min=0/Max=max(10,current*4) с округлением для int), файл целиком в #if UNITY_EDITOR || DEBUG; Assets/Scripts/Dev/DevParamRegistry.cs: создан реестр (Reflect(object,string) — рефлексия public float/int полей с пропуском прочих, public static All и Init() со сбором SessionState.SelectedChassis/SelectedTurret(+delivery,+onHitModules[])/SelectedDifficulty и WaveSpawner.waveData.compositions[].enemy через Object.FindFirstObjectByType, метки групп ChassisData.<имя>/TurretData.<имя>/TurretData.<имя>.delivery/OnHitModuleData.<имя>/DifficultyData.<имя>/EnemyData.<имя>), файл целиком в #if UNITY_EDITOR || DEBUG.
 Блокер: —

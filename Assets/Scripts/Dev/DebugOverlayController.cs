@@ -1,4 +1,4 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -57,8 +57,8 @@ namespace TankSurvival.Dev
         {
             _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
-            _statBlock = Object.FindFirstObjectByType<StatBlock>();
-            _playerHealth = Object.FindFirstObjectByType<PlayerHealth>();
+            _statBlock = Object.FindAnyObjectByType<StatBlock>();
+            _playerHealth = Object.FindAnyObjectByType<PlayerHealth>();
             _playerTransform = _statBlock != null
                 ? _statBlock.transform
                 : (_playerHealth != null ? _playerHealth.transform : null);

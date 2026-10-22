@@ -1,5 +1,5 @@
 # Phase 10.5: Dev Tools (Инструменты разработчика)
-- Status: in-progress
+- Status: accepted
 - Цель: изолированная от продакшн-кода dev-прослойка для тестирования — авто-проводка базовых систем (`GameServices`), Dev Menu с авто-регистрацией параметров (рефлексия по SO), Debug Overlay с числовым наблюдением статусов, отладочная визуализация пространственных механик и упорядоченная иерархия сцены. В релизном WebGL-билде dev-кода и dev-маркеров нет.
 
 ## Задачи (порядок = приоритет)
@@ -19,23 +19,23 @@
 4. Play Mode → F1 открывает Dev Menu; `~` тоже; Debug Overlay виден слева сверху.
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] У хендлеров (`Slow/Freeze/Burn/Explosion/Ground`) в Inspector нет полей
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] У хендлеров (`Slow/Freeze/Burn/Explosion/Ground`) в Inspector нет полей
       `controlEffects`/`statusEffects`/`pool`/`onHit`; при этом Slow/Freeze/Burn/Explosion/Ground
       работают как в Phase 10 (регресс не сломан).
-- [ ] F1/`~` открывает/закрывает Dev Menu; панель скрыта по умолчанию и не мешает игре.
-- [ ] В Dev Menu автоматически видны: `EnemyData` (health/speed/damage/xpReward), `ChassisData`
+- [x] F1/`~` открывает/закрывает Dev Menu; панель скрыта по умолчанию и не мешает игре.
+- [x] В Dev Menu автоматически видны: `EnemyData` (health/speed/damage/xpReward), `ChassisData`
       (health/speed), `TurretData → delivery` (damage/aps), `OnHitModuleData`
       (duration/tickDamage/tickRate/slowAmount…).
-- [ ] Правка `EnemyData.health` меняет HP новых спавнов; значение живёт между рестартами раунда
+- [x] Правка `EnemyData.health` меняет HP новых спавнов; значение живёт между рестартами раунда
       и сменой турели; после выхода из Play Mode ассет в Project не изменён.
-- [ ] Новое поле в `EnemyData` появляется в Dev Menu без правок UI (авто-регистрация).
-- [ ] Debug Overlay показывает числовые HP/скорость/модификаторы игрока и ближайшего врага +
+- [x] Новое поле в `EnemyData` появляется в Dev Menu без правок UI (авто-регистрация).
+- [x] Debug Overlay показывает числовые HP/скорость/модификаторы игрока и ближайшего врага +
       активные статусы (burn-остаток, freeze-стаки); новое публичное поле компонента появляется само.
-- [ ] Hitscan оставляет линию от `muzzle` на `module.range`; Cone рисует сектор с `module.angle`/`module.range`;
+- [x] Hitscan оставляет линию от `muzzle` на `module.range`; Cone рисует сектор с `module.angle`/`module.range`;
       Explosion/Ground — окружности радиуса `module.radius`; маркеры отключаются тумблером.
-- [ ] Корпус шасси (`ChassisVisual`) и `TurretVisual` видны в Play Mode.
-- [ ] Иерархия сцены сгруппирована под `_Managers/_Player/_Combat/_SpawnPoints/_UI/_Dev`;
+- [x] Корпус шасси (`ChassisVisual`) и `TurretVisual` видны в Play Mode.
+- [x] Иерархия сцены сгруппирована под `_Managers/_Player/_Combat/_SpawnPoints/_UI/_Dev`;
       Turret и тестовые турели остались дочерними Player.
-- [ ] Релизный WebGL-билд (Development Build выкл): нет Dev Menu/Overlay/маркеров, F1 не работает;
+- [x] Релизный WebGL-билд (Development Build выкл): нет Dev Menu/Overlay/маркеров, F1 не работает;
       обычная игра не затронута.

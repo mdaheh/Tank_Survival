@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using TankSurvival.Dev;
 #endif
 
@@ -35,7 +35,7 @@ namespace TankSurvival.Combat
             Vector3 origin = muzzle.position;
             Vector3 end = origin + direction * module.range;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
             DevVisualizer.ShowBeam(origin, end, 0.15f, new Color(1f, 0.9f, 0.2f, 0.6f));
 #endif
 

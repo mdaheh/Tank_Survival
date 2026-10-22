@@ -1,4 +1,4 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using System.Collections.Generic;
 using System.Reflection;
 using TankSurvival.Core;
@@ -16,7 +16,7 @@ namespace TankSurvival.Dev
         {
             All.Clear();
 
-            SessionState session = Object.FindFirstObjectByType<SessionState>();
+            SessionState session = Object.FindAnyObjectByType<SessionState>();
             if (session != null)
             {
                 Add(session.SelectedChassis, "ChassisData");
@@ -43,7 +43,7 @@ namespace TankSurvival.Dev
                 Add(session.SelectedDifficulty, "DifficultyData");
             }
 
-            WaveSpawner spawner = Object.FindFirstObjectByType<WaveSpawner>();
+            WaveSpawner spawner = Object.FindAnyObjectByType<WaveSpawner>();
             if (spawner != null && spawner.waveData != null && spawner.waveData.compositions != null)
             {
                 for (int i = 0; i < spawner.waveData.compositions.Length; i++)

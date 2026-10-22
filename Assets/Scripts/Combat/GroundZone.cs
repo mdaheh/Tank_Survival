@@ -2,7 +2,7 @@ using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using TankSurvival.Dev;
 #endif
 
@@ -33,7 +33,7 @@ namespace TankSurvival.Combat
             _tickTimer = 0f;
             transform.position = position;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
             DevVisualizer.ShowCircle(position, module.radius, module.duration, new Color(0.4f, 0.9f, 0.4f, 0.35f));
 #endif
         }

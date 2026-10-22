@@ -105,7 +105,7 @@ namespace TankSurvival.Combat
             enemy.controlSpeedMultiplier = 1f;
         }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         public int GetFreezeStacks(EnemyController enemy)
         {
             ControlStatus status = enemy != null ? Find(enemy) : null;

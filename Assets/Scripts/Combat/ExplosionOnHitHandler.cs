@@ -2,7 +2,7 @@ using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using TankSurvival.Dev;
 #endif
 
@@ -20,7 +20,7 @@ namespace TankSurvival.Combat
             if (module == null)
                 return;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
             DevVisualizer.ShowCircle(position, module.radius, 0.3f, new Color(1f, 0.25f, 0.2f, 0.5f));
 #endif
 

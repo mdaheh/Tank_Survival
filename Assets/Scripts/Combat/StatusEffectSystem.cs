@@ -76,7 +76,7 @@ namespace TankSurvival.Combat
             }
         }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         public int ActiveBurnCount => burns.Count;
 
         public float GetBurnRemaining(EnemyController enemy)

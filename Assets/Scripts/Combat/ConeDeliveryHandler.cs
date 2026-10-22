@@ -2,7 +2,7 @@ using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
 using TankSurvival.Dev;
 #endif
 
@@ -34,7 +34,7 @@ namespace TankSurvival.Combat
             Vector3 flatDir = direction;
             flatDir.y = 0f;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
             DevVisualizer.ShowSector(origin, flatDir, module.angle, module.range, 0.25f, new Color(1f, 0.55f, 0.1f, 0.25f));
 #endif
 
