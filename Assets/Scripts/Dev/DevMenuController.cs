@@ -65,7 +65,9 @@ namespace TankSurvival.Dev
             closeRect.anchoredPosition = new Vector2(-8f, -6f);
             close.onClick.AddListener(ClosePanel);
 
-            BuildRows(BuildScroll(_panel));
+            RectTransform content = BuildScroll(_panel);
+            CreateMarkersToggle(content);
+            BuildRows(content);
         }
 
         private RectTransform BuildScroll(RectTransform parent)
@@ -108,6 +110,55 @@ namespace TankSurvival.Dev
             scroll.content = content;
 
             return content;
+        }
+
+        private void CreateMarkersToggle(RectTransform content)
+        {
+            RectTransform row = CreateRect("Markers", content);
+            LayoutElement layout = row.gameObject.AddComponent<LayoutElement>();
+            layout.minHeight = RowHeight;
+            layout.preferredHeight = RowHeight;
+
+            Toggle toggle = CreateToggle(row);
+            toggle.isOn = DevVisualizer.Enabled;
+            toggle.onValueChanged.AddListener(OnMarkersToggled);
+
+            Text label = CreateText("Label", row, "Маркеры");
+            RectTransform labelRect = label.rectTransform;
+            labelRect.anchorMin = Vector2.zero;
+            labelRect.anchorMax = Vector2.one;
+            labelRect.offsetMin = new Vector2(34f, 0f);
+            labelRect.offsetMax = new Vector2(-6f, 0f);
+        }
+
+        private Toggle CreateToggle(RectTransform parent)
+        {
+            RectTransform rect = CreateRect("Toggle", parent);
+            rect.anchorMin = new Vector2(0f, 0.5f);
+            rect.anchorMax = new Vector2(0f, 0.5f);
+            rect.pivot = new Vector2(0f, 0.5f);
+            rect.anchoredPosition = new Vector2(8f, 0f);
+            rect.sizeDelta = new Vector2(20f, 20f);
+
+            Image background = rect.gameObject.AddComponent<Image>();
+            background.color = new Color(0.16f, 0.17f, 0.2f, 1f);
+
+            RectTransform checkRect = CreateRect("Checkmark", rect);
+            Stretch(checkRect, new Vector2(3f, 3f), new Vector2(-3f, -3f));
+
+            Image checkmark = checkRect.gameObject.AddComponent<Image>();
+            checkmark.color = new Color(0.25f, 0.75f, 0.45f, 1f);
+
+            Toggle toggle = rect.gameObject.AddComponent<Toggle>();
+            toggle.targetGraphic = background;
+            toggle.graphic = checkmark;
+
+            return toggle;
+        }
+
+        private static void OnMarkersToggled(bool value)
+        {
+            DevVisualizer.Enabled = value;
         }
 
         private void BuildRows(RectTransform content)

@@ -1,5 +1,5 @@
 # T081: DevVisualizer + отладочные маркеры и плейсхолдеры шасси/турели
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Depends: T078
 - Files:
@@ -69,5 +69,5 @@
 - Маркеры отключаются тумблером в Dev Menu; в релизном WebGL-билде маркеров нет.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevVisualizer.cs: создан dev-визуализатор (RuntimeInitializeOnLoadMethod AfterSceneLoad, статические ShowBeam/ShowSector/ShowCircle, пул с пре-вармом Beam 8/32, Sector 4/16, Circle 16/64 и переиспользованием самого старого при превышении max, Beam — LineRenderer с буфером из 2 точек, Sector — wedge-меш на 32 сегмента в пре-аллоцированном Vector3[] с пересчётом дуги только при изменении angle (lastAngle), Circle — кольцо LineRenderer из 64 пре-аллоцированных точек, масштаб трансформа под range/radius, цвет через vertex colors/MaterialPropertyBlock, свойство Enabled с мгновенным скрытием маркеров, всё в #if UNITY_EDITOR || DEVELOPMENT_BUILD); Assets/Scripts/Dev/DevMenuController.cs: добавлен тумблер «Маркеры», привязанный к DevVisualizer.Enabled; Assets/Scripts/Combat/HitscanDeliveryHandler.cs: хук ShowBeam(origin, end, 0.15f, цвет) в Fire; Assets/Scripts/Combat/ConeDeliveryHandler.cs: хук ShowSector(origin, flatDir, module.angle, module.range, 0.25f, цвет) в Fire; Assets/Scripts/Combat/ExplosionOnHitHandler.cs: хук ShowCircle(position, module.radius, 0.3f, цвет) в HandleHit; Assets/Scripts/Combat/GroundZone.cs: хук ShowCircle(position, module.radius, module.duration, цвет) в Init (во всех четырёх файлах using TankSurvival.Dev и хуки обёрнуты в #if UNITY_EDITOR || DEVELOPMENT_BUILD, логика не изменена).
+Блокер: —
