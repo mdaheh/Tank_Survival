@@ -1,5 +1,5 @@
 # T079: DebugOverlayController + dev-аксессоры статусов
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Depends: T077, T075
 - Files:
@@ -45,5 +45,5 @@ Dev-only аксессоры (в `#if UNITY_EDITOR || DEVELOPMENT_BUILD` внут
 - Новое `public float` поле в `StatBlock`/`EnemyController` появляется в оверлее без правок кода оверлея.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DebugOverlayController.cs: dev-only оверлей (static [RuntimeInitializeOnLoadMethod(AfterSceneLoad)] создаёт Canvas "DebugOverlay" ScreenSpaceOverlay sortingOrder 90 + CanvasScaler, панель top-left), StatBlock/PlayerHealth берутся Object.FindFirstObjectByType один раз, StatusEffectSystem/ControlEffectSystem — GameServices.Get<T> один раз в Awake, группы «Игрок» (Reflect(statBlock,"Player") + строка HP CurrentHealth/maxHealth), «Враг» (ближайший активный из EnemyController.Active + Reflect(enemy,"Enemy") + Reflect(enemy.health,"Enemy.Health") + дистанция; рефлексия врага перестраивается только при смене наблюдаемого врага) и «Статусы» (Active.Count, ActiveBurnCount, GetBurnRemaining, GetFreezeStacks, IsFrozen), обновление кэшированным WaitForSecondsRealtime(0.25f) с StringBuilder, весь файл в #if UNITY_EDITOR || DEVELOPMENT_BUILD; Assets/Scripts/Combat/StatusEffectSystem.cs: в #if добавлены public int ActiveBurnCount и public float GetBurnRemaining(EnemyController); Assets/Scripts/Combat/ControlEffectSystem.cs: в #if добавлены public int GetFreezeStacks(EnemyController) и public bool IsFrozen(EnemyController) через существующий Find, логика систем не изменена.
+Блокер: —

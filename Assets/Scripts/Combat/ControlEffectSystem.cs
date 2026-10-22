@@ -105,6 +105,22 @@ namespace TankSurvival.Combat
             enemy.controlSpeedMultiplier = 1f;
         }
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        public int GetFreezeStacks(EnemyController enemy)
+        {
+            ControlStatus status = enemy != null ? Find(enemy) : null;
+
+            return status != null ? status.freezeStacks : 0;
+        }
+
+        public bool IsFrozen(EnemyController enemy)
+        {
+            ControlStatus status = enemy != null ? Find(enemy) : null;
+
+            return status != null && status.frozen;
+        }
+#endif
+
         private void Update()
         {
             float dt = Time.deltaTime;

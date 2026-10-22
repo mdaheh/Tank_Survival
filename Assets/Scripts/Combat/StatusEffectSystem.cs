@@ -76,6 +76,27 @@ namespace TankSurvival.Combat
             }
         }
 
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        public int ActiveBurnCount => burns.Count;
+
+        public float GetBurnRemaining(EnemyController enemy)
+        {
+            if (enemy == null)
+                return 0f;
+
+            for (int i = 0; i < burns.Count; i++)
+            {
+                BurnStatus status = burns[i];
+                if (status.enemy == enemy)
+                {
+                    return Mathf.Max(0f, status.duration - status.elapsed);
+                }
+            }
+
+            return 0f;
+        }
+#endif
+
         private void Update()
         {
             float dt = Time.deltaTime;
