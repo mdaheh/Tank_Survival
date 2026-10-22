@@ -1,5 +1,5 @@
 # T078: DevBootstrap + DevMenuController (Cheat Panel)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.5
 - Depends: T077
 - Files:
@@ -36,5 +36,5 @@
 - Новое поле `EnemyData` (временное `testParam`) появляется в панели без правки кода панели.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevBootstrap.cs: статический [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] создаёт GameObject "DevMenu" с Canvas (ScreenSpaceOverlay, sortingOrder 100 — выше игрового), CanvasScaler (ScaleWithScreenSize, 1920x1080) и GraphicRaycaster + DevMenuController, весь файл в #if UNITY_EDITOR || DEVELOPMENT_BUILD; Assets/Scripts/Dev/DevMenuController.cs: панель строится кодом один раз в Awake (фон Image, заголовок, кнопка закрытия, ScrollRect + Viewport(RectMask2D) + Content с VerticalLayoutGroup и ContentSizeFitter), на каждый DevParam из DevParamRegistry.All (после DevParamRegistry.Init()) строка Text(label) + Slider(min..max, wholeNumbers для int) + Text(значения), onValueChanged → DevParam.SetValue + перечитывание значения, группы разделены заголовками, тогл F1/~ через Keyboard.current.f1Key/backquoteKey.wasPressedThisFrame с защитой Keyboard.current == null, панель скрыта по умолчанию; шрифт — встроенный Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"), файл в #if UNITY_EDITOR || DEVELOPMENT_BUILD.
+Блокер: —
