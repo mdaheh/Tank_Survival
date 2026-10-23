@@ -12,11 +12,9 @@ namespace TankSurvival.Player
         private void Update()
         {
             Vector2 input = moveAction.action.ReadValue<Vector2>();
-            transform.Translate(
-                input.x * statBlock.moveSpeed * Time.deltaTime,
-                0f,
-                input.y * statBlock.moveSpeed * Time.deltaTime,
-                Space.World);
+
+            transform.Rotate(0f, input.x * Mathf.Sign(input.y) * statBlock.turn * Time.deltaTime, 0f, Space.Self);
+            transform.Translate(Vector3.forward * (input.y * statBlock.moveSpeed * Time.deltaTime), Space.Self);
         }
     }
 }

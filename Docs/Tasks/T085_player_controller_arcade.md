@@ -1,5 +1,5 @@
 # T085: PlayerController — аркадное танковое движение
-- Status: [ ]
+- Status: [x]
 - Phase: 10.7
 - Depends: T084
 - Files:
@@ -28,5 +28,10 @@
 - Смена `SessionState.SelectedChassis` Standart↔Fat меняет скорость движения и скорость поворота без правки кода.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: —
+Блокер: T085: блокер — жалоба «поворот инвертирован только при движении назад (S + A/D)» не устраняется единственной точкой подстройки из ТЗ: смена знака на `-input.x` инвертирует поворот и при движении вперёд. Вопрос: нужен ли знак поворота от направления движения (`input.x * Mathf.Sign(input.y) * statBlock.turn`) и что делать при `input.y == 0`?
+
+## Отчёт Человека
+Закрыл задачу человек, поменяв строчку transform.Rotate(0f, input.x * statBlock.turn * Time.deltaTime, 0f, Space.Self);
+на строчку transform.Rotate(0f, input.x * Mathf.Sign(input.y) * statBlock.turn * Time.deltaTime, 0f, Space.Self);
+Это помогло быстро решить проблему инвентированного движения назад.

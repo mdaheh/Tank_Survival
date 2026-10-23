@@ -1,5 +1,5 @@
 # T084: StatBlock — поле turn
-- Status: [ ]
+- Status: [x]
 - Phase: 10.7
 - Files:
   - Assets/Scripts/Core/StatBlock.cs
@@ -21,5 +21,5 @@
 - Dev Menu (F1) → группа `ChassisData…` → слайдер `turn` присутствует и равен значению ассета (рефлексия `DevParamRegistry` подхватывает `public float` поля SO).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/StatBlock.cs: добавлено публичное поле `public float turn;` после `maxHealth`, в `Init` добавлено присвоение `turn = chassis.turn;` после `moveSpeed = chassis.speed;`.
+Блокер: —

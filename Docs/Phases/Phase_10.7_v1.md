@@ -12,8 +12,8 @@
 2. Убедиться, что на `Player` заполнены `PlayerController.statBlock` → `StatBlock` (на `Player`) и `PlayerController.moveAction` → action `Move` из `Assets/InputSystem_Actions.inputactions` (стоят по T007).
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] Камера плавно следует за игроком; угол изометрический и не вращается при движении.
-- [ ] W/S двигают танк вперёд/назад по направлению «носа» (`transform.forward`), A/D поворачивают корпус вокруг вертикальной оси.
-- [ ] Смена `SessionState.SelectedChassis` (Standart↔Fat) меняет скорость движения (`speed`) и скорость поворота (`turn`) без правки кода.
-- [ ] Dev Menu (F1) показывает `turn` в группе `ChassisData…` (рефлексия подхватила поле `ChassisData.turn`); `Player` → `StatBlock` → `Turn` равно `ChassisData.turn`.
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] Камера плавно следует за игроком; угол изометрический и не вращается при движении.
+- [x] W/S двигают танк вперёд/назад по направлению «носа» (`transform.forward`), A/D поворачивают корпус вокруг вертикальной оси.
+- [x] Смена `SessionState.SelectedChassis` (Standart↔Fat) меняет скорость движения (`speed`) и скорость поворота (`turn`) без правки кода.
+- [x] Dev Menu (F1) показывает `turn` в группе `ChassisData…` (рефлексия подхватила поле `ChassisData.turn`); `Player` → `StatBlock` → `Turn` равно `ChassisData.turn`.

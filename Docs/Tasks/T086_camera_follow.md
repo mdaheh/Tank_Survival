@@ -1,5 +1,5 @@
 # T086: CameraFollow — изометрическая камера
-- Status: [ ]
+- Status: [x]
 - Phase: 10.7
 - Files:
   - Assets/Scripts/Camera/CameraFollow.cs
@@ -30,5 +30,5 @@
 - Угол камеры не меняется при движении (поворот фиксированный, изометрический).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Camera/CameraFollow.cs: класс CameraFollow : MonoBehaviour в namespace TankSurvival.Camera с полями target/offset/smoothing и LateUpdate с экспоненциальным сглаживанием позиции (поворот не меняется).
+Блокер: —

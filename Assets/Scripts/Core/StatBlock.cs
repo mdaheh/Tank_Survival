@@ -10,12 +10,14 @@ namespace TankSurvival.Core
         public float fireRate;
         public float moveSpeed;
         public float maxHealth;
+        public float turn;
 
         public event Action<float> MaxHealthIncreased;
 
         public void Init(ChassisData chassis, TurretData turret)
         {
             moveSpeed = chassis.speed;
+            turn = chassis.turn;
             maxHealth = chassis.health;
             damage = turret.delivery != null ? turret.delivery.damage : 0f;
             fireRate = turret.delivery != null ? turret.delivery.aps : 0f;
