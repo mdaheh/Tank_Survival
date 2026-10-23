@@ -2,6 +2,9 @@
 using System;
 using System.Reflection;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace TankSurvival.Dev
 {
@@ -9,6 +12,7 @@ namespace TankSurvival.Dev
     {
         private readonly object _target;
         private readonly FieldInfo _field;
+        private readonly float _originalValue;
 
         public readonly string Group;
         public readonly string Label;
@@ -30,6 +34,8 @@ namespace TankSurvival.Dev
 
             Min = 0f;
             Max = isInteger ? Mathf.RoundToInt(max) : max;
+
+            _originalValue = ReadOriginalValue();
         }
 
         public float GetValue()
@@ -47,6 +53,38 @@ namespace TankSurvival.Dev
 
             _field.SetValue(_target, value);
         }
+
+        public void Restore()
+        {
+            SetValue(_originalValue);
+        }
+
+#if UNITY_EDITOR
+        private float ReadOriginalValue()
+        {
+            UnityEngine.Object unityTarget = _target as UnityEngine.Object;
+            if (unityTarget != null)
+            {
+                SerializedObject so = new SerializedObject(unityTarget);
+                SerializedProperty prop = so.FindProperty(_field.Name);
+                if (prop != null)
+                {
+                    float value = prop.propertyType == SerializedPropertyType.Integer ? prop.intValue : prop.floatValue;
+                    so.Dispose();
+                    return value;
+                }
+
+                so.Dispose();
+            }
+
+            return Convert.ToSingle(_field.GetValue(_target));
+        }
+#else
+        private float ReadOriginalValue()
+        {
+            return Convert.ToSingle(_field.GetValue(_target));
+        }
+#endif
     }
 }
 #endif

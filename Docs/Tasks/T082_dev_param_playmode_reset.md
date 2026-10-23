@@ -1,5 +1,5 @@
 # T082: DevParam — снапшот с диска + автооткат при выходе из Play Mode
-- Status: [ ]
+- Status: [!]
 - Phase: 10.6
 - Files:
   - Assets/Scripts/Dev/DevParam.cs
@@ -53,5 +53,5 @@
 - Повторить «правка → Stop → вход» для `EnemyData` (health): после перезахода слайдер снова равен диску.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DevParam.cs: поле `_originalValue` + `ReadOriginalValue()` (SerializedObject под `#if UNITY_EDITOR`, fallback Convert.ToSingle) + `Restore()`; DevParamRegistry.cs: `using UnityEditor` под `#if UNITY_EDITOR`, `InstallPlayModeHook()` с `[InitializeOnLoadMethod]` и `OnPlayModeStateChanged` → `Restore()` всех параметров на `ExitingPlayMode`.
+Блокер: CS0104 — после добавления `using UnityEditor;` в DevParamRegistry.cs строка 22 (`SessionState`) стала неоднозначной (TankSurvival.Core.SessionState vs UnityEditor.SessionState). Исправляется в T083.

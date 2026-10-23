@@ -5,6 +5,9 @@ using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Waves;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace TankSurvival.Dev
 {
@@ -16,7 +19,7 @@ namespace TankSurvival.Dev
         {
             All.Clear();
 
-            SessionState session = Object.FindAnyObjectByType<SessionState>();
+            TankSurvival.Core.SessionState session = Object.FindAnyObjectByType<TankSurvival.Core.SessionState>();
             if (session != null)
             {
                 Add(session.SelectedChassis, "ChassisData");
@@ -86,6 +89,31 @@ namespace TankSurvival.Dev
 
             All.AddRange(Reflect(asset, groupPrefix + "." + asset.name));
         }
+
+#if UNITY_EDITOR
+        private static bool _playModeHookInstalled;
+
+        [InitializeOnLoadMethod]
+        private static void InstallPlayModeHook()
+        {
+            if (_playModeHookInstalled)
+                return;
+
+            _playModeHookInstalled = true;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state != PlayModeStateChange.ExitingPlayMode)
+                return;
+
+            for (int i = 0; i < All.Count; i++)
+            {
+                All[i].Restore();
+            }
+        }
+#endif
     }
 }
 #endif
