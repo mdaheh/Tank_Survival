@@ -41,6 +41,7 @@
 - **Phase 10.5 — Dev Tools: DI (`GameServices`), Dev Menu, Debug Overlay, dev-маркеры.** [accepted]
 - **Phase 10.6 — Dev Tools: стабильность.** [accepted]
 - **Phase 10.7 — Игрок: камера + аркадное движение.** [in-progress]
+- **Phase 10.8 — Dev Menu: переосмысление + каркас паузы.** [in-progress]
 - **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [planned]
 - **Phase 12 — Специализации турелей (8) и три ветки.** [planned]
 - **Phase 13 — Шасси v1.0: Fancy, Veteran + каркас способностей + Boost.** [planned]
