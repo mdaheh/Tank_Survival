@@ -1,5 +1,5 @@
 # Phase 10.6: Dev Tools — стабильность
-- Status: in-progress
+- Status: accepted
 - Цель: правки параметров в Dev Menu действуют только внутри текущей сессии Play Mode и не переживают выход из Play Mode при отключённом Domain/Scene Reload.
 
 ## Задачи (порядок = приоритет)
