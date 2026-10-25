@@ -1,19 +1,27 @@
 # Unity — кэш, логи, временные файлы
-Library/
-Temp/
-Logs/
-UserSettings/
-obj/
-Build/
-Builds/
+Library/**
+Temp/**
+Logs/**
+UserSettings/**
+obj/**
+Build/**
+Builds/**
+
+# Явно — самые «тяжёлые» и бесполезные для контекста подпапки Library
+Library/PackageCache/**
+Library/SourceAssetDB
+Library/ArtifactDB
+Library/Bee/**
+Library/ArtifactDB*
+Library/SourceAssetDB*
 
 # IDE и редакторы
-.vs/
-.idea/
-.vscode/
+.vs/**
+.idea/**
+.vscode/**
 
 # Git
-.git/
+.git/**
 
 # Сгенерированные файлы Unity
 *.csproj
