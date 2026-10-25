@@ -151,36 +151,51 @@ namespace TankSurvival.Dev
             DevVisualizer.Enabled = value;
         }
 
+        private static string GetCategory(string group)
+        {
+            if (group.StartsWith("ChassisData")) return "Chassis";
+            if (group.EndsWith(".delivery")) return "Delivery";
+            if (group.StartsWith("TurretData")) return "Turret";
+            if (group.StartsWith("OnHitModuleData")) return "OnHit";
+            if (group.StartsWith("DifficultyData")) return "Difficulty";
+            if (group.StartsWith("EnemyData")) return "Enemy";
+            return group;
+        }
+
         private void BuildRows(RectTransform content)
         {
             List<DevParam> parameters = DevParamRegistry.All;
-            string currentGroup = null;
+            string currentCategory = null;
 
             for (int i = 0; i < parameters.Count; i++)
             {
                 DevParam parameter = parameters[i];
+                string category = GetCategory(parameter.Group);
 
-                if (parameter.Group != currentGroup)
+                if (category != currentCategory)
                 {
-                    currentGroup = parameter.Group;
-                    CreateGroupHeader(content, currentGroup);
+                    currentCategory = category;
+                    CreateSectionHeader(content, category);
                 }
 
                 CreateRow(content, parameter);
             }
         }
 
-        private void CreateGroupHeader(RectTransform content, string group)
+        private void CreateSectionHeader(RectTransform content, string category)
         {
-            RectTransform header = CreateRect("Group", content);
+            RectTransform header = CreateRect("Section", content);
             LayoutElement layout = header.gameObject.AddComponent<LayoutElement>();
             layout.minHeight = GroupHeaderHeight;
             layout.preferredHeight = GroupHeaderHeight;
 
-            Text label = CreateText("Label", header, group);
+            Image background = header.gameObject.AddComponent<Image>();
+            background.color = new Color(0.14f, 0.20f, 0.28f, 1f);
+
+            Text label = CreateText("Label", header, category);
             label.fontStyle = FontStyle.Bold;
-            label.color = new Color(0.55f, 0.85f, 1f, 1f);
-            Stretch(label.rectTransform, new Vector2(6f, 0f), new Vector2(-6f, 0f));
+            label.color = new Color(0.75f, 0.9f, 1f, 1f);
+            Stretch(label.rectTransform, new Vector2(8f, 0f), new Vector2(-8f, 0f));
         }
 
         private void CreateRow(RectTransform content, DevParam parameter)

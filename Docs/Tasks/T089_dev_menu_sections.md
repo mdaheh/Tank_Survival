@@ -1,5 +1,5 @@
 # T089: Dev Menu — секции/категории
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/Dev/DevMenuController.cs
@@ -47,5 +47,5 @@
 - Заголовки секций визуально отделены от строк (фоновый блок).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevMenuController.cs: добавлен `GetCategory(string group)`; `BuildRows()` переведён на `currentCategory`/`GetCategory(parameter.Group)`; `CreateGroupHeader` заменён на `CreateSectionHeader` (фон `Image` `new Color(0.14f, 0.20f, 0.28f, 1f)`, текст `FontStyle.Bold` цвета `new Color(0.75f, 0.9f, 1f, 1f)`, `Stretch(..., new Vector2(8f, 0f), new Vector2(-8f, 0f))`).
+Блокер: —
