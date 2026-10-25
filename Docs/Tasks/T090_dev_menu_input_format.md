@@ -1,5 +1,5 @@
 # T090: Dev Menu — ручной ввод точных чисел + корректное форматирование
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/Dev/DevMenuController.cs
@@ -107,5 +107,5 @@
 - Ввести нечисловое (например, `abc`) → после потери фокуса текст возвращается к предыдущему корректному значению.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevMenuController.cs: добавлен `using System.Globalization;`; `FormatValue` переведён на `CultureInfo.InvariantCulture`; `OnSliderChanged` принимает `InputField` и использует `SetTextWithoutNotify`; в `CreateRow` вместо `Text value` создаётся `InputField` с подписками на `slider.onValueChanged` и `inputField.onEndEdit`; добавлены `CreateInputField(...)` и `OnInputCommitted(...)`.
+Блокер: —

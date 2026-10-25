@@ -1,5 +1,6 @@
 #if UNITY_EDITOR || DEBUG
 using System.Collections.Generic;
+using System.Globalization;
 using TankSurvival.Round;
 using UnityEngine;
 using UnityEngine.UI;
@@ -219,15 +220,15 @@ namespace TankSurvival.Dev
 
             Slider slider = CreateSlider(row, parameter);
 
-            Text value = CreateText("Value", row, FormatValue(parameter));
-            value.alignment = TextAnchor.MiddleRight;
-            RectTransform valueRect = value.rectTransform;
-            valueRect.anchorMin = new Vector2(0.78f, 0f);
-            valueRect.anchorMax = new Vector2(1f, 1f);
-            valueRect.offsetMin = new Vector2(6f, 0f);
-            valueRect.offsetMax = new Vector2(-8f, 0f);
+            InputField inputField = CreateInputField(row, parameter);
+            RectTransform inputRect = (RectTransform)inputField.transform;
+            inputRect.anchorMin = new Vector2(0.78f, 0f);
+            inputRect.anchorMax = new Vector2(1f, 1f);
+            inputRect.offsetMin = new Vector2(6f, 0f);
+            inputRect.offsetMax = new Vector2(-8f, 0f);
 
-            slider.onValueChanged.AddListener(newValue => OnSliderChanged(parameter, newValue, value));
+            slider.onValueChanged.AddListener(newValue => OnSliderChanged(parameter, newValue, inputField));
+            inputField.onEndEdit.AddListener(text => OnInputCommitted(parameter, text, slider, inputField));
         }
 
         private static Slider CreateSlider(RectTransform parent, DevParam parameter)
@@ -271,6 +272,33 @@ namespace TankSurvival.Dev
             slider.value = parameter.GetValue();
 
             return slider;
+        }
+
+        private InputField CreateInputField(RectTransform parent, DevParam parameter)
+        {
+            RectTransform rect = CreateRect("Input", parent);
+
+            Image background = rect.gameObject.AddComponent<Image>();
+            background.color = new Color(0.12f, 0.14f, 0.17f, 1f);
+
+            RectTransform textRect = CreateRect("Text", rect);
+            Stretch(textRect, new Vector2(4f, 0f), new Vector2(-4f, 0f));
+            Text text = textRect.gameObject.AddComponent<Text>();
+            text.font = _font;
+            text.fontSize = 14;
+            text.color = Color.white;
+            text.alignment = TextAnchor.MiddleRight;
+            text.horizontalOverflow = HorizontalWrapMode.Overflow;
+            text.verticalOverflow = VerticalWrapMode.Overflow;
+            text.supportRichText = false;
+            text.raycastTarget = true;
+
+            InputField inputField = rect.gameObject.AddComponent<InputField>();
+            inputField.textComponent = text;
+            inputField.targetGraphic = background;
+            inputField.text = FormatValue(parameter);
+
+            return inputField;
         }
 
         private Text CreateText(string name, RectTransform parent, string value)
@@ -334,17 +362,35 @@ namespace TankSurvival.Dev
             rect.offsetMax = offsetMax;
         }
 
-        private static void OnSliderChanged(DevParam parameter, float value, Text valueText)
+        private static void OnSliderChanged(DevParam parameter, float value, InputField inputField)
         {
             parameter.SetValue(value);
-            valueText.text = FormatValue(parameter);
+            inputField.SetTextWithoutNotify(FormatValue(parameter));
+        }
+
+        private static void OnInputCommitted(DevParam parameter, string text, Slider slider, InputField inputField)
+        {
+            if (parameter.IsInteger)
+            {
+                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out int iv))
+                    parameter.SetValue(iv);
+            }
+            else
+            {
+                if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out float fv))
+                    parameter.SetValue(fv);
+            }
+
+            slider.SetValueWithoutNotify(Mathf.Clamp(parameter.GetValue(), slider.minValue, slider.maxValue));
+            inputField.SetTextWithoutNotify(FormatValue(parameter));
         }
 
         private static string FormatValue(DevParam parameter)
         {
             float value = parameter.GetValue();
-
-            return parameter.IsInteger ? Mathf.RoundToInt(value).ToString() : value.ToString("0.###");
+            return parameter.IsInteger
+                ? Mathf.RoundToInt(value).ToString(CultureInfo.InvariantCulture)
+                : value.ToString("0.###", CultureInfo.InvariantCulture);
         }
 
         private void SetVisible(bool visible)
