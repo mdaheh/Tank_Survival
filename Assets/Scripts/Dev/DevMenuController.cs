@@ -32,14 +32,14 @@ namespace TankSurvival.Dev
 
             DevParamRegistry.Init();
             BuildPanel();
-            _roundController = Object.FindFirstObjectByType<RoundController>();
+            _roundController = Object.FindAnyObjectByType<RoundController>();
             SetVisible(true);
 
-            PauseMenuController pause = Object.FindFirstObjectByType<PauseMenuController>();
+            PauseMenuController pause = Object.FindAnyObjectByType<PauseMenuController>();
             if (pause != null)
                 pause.OnExitToMenu += ShowDevMenu;
 
-            RoundEndUI roundEnd = Object.FindFirstObjectByType<RoundEndUI>();
+            RoundEndUI roundEnd = Object.FindAnyObjectByType<RoundEndUI>();
             if (roundEnd != null)
                 roundEnd.OnContinue += ShowDevMenu;
         }
