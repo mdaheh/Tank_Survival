@@ -1,5 +1,5 @@
 # T093: RoundEndUI — кнопка ведёт в Dev Menu (не рестарт)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/UI/RoundEndUI.cs
@@ -36,5 +36,5 @@
 - Клик по кнопке → панель скрывается, `Time.timeScale = 1`. Новый раунд автоматически НЕ запускается (Dev Menu появится в T094).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/UI/RoundEndUI.cs: добавлено событие `public event System.Action OnContinue;`; в `Awake()` подписка заменена на `GoToMenu`; метод `Restart()` заменён на `GoToMenu()` (`Time.timeScale = 1f`, `panel.SetActive(false)`, `OnContinue?.Invoke()`), вызов `roundController.Restart()` удалён; поле `restartButton` не переименовано.
+Блокер: —

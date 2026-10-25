@@ -11,10 +11,12 @@ namespace TankSurvival.UI
         public Text resultText;
         public Button restartButton;
 
+        public event System.Action OnContinue;
+
         private void Awake()
         {
             roundController.OnPhaseChanged += HandlePhaseChanged;
-            restartButton.onClick.AddListener(Restart);
+            restartButton.onClick.AddListener(GoToMenu);
             panel.SetActive(false);
         }
 
@@ -38,11 +40,11 @@ namespace TankSurvival.UI
             panel.SetActive(true);
         }
 
-        private void Restart()
+        private void GoToMenu()
         {
             Time.timeScale = 1f;
             panel.SetActive(false);
-            roundController.Restart();
+            OnContinue?.Invoke();
         }
     }
 }
