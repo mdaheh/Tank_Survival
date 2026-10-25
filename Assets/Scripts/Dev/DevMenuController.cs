@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using TankSurvival.Round;
+using TankSurvival.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,14 @@ namespace TankSurvival.Dev
             BuildPanel();
             _roundController = Object.FindFirstObjectByType<RoundController>();
             SetVisible(true);
+
+            PauseMenuController pause = Object.FindFirstObjectByType<PauseMenuController>();
+            if (pause != null)
+                pause.OnExitToMenu += ShowDevMenu;
+
+            RoundEndUI roundEnd = Object.FindFirstObjectByType<RoundEndUI>();
+            if (roundEnd != null)
+                roundEnd.OnContinue += ShowDevMenu;
         }
 
         private void BuildPanel()
@@ -399,6 +408,11 @@ namespace TankSurvival.Dev
         private void SetVisible(bool visible)
         {
             _panel.gameObject.SetActive(visible);
+        }
+
+        private void ShowDevMenu()
+        {
+            SetVisible(true);
         }
 
         private void StartRound()

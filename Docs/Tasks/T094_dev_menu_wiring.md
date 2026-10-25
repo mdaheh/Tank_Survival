@@ -1,5 +1,5 @@
 # T094: Dev Menu — связка с паузой и RoundEnd
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Depends: T092, T093
 - Files:
@@ -43,5 +43,5 @@
 - Из Dev Menu «Start Round» → начинается новый раунд с текущими настройками.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevMenuController.cs: добавлен `using TankSurvival.UI;`; в `Awake()` после резолва `_roundController` добавлены подписки `pause.OnExitToMenu += ShowDevMenu` и `roundEnd.OnContinue += ShowDevMenu` (через `Object.FindFirstObjectByType<T>()` с null-guard); добавлен метод `ShowDevMenu()` → `SetVisible(true)`.
+Блокер: —
