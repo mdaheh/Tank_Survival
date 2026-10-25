@@ -1,5 +1,5 @@
 # T095: Dev Menu — кнопка Reset (сброс параметров)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Depends: T090
 - Files:
@@ -65,5 +65,5 @@
 - После Reset → «Start Round» → игра идёт с исходными (не изменёнными) значениями.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevMenuController.cs: добавлены поле `_rows` и вложенный тип `DevParamRow`; в `CreateRow` после подписок добавлен `_rows.Add(...)`; в `BuildPanel()` рядом с «Start Round» добавлена кнопка «Reset» (левый низ); добавлен метод `ResetAll()` с `Restore()`/`SetValueWithoutNotify`/`SetTextWithoutNotify`.
+Блокер: —

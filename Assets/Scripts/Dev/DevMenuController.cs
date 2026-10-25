@@ -17,6 +17,14 @@ namespace TankSurvival.Dev
         private Font _font;
         private RectTransform _panel;
         private RoundController _roundController;
+        private readonly List<DevParamRow> _rows = new List<DevParamRow>();
+
+        private sealed class DevParamRow
+        {
+            public DevParam Parameter;
+            public Slider Slider;
+            public InputField Input;
+        }
 
         private void Awake()
         {
@@ -68,6 +76,15 @@ namespace TankSurvival.Dev
             startRect.anchoredPosition = new Vector2(-8f, 8f);
             startRect.sizeDelta = new Vector2(150f, 32f);
             start.onClick.AddListener(StartRound);
+
+            Button reset = CreateButton("Reset", _panel, "Reset");
+            RectTransform resetRect = (RectTransform)reset.transform;
+            resetRect.anchorMin = new Vector2(0f, 0f);
+            resetRect.anchorMax = new Vector2(0f, 0f);
+            resetRect.pivot = new Vector2(0f, 0f);
+            resetRect.anchoredPosition = new Vector2(8f, 8f);
+            resetRect.sizeDelta = new Vector2(120f, 32f);
+            reset.onClick.AddListener(ResetAll);
         }
 
         private RectTransform BuildScroll(RectTransform parent)
@@ -241,6 +258,8 @@ namespace TankSurvival.Dev
 
             slider.onValueChanged.AddListener(newValue => OnSliderChanged(parameter, newValue, inputField));
             inputField.onEndEdit.AddListener(text => OnInputCommitted(parameter, text, slider, inputField));
+
+            _rows.Add(new DevParamRow { Parameter = parameter, Slider = slider, Input = inputField });
         }
 
         private static Slider CreateSlider(RectTransform parent, DevParam parameter)
@@ -413,6 +432,17 @@ namespace TankSurvival.Dev
         private void ShowDevMenu()
         {
             SetVisible(true);
+        }
+
+        private void ResetAll()
+        {
+            for (int i = 0; i < _rows.Count; i++)
+            {
+                DevParamRow row = _rows[i];
+                row.Parameter.Restore();
+                row.Slider.SetValueWithoutNotify(Mathf.Clamp(row.Parameter.GetValue(), row.Slider.minValue, row.Slider.maxValue));
+                row.Input.SetTextWithoutNotify(FormatValue(row.Parameter));
+            }
         }
 
         private void StartRound()
