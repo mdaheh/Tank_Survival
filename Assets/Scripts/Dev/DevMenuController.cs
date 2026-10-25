@@ -100,6 +100,9 @@ namespace TankSurvival.Dev
             scroll.viewport = viewport;
             scroll.content = content;
 
+            Image scrollBackground = scrollRect.gameObject.AddComponent<Image>();
+            scrollBackground.color = new Color(0.08f, 0.09f, 0.12f, 1f);
+
             return content;
         }
 

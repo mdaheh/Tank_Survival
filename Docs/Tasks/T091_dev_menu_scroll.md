@@ -1,5 +1,5 @@
 # T091: Dev Menu — исправление скролла списка
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/Dev/DevMenuController.cs
@@ -26,5 +26,5 @@ scrollBackground.color = new Color(0.08f, 0.09f, 0.12f, 1f);
 - Play Mode → Dev Menu, список длиннее видимой области: колесо мыши прокручивает список, когда курсор находится над текстом названия параметра и над пустым местом строки (не только над слайдером).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Dev/DevMenuController.cs: в `BuildScroll` после блока настройки `ScrollRect` перед `return content;` добавлен фоновый `Image` на объект ScrollRect с цветом `new Color(0.08f, 0.09f, 0.12f, 1f)`.
+Блокер: —
