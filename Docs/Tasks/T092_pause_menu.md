@@ -1,5 +1,5 @@
 # T092: PauseMenuController — минимальный каркас паузы
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Depends: T087
 - Files:
@@ -82,5 +82,5 @@ private void ExitToMenu()
 - Esc до старта раунда (когда на экране Dev Menu) и после победы/поражения — пауза НЕ появляется.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/UI/PauseMenuController.cs: создан класс `PauseMenuController : MonoBehaviour` (namespace `TankSurvival.UI`) с полями `roundController`/`panel`/`resumeButton`/`exitButton`, событием `OnExitToMenu` и методами `Awake`/`Update`/`CanPause`/`Show`/`Resume`/`ExitToMenu` точно по ТЗ.
+Блокер: —
