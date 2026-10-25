@@ -19,7 +19,9 @@ namespace TankSurvival.Core
             poolManager.Prewarm(projectilePrefab, projectileCount);
             poolManager.Prewarm(enemyProjectilePrefab, enemyProjectileCount);
             waveSpawner.Prewarm();
+#if !UNITY_EDITOR && !DEBUG
             roundController.StartRound();
+#endif
         }
     }
 }

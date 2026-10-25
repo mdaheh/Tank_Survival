@@ -1,7 +1,7 @@
 #if UNITY_EDITOR || DEBUG
 using System.Collections.Generic;
+using TankSurvival.Round;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace TankSurvival.Dev
@@ -14,6 +14,7 @@ namespace TankSurvival.Dev
 
         private Font _font;
         private RectTransform _panel;
+        private RoundController _roundController;
 
         private void Awake()
         {
@@ -21,19 +22,8 @@ namespace TankSurvival.Dev
 
             DevParamRegistry.Init();
             BuildPanel();
-            SetVisible(false);
-        }
-
-        private void Update()
-        {
-            Keyboard keyboard = Keyboard.current;
-            if (keyboard == null)
-                return;
-
-            if (keyboard.f1Key.wasPressedThisFrame || keyboard.backquoteKey.wasPressedThisFrame)
-            {
-                SetVisible(!_panel.gameObject.activeSelf);
-            }
+            _roundController = Object.FindFirstObjectByType<RoundController>();
+            SetVisible(true);
         }
 
         private void BuildPanel()
@@ -48,7 +38,7 @@ namespace TankSurvival.Dev
             Image background = _panel.gameObject.AddComponent<Image>();
             background.color = new Color(0.06f, 0.07f, 0.09f, 0.93f);
 
-            Text title = CreateText("Title", _panel, "DEV MENU  [F1 / ~]");
+            Text title = CreateText("Title", _panel, "DEV MENU");
             RectTransform titleRect = title.rectTransform;
             titleRect.anchorMin = new Vector2(0f, 1f);
             titleRect.anchorMax = new Vector2(1f, 1f);
@@ -56,18 +46,18 @@ namespace TankSurvival.Dev
             titleRect.sizeDelta = new Vector2(-60f, 28f);
             titleRect.anchoredPosition = new Vector2(-30f, -6f);
 
-            Button close = CreateButton("Close", _panel, "X");
-            RectTransform closeRect = (RectTransform)close.transform;
-            closeRect.anchorMin = new Vector2(1f, 1f);
-            closeRect.anchorMax = new Vector2(1f, 1f);
-            closeRect.pivot = new Vector2(1f, 1f);
-            closeRect.sizeDelta = new Vector2(28f, 28f);
-            closeRect.anchoredPosition = new Vector2(-8f, -6f);
-            close.onClick.AddListener(ClosePanel);
-
             RectTransform content = BuildScroll(_panel);
             CreateMarkersToggle(content);
             BuildRows(content);
+
+            Button start = CreateButton("StartRound", _panel, "Start Round");
+            RectTransform startRect = (RectTransform)start.transform;
+            startRect.anchorMin = new Vector2(1f, 0f);
+            startRect.anchorMax = new Vector2(1f, 0f);
+            startRect.pivot = new Vector2(1f, 0f);
+            startRect.anchoredPosition = new Vector2(-8f, 8f);
+            startRect.sizeDelta = new Vector2(150f, 32f);
+            start.onClick.AddListener(StartRound);
         }
 
         private RectTransform BuildScroll(RectTransform parent)
@@ -76,7 +66,7 @@ namespace TankSurvival.Dev
             scrollRect.anchorMin = Vector2.zero;
             scrollRect.anchorMax = Vector2.one;
             scrollRect.offsetMin = new Vector2(8f, 8f);
-            scrollRect.offsetMax = new Vector2(-8f, -40f);
+            scrollRect.offsetMax = new Vector2(-8f, -48f);
 
             RectTransform viewport = CreateRect("Viewport", scrollRect);
             Stretch(viewport, Vector2.zero, Vector2.zero);
@@ -347,8 +337,10 @@ namespace TankSurvival.Dev
             _panel.gameObject.SetActive(visible);
         }
 
-        private void ClosePanel()
+        private void StartRound()
         {
+            if (_roundController != null)
+                _roundController.StartRound();
             SetVisible(false);
         }
     }

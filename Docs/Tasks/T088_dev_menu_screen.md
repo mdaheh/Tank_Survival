@@ -1,5 +1,5 @@
 # T088: Dev Menu — экран перед раундом (показ при старте + Start Round)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/Core/GameBootstrap.cs
@@ -62,5 +62,5 @@
 - Клавиши F1 и `~` не открывают и не закрывают панель.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameBootstrap.cs: `roundController.StartRound();` обёрнут в `#if !UNITY_EDITOR && !DEBUG`; Assets/Scripts/Dev/DevMenuController.cs: добавлен `using TankSurvival.Round;` и поле `_roundController`, в `Awake()` после `BuildPanel()` добавлен `FindFirstObjectByType<RoundController>()` и `SetVisible(true)`, удалён `Update()` и `using UnityEngine.InputSystem;`, удалена кнопка «Close» и метод `ClosePanel()`, заголовок заменён на «DEV MENU», `scrollRect.offsetMax` = `(-8f, -48f)`, добавлена кнопка «Start Round» и метод `StartRound()`.
+Блокер: —

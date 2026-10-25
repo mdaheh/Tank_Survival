@@ -1,5 +1,5 @@
 # T087: RoundController — `isRoundActive` + `AbortRound()`
-- Status: [ ]
+- Status: [x]
 - Phase: 10.8
 - Files:
   - Assets/Scripts/Round/RoundController.cs
@@ -35,5 +35,5 @@
 - (Действие `AbortRound()` проверяется в T092 кнопкой «Выйти» в паузе.)
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Round/RoundController.cs: добавлено поле `public bool isRoundActive;`; в `StartRound()` после `kills = 0;` добавлено `isRoundActive = true;`; в `HandleWaveCleared()` в ветке победы и в `HandlePlayerDeath()` добавлено `isRoundActive = false;` перед `SetPhase(...)`; добавлен метод `AbortRound()` (`isRoundActive = false;` + `waveSpawner.ClearActiveEnemies();`).
+Блокер: —

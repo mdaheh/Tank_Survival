@@ -26,6 +26,7 @@ namespace TankSurvival.Round
         public RoundPhase phase;
         public int currentWave;
         public int kills;
+        public bool isRoundActive;
 
         public int TotalWaves => sessionState.SelectedDifficulty.waveCount;
 
@@ -47,6 +48,7 @@ namespace TankSurvival.Round
         {
             currentWave = 1;
             kills = 0;
+            isRoundActive = true;
             waveSpawner.difficulty = sessionState.SelectedDifficulty;
             SetPhase(RoundPhase.Playing);
             statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
@@ -61,6 +63,7 @@ namespace TankSurvival.Round
         {
             if (currentWave >= sessionState.SelectedDifficulty.waveCount)
             {
+                isRoundActive = false;
                 SetPhase(RoundPhase.Win);
             }
             else
@@ -73,6 +76,7 @@ namespace TankSurvival.Round
 
         private void HandlePlayerDeath()
         {
+            isRoundActive = false;
             SetPhase(RoundPhase.Lose);
             waveSpawner.ClearActiveEnemies();
         }
@@ -103,6 +107,12 @@ namespace TankSurvival.Round
         public void Restart()
         {
             StartRound();
+        }
+
+        public void AbortRound()
+        {
+            isRoundActive = false;
+            waveSpawner.ClearActiveEnemies();
         }
     }
 }
