@@ -1,5 +1,5 @@
 # T100: Debug Overlay — крестик (✕) для открепления
-- Status: [ ]
+- Status: [x]
 - Phase: 10.9
 - Depends: T096
 - Files:

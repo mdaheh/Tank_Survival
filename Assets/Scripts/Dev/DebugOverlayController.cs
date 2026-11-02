@@ -34,6 +34,7 @@ namespace TankSurvival.Dev
             scaler.matchWidthOrHeight = 0.5f;
 
             overlay.AddComponent<DebugOverlayController>();
+            overlay.AddComponent<GraphicRaycaster>();
         }
 
         private readonly StringBuilder _builder = new StringBuilder(512);
@@ -60,6 +61,7 @@ namespace TankSurvival.Dev
         private RectTransform _previewPanel;
         private Text _previewText;
         private EnemyController _observedPreviewEnemy;
+        private Button _closeButton;
         private WaitForSecondsRealtime _refreshInterval;
 
         private void Awake()
@@ -123,6 +125,7 @@ namespace TankSurvival.Dev
             _statusText.text = BuildStatusText();
 
             _previewPanel.gameObject.SetActive(preview != null);
+            _closeButton.gameObject.SetActive(_pinnedEnemy != null);
         }
 
         private static bool IsAlive(EnemyController enemy)
@@ -233,6 +236,7 @@ namespace TankSurvival.Dev
 
             Image background = panel.gameObject.AddComponent<Image>();
             background.color = new Color(0f, 0f, 0f, 0.55f);
+            background.raycastTarget = false;
 
             VerticalLayoutGroup layout = panel.gameObject.AddComponent<VerticalLayoutGroup>();
             layout.childControlWidth = true;
@@ -259,6 +263,7 @@ namespace TankSurvival.Dev
 
             Image previewBackground = previewPanel.gameObject.AddComponent<Image>();
             previewBackground.color = new Color(0.05f, 0.08f, 0.12f, 0.6f);
+            previewBackground.raycastTarget = false;
 
             VerticalLayoutGroup previewLayout = previewPanel.gameObject.AddComponent<VerticalLayoutGroup>();
             previewLayout.childControlWidth = true;
@@ -276,6 +281,9 @@ namespace TankSurvival.Dev
 
             _previewPanel = previewPanel;
             _previewPanel.gameObject.SetActive(false);
+
+            _closeButton = CreateCloseButton(panel);
+            _closeButton.gameObject.SetActive(false);
         }
 
         private string BuildPlayerText()
@@ -410,6 +418,45 @@ namespace TankSurvival.Dev
             text.text = string.Empty;
 
             return text;
+        }
+
+        private Button CreateCloseButton(RectTransform parent)
+        {
+            RectTransform rect = CreateRect("CloseButton", parent);
+
+            LayoutElement ignore = rect.gameObject.AddComponent<LayoutElement>();
+            ignore.ignoreLayout = true;
+
+            rect.anchorMin = new Vector2(1f, 1f);
+            rect.anchorMax = new Vector2(1f, 1f);
+            rect.pivot = new Vector2(1f, 1f);
+            rect.anchoredPosition = new Vector2(-4f, -4f);
+            rect.sizeDelta = new Vector2(20f, 20f);
+
+            Image background = rect.gameObject.AddComponent<Image>();
+            background.color = new Color(0.8f, 0.2f, 0.2f, 0.9f);
+            background.raycastTarget = true;
+
+            Text label = CreateText("X", rect);
+            label.text = "✕";
+            label.fontSize = 12;
+            label.alignment = TextAnchor.MiddleCenter;
+            label.raycastTarget = false;
+            label.rectTransform.anchorMin = Vector2.zero;
+            label.rectTransform.anchorMax = Vector2.one;
+            label.rectTransform.offsetMin = Vector2.zero;
+            label.rectTransform.offsetMax = Vector2.zero;
+
+            Button button = rect.gameObject.AddComponent<Button>();
+            button.targetGraphic = background;
+            button.onClick.AddListener(Unpin);
+
+            return button;
+        }
+
+        private void Unpin()
+        {
+            _pinnedEnemy = null;
         }
 
         private static RectTransform CreateRect(string name, Transform parent)
