@@ -76,6 +76,17 @@ namespace TankSurvival.Core
             _pools[prefab].Enqueue(instance);
         }
 
+        public void ReleaseAllActive()
+        {
+            foreach (GameObject instance in _instancePrefabs.Keys)
+            {
+                if (instance != null && instance.activeSelf)
+                {
+                    Release(instance);
+                }
+            }
+        }
+
         private Queue<GameObject> GetOrCreatePool(GameObject prefab)
         {
             if (!_pools.TryGetValue(prefab, out Queue<GameObject> pool))

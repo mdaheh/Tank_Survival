@@ -22,6 +22,7 @@ namespace TankSurvival.Round
         [SerializeField] private StatBlock statBlock;
         [SerializeField] private SessionState sessionState;
         [SerializeField] private ProgressionSystem progression;
+        [SerializeField] private PlayerSpawnPoint playerSpawnPoint;
 
         public RoundPhase phase;
         public int currentWave;
@@ -54,9 +55,11 @@ namespace TankSurvival.Round
             statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
             progression.Reset();
             playerHealth.Init();
+            ResetPlayerToSpawn();
             OnWaveChanged?.Invoke();
             OnKillsChanged?.Invoke();
             waveSpawner.BeginWave(currentWave);
+            waveSpawner.poolManager.ReleaseAllActive();
         }
 
         private void HandleWaveCleared()
@@ -115,11 +118,25 @@ namespace TankSurvival.Round
             currentWave = 0;
             kills = 0;
             waveSpawner.ClearActiveEnemies();
+            waveSpawner.poolManager.ReleaseAllActive();
+            ResetPlayerToSpawn();
             statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
             progression.Reset();
             playerHealth.Init();
             OnWaveChanged?.Invoke();
             OnKillsChanged?.Invoke();
+        }
+
+        private void ResetPlayerToSpawn()
+        {
+            if (playerSpawnPoint == null || waveSpawner.playerTransform == null)
+            {
+                return;
+            }
+
+            waveSpawner.playerTransform.SetPositionAndRotation(
+                playerSpawnPoint.transform.position,
+                playerSpawnPoint.transform.rotation);
         }
     }
 }
