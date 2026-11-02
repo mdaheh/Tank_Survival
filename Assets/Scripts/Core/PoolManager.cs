@@ -60,6 +60,12 @@ namespace TankSurvival.Core
                 return;
             }
 
+            if (!instance.activeSelf)
+            {
+                Debug.LogError("PoolManager: Release got an already-pooled (inactive) instance.", instance);
+                return;
+            }
+
             IPoolable[] poolables = _instancePoolables[instance];
             for (int i = 0; i < poolables.Length; i++)
             {
