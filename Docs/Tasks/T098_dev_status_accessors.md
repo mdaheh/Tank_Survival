@@ -1,5 +1,5 @@
 # T098: Dev-аксессоры статусов Slow / Ground / Knockback
-- Status: [ ]
+- Status: [x]
 - Phase: 10.9
 - Depends: —
 - Files:

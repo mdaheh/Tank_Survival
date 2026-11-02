@@ -39,6 +39,8 @@ namespace TankSurvival.Dev
         private readonly StringBuilder _builder = new StringBuilder(512);
         private readonly List<DevParam> _enemyParams = new List<DevParam>();
         private readonly List<DevParam> _enemyHealthParams = new List<DevParam>();
+        private readonly List<DevParam> _previewParams = new List<DevParam>();
+        private readonly List<DevParam> _previewHealthParams = new List<DevParam>();
 
         private Font _font;
         private StatBlock _statBlock;
@@ -55,6 +57,9 @@ namespace TankSurvival.Dev
         private UnityEngine.Camera _camera;
         private EnemyController _pinnedEnemy;
         private EnemyController _hoveredEnemy;
+        private RectTransform _previewPanel;
+        private Text _previewText;
+        private EnemyController _observedPreviewEnemy;
         private WaitForSecondsRealtime _refreshInterval;
 
         private void Awake()
@@ -106,11 +111,18 @@ namespace TankSurvival.Dev
 
         private void Refresh()
         {
-            ObserveEnemy(MainEnemy());
+            EnemyController main = MainEnemy();
+            EnemyController preview = PreviewEnemy();
+
+            ObserveEnemy(main);
+            ObservePreviewEnemy(preview);
 
             _playerText.text = BuildPlayerText();
-            _enemyText.text = BuildEnemyText();
+            _enemyText.text = BuildEnemyBlock("Враг", main, _enemyParams, _enemyHealthParams);
+            _previewText.text = BuildEnemyBlock("Враг (preview)", preview, _previewParams, _previewHealthParams);
             _statusText.text = BuildStatusText();
+
+            _previewPanel.gameObject.SetActive(preview != null);
         }
 
         private static bool IsAlive(EnemyController enemy)
@@ -174,6 +186,28 @@ namespace TankSurvival.Dev
             return (enemy.transform.position - _playerTransform.position).magnitude;
         }
 
+        private EnemyController PreviewEnemy()
+        {
+            if (_pinnedEnemy == null || _hoveredEnemy == null || _hoveredEnemy == _pinnedEnemy)
+                return null;
+
+            return _hoveredEnemy;
+        }
+
+        private void ObservePreviewEnemy(EnemyController enemy)
+        {
+            if (enemy == _observedPreviewEnemy)
+                return;
+
+            _observedPreviewEnemy = enemy;
+
+            _previewParams.Clear();
+            _previewParams.AddRange(DevParamRegistry.Reflect(enemy, "Enemy"));
+
+            _previewHealthParams.Clear();
+            _previewHealthParams.AddRange(DevParamRegistry.Reflect(enemy != null ? enemy.health : null, "Enemy.Health"));
+        }
+
         private void ObserveEnemy(EnemyController enemy)
         {
             if (enemy == _observedEnemy)
@@ -215,6 +249,33 @@ namespace TankSurvival.Dev
             _playerText = CreateText("Player", panel);
             _enemyText = CreateText("Enemy", panel);
             _statusText = CreateText("Statuses", panel);
+
+            RectTransform previewPanel = CreateRect("PreviewPanel", transform);
+            previewPanel.anchorMin = new Vector2(0f, 1f);
+            previewPanel.anchorMax = new Vector2(0f, 1f);
+            previewPanel.pivot = new Vector2(0f, 1f);
+            previewPanel.anchoredPosition = new Vector2(12f + OverlayWidth + 8f, -12f);
+            previewPanel.sizeDelta = new Vector2(OverlayWidth, 0f);
+
+            Image previewBackground = previewPanel.gameObject.AddComponent<Image>();
+            previewBackground.color = new Color(0.05f, 0.08f, 0.12f, 0.6f);
+
+            VerticalLayoutGroup previewLayout = previewPanel.gameObject.AddComponent<VerticalLayoutGroup>();
+            previewLayout.childControlWidth = true;
+            previewLayout.childControlHeight = true;
+            previewLayout.childForceExpandWidth = true;
+            previewLayout.childForceExpandHeight = false;
+            previewLayout.spacing = 4f;
+            previewLayout.padding = new RectOffset(8, 8, 8, 8);
+
+            ContentSizeFitter previewFitter = previewPanel.gameObject.AddComponent<ContentSizeFitter>();
+            previewFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+            previewFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            _previewText = CreateText("Preview", previewPanel);
+
+            _previewPanel = previewPanel;
+            _previewPanel.gameObject.SetActive(false);
         }
 
         private string BuildPlayerText()
@@ -231,21 +292,21 @@ namespace TankSurvival.Dev
             return _builder.ToString();
         }
 
-        private string BuildEnemyText()
+        private string BuildEnemyBlock(string header, EnemyController enemy, List<DevParam> enemyParams, List<DevParam> healthParams)
         {
             _builder.Clear();
-            _builder.Append("<b>Враг</b>\n");
+            _builder.Append("<b>").Append(header).Append("</b>\n");
 
-            if (_observedEnemy == null)
+            if (enemy == null)
             {
                 _builder.Append("нет врага под курсором\n");
                 return _builder.ToString();
             }
 
-            AppendParams(_enemyParams);
-            AppendParams(_enemyHealthParams);
+            AppendParams(enemyParams);
+            AppendParams(healthParams);
             _builder.Append("Дистанция: ");
-            _builder.Append(DistanceToPlayer(_observedEnemy).ToString("0.00"));
+            _builder.Append(DistanceToPlayer(enemy).ToString("0.00"));
             _builder.Append('\n');
 
             return _builder.ToString();

@@ -119,6 +119,20 @@ namespace TankSurvival.Combat
 
             return status != null && status.frozen;
         }
+
+        public float GetSlowAmount(EnemyController enemy)
+        {
+            ControlStatus status = enemy != null ? Find(enemy) : null;
+
+            return status != null ? status.slowAmount : 0f;
+        }
+
+        public float GetSlowRemaining(EnemyController enemy)
+        {
+            ControlStatus status = enemy != null ? Find(enemy) : null;
+
+            return status != null ? Mathf.Max(0f, status.duration - status.elapsed) : 0f;
+        }
 #endif
 
         private void Update()

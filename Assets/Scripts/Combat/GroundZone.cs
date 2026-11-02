@@ -3,6 +3,7 @@ using TankSurvival.Data;
 using TankSurvival.Enemy;
 using UnityEngine;
 #if UNITY_EDITOR || DEBUG
+using System.Collections.Generic;
 using TankSurvival.Dev;
 #endif
 
@@ -10,6 +11,31 @@ namespace TankSurvival.Combat
 {
     public class GroundZone : MonoBehaviour, IPoolable
     {
+#if UNITY_EDITOR || DEBUG
+        public static readonly List<GroundZone> Active = new List<GroundZone>();
+
+        private void OnEnable()
+        {
+            Active.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            Active.Remove(this);
+        }
+
+        public bool Contains(EnemyController enemy)
+        {
+            if (enemy == null)
+                return false;
+
+            float dx = enemy.transform.position.x - transform.position.x;
+            float dz = enemy.transform.position.z - transform.position.z;
+
+            return dx * dx + dz * dz <= _radius * _radius;
+        }
+#endif
+
         private PoolManager _pool;
         private OnHitDispatcher _onHit;
         private float _radius;

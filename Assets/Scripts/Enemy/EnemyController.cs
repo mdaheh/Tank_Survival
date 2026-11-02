@@ -141,5 +141,9 @@ namespace TankSurvival.Enemy
                 _attackCooldown = AttackInterval;
             }
         }
+
+#if UNITY_EDITOR || DEBUG
+        public float KnockbackRemaining => _knockbackTimer;
+#endif
     }
 }

@@ -1,5 +1,5 @@
 # T097: Debug Overlay — preview второго врага (панель справа)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.9
 - Depends: T096
 - Files:
