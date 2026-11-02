@@ -1,5 +1,5 @@
 # T102: GameServices — сброс статического реестра между сессиями
-- Status: [ ]
+- Status: [x]
 - Phase: 10.10
 - Files:
   - Assets/Scripts/Core/GameServices.cs
@@ -66,5 +66,5 @@ public static void Clear()
 - При использовании «Enter Play Mode Options → Reload Domain» выключенным — повторные входы не дают stale-состояний.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Core/GameServices.cs: добавлен editor-only `using UnityEditor` под `#if UNITY_EDITOR`, публичный `Clear()` (очистка `_services`) и `#if UNITY_EDITOR`-блок с `[InitializeOnLoadMethod] InstallPlayModeReset()` + `OnPlayModeStateChanged`, вызывающий `Clear()` на `ExitingPlayMode`.
+Блокер: —

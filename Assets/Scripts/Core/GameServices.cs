@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace TankSurvival.Core
 {
@@ -28,5 +31,34 @@ namespace TankSurvival.Core
         {
             return TryGet(out T instance) ? instance : default(T);
         }
+
+        public static void Clear()
+        {
+            _services.Clear();
+        }
+
+#if UNITY_EDITOR
+        private static bool _playModeHookInstalled;
+
+        [InitializeOnLoadMethod]
+        private static void InstallPlayModeReset()
+        {
+            if (_playModeHookInstalled)
+            {
+                return;
+            }
+
+            _playModeHookInstalled = true;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                Clear();
+            }
+        }
+#endif
     }
 }
