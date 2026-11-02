@@ -7,6 +7,7 @@ using TankSurvival.Core;
 using TankSurvival.Enemy;
 using TankSurvival.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace TankSurvival.Dev
@@ -50,7 +51,10 @@ namespace TankSurvival.Dev
         private Text _enemyText;
         private Text _statusText;
         private EnemyController _observedEnemy;
-        private float _nearestDistance;
+        [SerializeField] private float hoverRadius = 2f;
+        private UnityEngine.Camera _camera;
+        private EnemyController _pinnedEnemy;
+        private EnemyController _hoveredEnemy;
         private WaitForSecondsRealtime _refreshInterval;
 
         private void Awake()
@@ -63,6 +67,8 @@ namespace TankSurvival.Dev
                 ? _statBlock.transform
                 : (_playerHealth != null ? _playerHealth.transform : null);
 
+            _camera = UnityEngine.Camera.main != null ? UnityEngine.Camera.main : Object.FindAnyObjectByType<UnityEngine.Camera>();
+
             _statusEffects = GameServices.Get<StatusEffectSystem>();
             _controlEffects = GameServices.Get<ControlEffectSystem>();
 
@@ -71,6 +77,21 @@ namespace TankSurvival.Dev
 
             BuildOverlay();
             StartCoroutine(RefreshLoop());
+        }
+
+        private void Update()
+        {
+            if (_pinnedEnemy != null && !IsAlive(_pinnedEnemy))
+                _pinnedEnemy = null;
+
+            _hoveredEnemy = FindEnemyUnderCursor();
+
+            Mouse mouse = Mouse.current;
+            if (mouse == null)
+                return;
+
+            if (mouse.leftButton.wasPressedThisFrame)
+                _pinnedEnemy = _hoveredEnemy;
         }
 
         private IEnumerator RefreshLoop()
@@ -85,43 +106,72 @@ namespace TankSurvival.Dev
 
         private void Refresh()
         {
-            ObserveEnemy(FindNearestEnemy());
+            ObserveEnemy(MainEnemy());
 
             _playerText.text = BuildPlayerText();
             _enemyText.text = BuildEnemyText();
             _statusText.text = BuildStatusText();
         }
 
-        private EnemyController FindNearestEnemy()
+        private static bool IsAlive(EnemyController enemy)
         {
-            _nearestDistance = 0f;
+            return enemy != null
+                && enemy.gameObject.activeSelf
+                && enemy.health != null
+                && enemy.health.currentHealth > 0f;
+        }
 
-            if (_playerTransform == null)
+        private EnemyController FindEnemyUnderCursor()
+        {
+            Mouse mouse = Mouse.current;
+            if (mouse == null || _camera == null)
                 return null;
 
-            Vector3 playerPosition = _playerTransform.position;
-            EnemyController nearest = null;
-            float nearestSqrDistance = float.MaxValue;
+            Ray ray = _camera.ScreenPointToRay(mouse.position.ReadValue());
+
+            if (Mathf.Abs(ray.direction.y) < 0.0001f)
+                return null;
+
+            float t = -ray.origin.y / ray.direction.y;
+            if (t < 0f)
+                return null;
+
+            Vector3 groundPoint = ray.origin + ray.direction * t;
+
+            EnemyController best = null;
+            float bestSqrDistance = hoverRadius * hoverRadius;
 
             List<EnemyController> active = EnemyController.Active;
             for (int i = 0; i < active.Count; i++)
             {
                 EnemyController enemy = active[i];
-                if (enemy == null || !enemy.gameObject.activeSelf)
+                if (!IsAlive(enemy))
                     continue;
 
-                float sqrDistance = (enemy.transform.position - playerPosition).sqrMagnitude;
-                if (sqrDistance < nearestSqrDistance)
+                float dx = enemy.transform.position.x - groundPoint.x;
+                float dz = enemy.transform.position.z - groundPoint.z;
+                float sqrDistance = dx * dx + dz * dz;
+                if (sqrDistance < bestSqrDistance)
                 {
-                    nearestSqrDistance = sqrDistance;
-                    nearest = enemy;
+                    bestSqrDistance = sqrDistance;
+                    best = enemy;
                 }
             }
 
-            if (nearest != null)
-                _nearestDistance = Mathf.Sqrt(nearestSqrDistance);
+            return best;
+        }
 
-            return nearest;
+        private EnemyController MainEnemy()
+        {
+            return _pinnedEnemy != null ? _pinnedEnemy : _hoveredEnemy;
+        }
+
+        private float DistanceToPlayer(EnemyController enemy)
+        {
+            if (enemy == null || _playerTransform == null)
+                return 0f;
+
+            return (enemy.transform.position - _playerTransform.position).magnitude;
         }
 
         private void ObserveEnemy(EnemyController enemy)
@@ -188,14 +238,14 @@ namespace TankSurvival.Dev
 
             if (_observedEnemy == null)
             {
-                _builder.Append("нет активных врагов\n");
+                _builder.Append("нет врага под курсором\n");
                 return _builder.ToString();
             }
 
             AppendParams(_enemyParams);
             AppendParams(_enemyHealthParams);
             _builder.Append("Дистанция: ");
-            _builder.Append(_nearestDistance.ToString("0.00"));
+            _builder.Append(DistanceToPlayer(_observedEnemy).ToString("0.00"));
             _builder.Append('\n');
 
             return _builder.ToString();

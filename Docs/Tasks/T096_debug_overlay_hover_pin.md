@@ -1,5 +1,5 @@
 # T096: Debug Overlay — выбор врага под курсором (hover + pin)
-- Status: [ ]
+- Status: [x]
 - Phase: 10.9
 - Depends: —
 - Files:
