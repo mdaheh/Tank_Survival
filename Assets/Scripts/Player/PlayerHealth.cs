@@ -28,6 +28,11 @@ namespace TankSurvival.Player
 
         public void TakeDamage(float amount)
         {
+            if (currentHealth <= 0f)
+            {
+                return;
+            }
+
             currentHealth -= amount;
             OnHealthChanged?.Invoke(currentHealth, statBlock.maxHealth);
             if (currentHealth <= 0f)

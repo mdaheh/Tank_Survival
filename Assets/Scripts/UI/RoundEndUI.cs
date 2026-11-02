@@ -44,6 +44,7 @@ namespace TankSurvival.UI
         {
             Time.timeScale = 1f;
             panel.SetActive(false);
+            roundController.ResetToMenu();
             OnContinue?.Invoke();
         }
     }

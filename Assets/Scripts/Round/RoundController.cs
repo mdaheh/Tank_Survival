@@ -109,10 +109,17 @@ namespace TankSurvival.Round
             StartRound();
         }
 
-        public void AbortRound()
+        public void ResetToMenu()
         {
             isRoundActive = false;
+            currentWave = 0;
+            kills = 0;
             waveSpawner.ClearActiveEnemies();
+            statBlock.Init(sessionState.SelectedChassis, sessionState.SelectedTurret);
+            progression.Reset();
+            playerHealth.Init();
+            OnWaveChanged?.Invoke();
+            OnKillsChanged?.Invoke();
         }
     }
 }

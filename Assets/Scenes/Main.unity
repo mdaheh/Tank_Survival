@@ -3128,6 +3128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   statBlock: {fileID: 1245404300}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  roundController: {fileID: 1360148710}
 --- !u!114 &1245404300
 MonoBehaviour:
   m_ObjectHideFlags: 0
