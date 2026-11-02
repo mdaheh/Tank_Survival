@@ -309,7 +309,57 @@ namespace TankSurvival.Dev
             _builder.Append(DistanceToPlayer(enemy).ToString("0.00"));
             _builder.Append('\n');
 
+            _builder.Append("Скорость: ");
+            _builder.Append(ActualSpeed(enemy).ToString("0.##"));
+            _builder.Append('\n');
+
+            _builder.Append("Burn остаток: ");
+            _builder.Append(_statusEffects != null ? _statusEffects.GetBurnRemaining(enemy).ToString("0.##") : "0");
+            _builder.Append('\n');
+            _builder.Append("Freeze стаки: ");
+            _builder.Append(_controlEffects != null ? _controlEffects.GetFreezeStacks(enemy) : 0);
+            _builder.Append('\n');
+            _builder.Append("Frozen: ");
+            _builder.Append(_controlEffects != null && _controlEffects.IsFrozen(enemy) ? "да" : "нет");
+            _builder.Append('\n');
+            _builder.Append("Slow: ");
+            _builder.Append(_controlEffects != null && _controlEffects.GetSlowRemaining(enemy) > 0f ? "да" : "нет");
+            _builder.Append(" (");
+            _builder.Append(_controlEffects != null ? _controlEffects.GetSlowAmount(enemy).ToString("0.##") : "0");
+            _builder.Append(")\n");
+            _builder.Append("Ground: ");
+            _builder.Append(IsEnemyInGround(enemy) ? "да" : "нет");
+            _builder.Append('\n');
+            _builder.Append("Knockback: ");
+            _builder.Append(enemy != null && enemy.KnockbackRemaining > 0f ? "да" : "нет");
+            _builder.Append(" (");
+            _builder.Append(enemy != null ? enemy.KnockbackRemaining.ToString("0.##") : "0");
+            _builder.Append(")\n");
+
             return _builder.ToString();
+        }
+
+        private static float ActualSpeed(EnemyController enemy)
+        {
+            if (enemy == null || enemy.data == null)
+                return 0f;
+
+            return enemy.data.speed * enemy.speedMultiplier * enemy.controlSpeedMultiplier;
+        }
+
+        private static bool IsEnemyInGround(EnemyController enemy)
+        {
+            if (enemy == null)
+                return false;
+
+            for (int i = 0; i < GroundZone.Active.Count; i++)
+            {
+                GroundZone zone = GroundZone.Active[i];
+                if (zone != null && zone.Contains(enemy))
+                    return true;
+            }
+
+            return false;
         }
 
         private string BuildStatusText()
@@ -321,17 +371,6 @@ namespace TankSurvival.Dev
             _builder.Append('\n');
             _builder.Append("Burn активно: ");
             _builder.Append(_statusEffects != null ? _statusEffects.ActiveBurnCount : 0);
-            _builder.Append('\n');
-            _builder.Append("Burn остаток: ");
-            _builder.Append(_statusEffects != null && _observedEnemy != null
-                ? _statusEffects.GetBurnRemaining(_observedEnemy).ToString("0.00")
-                : "0.00");
-            _builder.Append('\n');
-            _builder.Append("Freeze стаки: ");
-            _builder.Append(_controlEffects != null && _observedEnemy != null ? _controlEffects.GetFreezeStacks(_observedEnemy) : 0);
-            _builder.Append('\n');
-            _builder.Append("Frozen: ");
-            _builder.Append(_controlEffects != null && _observedEnemy != null && _controlEffects.IsFrozen(_observedEnemy) ? "да" : "нет");
             _builder.Append('\n');
 
             return _builder.ToString();

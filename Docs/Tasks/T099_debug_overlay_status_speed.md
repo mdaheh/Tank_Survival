@@ -1,5 +1,5 @@
 # T099: Debug Overlay — фактическая скорость + статусы в блоке врага
-- Status: [ ]
+- Status: [x]
 - Phase: 10.9
 - Depends: T097, T098
 - Files:
