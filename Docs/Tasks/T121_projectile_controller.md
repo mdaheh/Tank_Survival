@@ -1,5 +1,5 @@
 # T121: ProjectileController — снаряд (Terminal Hit, swept)
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T119
 - Files:
@@ -60,5 +60,5 @@ Destroy: `foreach (m in ctx.buildSnapshot.destroyModules) m.OnDestroy(ctx); ctx.
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: ProjectileController.cs: создан stateless-контроллер с Tick(ctx, dt) — Spawn→Flight инициализация, flight/hit/postHit/destroy-модули, движение по direction*speed, Expired и Hit Destroy, swept-поиск по EnemyController.Active с пропуском мёртвых и уже поражённых, Dev-маркер ShowBeam
+Блокер: —
