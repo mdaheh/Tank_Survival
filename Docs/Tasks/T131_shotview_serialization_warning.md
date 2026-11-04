@@ -1,5 +1,5 @@
 # T131: ShotView — убрать предупреждение сериализации (UAC1001)
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Files:
   - Assets/Scripts/Combat/Shooting/ShotView.cs
@@ -22,5 +22,5 @@
 - Проект компилируется без ошибок и предупреждений.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: ShotView.cs: поле ctx изменено с public на private (Unity его не сериализует, UAC1001 уходит); Bind/Update/OnGetFromPool/OnReleaseFromPool, usings и базовые типы не тронуты
+Блокер: —

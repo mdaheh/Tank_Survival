@@ -5,7 +5,7 @@ namespace TankSurvival.Combat.Shooting
 {
     public class ShotView : MonoBehaviour, IPoolable
     {
-        public ShotContext ctx;
+        private ShotContext ctx;
 
         public void Bind(ShotContext context)
         {
