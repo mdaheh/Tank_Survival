@@ -1,6 +1,6 @@
 # Phase 10: On-hit контроль — Freeze, Slow, Knockback, Ground
 - Status: accepted
-- Цель: добавить 4 on-hit-модуля контроля поверх on-hit-слоя (IHitHandler/OnHitDispatcher): Slow, Freeze, Knockback, Ground. Вводится единая точка попадания `TryApplyHit` (guard живости), depth-counter (`max_depth`) против рекурсии Ground и конфликт `burn ↔ freeze`.
+- Цель: добавить 4 on-hit-модуля контроля поверх on-hit-слоя (IHitHandler/OnHitDispatcher): Slow, Freeze, Knockback, Ground. Вводится единая точка попадания `TryApplyHit` (guard живости), depth-counter (`max_depth`) против рекурсии Ground.
 
 ## Задачи (порядок = приоритет)
 - T066: `OnHitModuleData` — kind Slow/Freeze/Knockback/Ground + поля slowAmount/freezeThreshold/force/damageScaling/groundVfx/maxDepth.
@@ -12,7 +12,6 @@
 - T071: `KnockbackOnHitHandler`.
 - T072: `GroundOnHitHandler` + `GroundZone` + роутинг Ground (depth-guard).
 - T073: `OnHitDispatcher` — роутинг Slow/Freeze/Knockback.
-- T074: конфликт burn ↔ freeze (RemoveBurn/RemoveFreeze).
 
 ## Setup for smoke test (human)
 
@@ -38,7 +37,7 @@
    `FreezeOnHitHandler.controlEffects` → `ControlEffectSystem`; `GroundOnHitHandler.pool`
    → `PoolManager`; `GroundOnHitHandler.onHit` → `OnHitDispatcher` (на `Turret`).
 4. На тестовом `Turret` (Hammer): `TurretData.onHitModules` — по одному модулю за прогон
-   (Slow / Freeze / Knockback / Ground, затем комбинации Ground+Slow, Burn+Freeze).
+   (Slow / Freeze / Knockback / Ground, затем комбинации Ground+Slow).
    `OnHitDispatcher` на `Turret`: привязать `slow`/`freeze`/`knockback`/`ground` к объектам
    из шага 3.
 5. `SessionState.selectedTurret` → Hammer (как в Phase 5/9).
@@ -52,6 +51,5 @@
 - [x] Ground + Slow: враги в зоне замедляются каждый тик (ре-триггер on-hit работает).
 - [x] Ground рекурсия ограничена `maxDepth`: при нескольких врагах в зоне нет вечного каскада/зависания, консоль чистая.
 - [x] Труп не источник on-hit (T067a): мёртвый враг не триггерит on-hit — зона в позиции трупа не создаётся; взрыв/зона по убивающему выстрелу срабатывает.
-- [x] Конфликт burn/freeze: Burn+Freeze на одной турели — активен один (freeze снимает burn, burn снимает freeze).
 - [x] Регресс: Explosion/Burn и все delivery (Projectile / Hitscan instant / Hitscan continuous / Cone) не сломаны.
 - [x] Консоль чистая.

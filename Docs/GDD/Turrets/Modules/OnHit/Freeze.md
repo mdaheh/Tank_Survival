@@ -6,9 +6,8 @@ added_tags:
   - control
   - dot
 required_tags: []
-conflicts_with:
-  - burn
-conflict_group: element
+conflicts_with: []
+conflict_group: none
 fields:
   duration: medium
   slow_amount: high

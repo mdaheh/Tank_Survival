@@ -168,8 +168,7 @@ type: project
   - laser (Laser, continuous hitscan) → Beam, Railgun.
 - **Delivery-модули (3):** Projectile, Hitscan (instant + continuous), Cone.
 - **On-hit-модули (10):** Explosion, Burn, Freeze, Ground, Knockback, Slow,
-  Pierce, Homing, Beam Split, Laser Focus (+ conflict_groups, priority,
-  max_depth).
+  Pierce, Homing, Beam Split, Laser Focus (+ priority, max_depth).
 - **Враги (5):** Runner, Brute, Tank, Shooter (ranged), Boss.
 - **Апгрейды (51):** турелей 37 (16 tag + 12 unique + 9 module), шасси 14
   (3 base + 8 ability + 3 unique).
@@ -214,7 +213,7 @@ type: project
 1. Полный проход раунда на всех 8 сложностях.
 2. Все 4 шасси + 4 способности работают.
 3. Все 3 ветки + 8 специализаций стреляют по GDD.
-4. Все 10 on-hit-модулей работают, конфликты/priority/max_depth соблюдены.
+4. Все 10 on-hit-модулей работают, priority/max_depth соблюдены.
 5. Все 5 врагов спавнятся и ведут себя по GDD (Shooter стреляет, Boss на
    10-й волне).
 6. Level-up предлагает корректный пул по билду, стеки и cap работают.

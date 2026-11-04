@@ -47,7 +47,7 @@
 - `Specializations/` — 8 специализаций: `Machine gun`, `Shotgun`, `Bombard`, `Piercing cannon`, `Beam`, `Railgun`, `Freezer`, `Hellfire`
 - `Modules/Delivery/` — 3 модуля: `Projectile.md`, `Hitscan.md`, `Cone.md`
 - `Modules/OnHit/` — 10 модулей: `Explosion`, `Burn`, `Freeze`, `Ground`, `Knockback`, `Slow`, `Pierce`, `Homing`, `Beam Split`, `Laser Focus`
-Читать когда: оружие, стрельба, delivery-механика, on_hit-эффекты, специализации турелей, ДПС, синергии и конфликты модулей.
+Читать когда: оружие, стрельба, delivery-механика, on_hit-эффекты, специализации турелей, ДПС, синергии модулей.
 
 ### Chassis
 Папка: `Docs/GDD/Chassis/`

@@ -1,5 +1,5 @@
 # Phase 10.10: Аудит P0 — критичные guard'ы и сброс статики
-- Status: in-progress
+- Status: accepted
 - Цель: закрыть P0-находки аудита Phase 10.8: guard от двойного возврата в `PoolManager.Release`, явная точка сброса статического реестра `GameServices` между Play Mode-сессиями, guard после смерти в `PlayerHealth.TakeDamage`.
 
 ## Задачи (порядок = приоритет)

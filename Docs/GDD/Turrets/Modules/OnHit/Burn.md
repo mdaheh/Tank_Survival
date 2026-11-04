@@ -5,9 +5,8 @@ module_class: on_hit
 added_tags:
   - dot
 required_tags: []
-conflicts_with:
-  - freeze
-conflict_group: element
+conflicts_with: []
+conflict_group: none
 fields:
   duration: medium
   tick_damage: low

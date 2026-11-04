@@ -43,8 +43,8 @@
 - **Phase 10.7 — Игрок: камера + аркадное движение.** [accepted]
 - **Phase 10.8 — Dev Menu: переосмысление + каркас паузы.** [accepted]
 - **Phase 10.9 — Debug Overlay: pin + hover preview.** [accepted]
-- **Phase 10.10 — Аудит P0: guard'ы (Pool/PlayerHealth) + сброс статики GameServices.** [in-progress]
-- **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [planned]
+- **Phase 10.10 — Аудит P0: guard'ы (Pool/PlayerHealth) + сброс статики GameServices.** [accepted]
+- **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [in-progress]
 - **Phase 12 — Специализации турелей (8) и три ветки.** [planned]
 - **Phase 13 — Шасси v1.0: Fancy, Veteran + каркас способностей + Boost.** [planned]
 - **Phase 14 — Способности: Nova, Phase, Shield.** [planned]
@@ -72,8 +72,7 @@
 - [ ] Полный проход раунда на всех 8 сложностях (победа по правилам GDD).
 - [ ] Все 4 шасси + 4 способности работают (Boost/Nova/Phase/Shield).
 - [ ] Все 3 ветки + 8 специализаций стреляют по GDD.
-- [ ] Все 10 on-hit-модулей работают; конфликты (burn/freeze), priority,
-  max_depth соблюдены.
+- [ ] Все 10 on-hit-модулей работают; priority, max_depth соблюдены.
 - [ ] Все 5 врагов спавнятся и ведут себя по GDD (Shooter стреляет, Boss на
   10-й волне).
 - [ ] Level-up предлагает корректный пул по билду; стеки additive →

@@ -232,3 +232,40 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
   - `Assets/Settings/` — только URP-ассеты (RP-ассеты, рендереры, volume profile,
     global settings)
   - `Assets/Input/InputSystem_Actions.inputactions` — Input System
+
+---
+
+## 7. Стрельба: lifecycle-модель и маппинг модулей (целевая)
+
+Целевая архитектура выстрела — lifecycle-модель из `Docs/Shooting.md`
+(`ShotContext` + типоспецифичные контроллеры + модули-контракты). Текущий код
+реализует более простую модель (`DeliveryHandler` + `IHitHandler` +
+`OnHitDispatcher`) — разделы §1/§2/§5 описывают это текущее состояние. Переход
+на lifecycle-модель — отдельная фаза рефакторинга; после неё `DeliveryHandler` /
+`IHitHandler` заменяются контроллерами и контрактами.
+
+### Маппинг: тип доставки → контроллер
+
+| Тип доставки | Контроллер | Flight | Hit | Дедупликация | keepAlive |
+|---|---|---|---|---|---|
+| Projectile | `ProjectileController` | ✅ | Terminal | `hitTargets` | ✅ (Pierce) |
+| Hitscan (instant) | `HitscanController` | ❌ | Terminal (1 раз) | `hitTargets` | ✅ (обычно false) |
+| Hitscan (continuous) | `HitscanController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
+| Cone | `ConeController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
+
+`instant`/`continuous` — флаг `duration` одного `HitscanController`, а не два класса.
+
+### Маппинг: on-hit модуль → контракты
+
+| Модуль | Контракты | Примечание |
+|---|---|---|
+| Explosion | `IOnHit` + `spawnQueue` (AoE-ребёнок) | ребёнок избирательный: наследует билд, кроме Explosion |
+| Burn | `IOnHit` | статус на цель |
+| Freeze | `IOnHit` | статус на цель |
+| Slow | `IOnHit` | статус на цель |
+| Knockback | `IOnHit` | читает `ctx.damage`; сила = `force × damage_scaling` |
+| Ground | `IOnHit` + `spawnQueue` (зона-ребёнок Periodic) | зона = логический выстрел (AoE Periodic) |
+| Pierce | `IOnPostHit` | `ctx.keepAlive = true`; счётчик/falloff в `ctx` |
+| Homing | `IOnFlight` | меняет `ctx.direction` каждый тик |
+| Beam Split | `IOnHit` + `spawnQueue` (дети с полным билдом) | на каждую поражённую цель |
+| Laser Focus | `IOnHit` | стаки в `ctx`, сброс при смене `ctx.currentTarget` |
