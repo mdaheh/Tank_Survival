@@ -1,5 +1,5 @@
 # T119: DamageModule — единая точка нанесения урона
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T114, T116
 - Files:
@@ -32,5 +32,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DamageModule.cs: создан stateless-модуль DamageModule : IOnHit, OnHit с guard на target/target.damageable и вызовом target.damageable.TakeDamage(ctx.buildSnapshot.damage)
+Блокер: —
