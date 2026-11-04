@@ -1,5 +1,5 @@
 # T124: ShotView — визуальная оболочка выстрела
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Files:
   - Assets/Scripts/Combat/Shooting/ShotView.cs
@@ -29,5 +29,5 @@
 - В Play Mode (после T130) снаряд виден, движется к цели; при уничтожении GameObject деактивируется (вернулся в пул).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotView.cs: создан ShotView : MonoBehaviour, IPoolable с полем ctx, Bind, Update (позиция + LookRotation по ctx.direction с обнулением y), OnGetFromPool/OnReleaseFromPool (ctx = null)
+Блокер: —

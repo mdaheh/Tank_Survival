@@ -1,5 +1,5 @@
 # T125: VfxSpawner — реализация IVfxSpawner (+ направление)
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Files:
   - Assets/Scripts/Combat/Shooting/IVfxSpawner.cs
@@ -30,5 +30,5 @@
 - В Play Mode (после T130) `ConeVFX` проигрывается при выстреле Flamethrower и самостоятельно гаснет.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/IVfxSpawner.cs: добавлена перегрузка Spawn(GameObject, Vector3, Vector3), старая сигнатура сохранена; Assets/Scripts/Combat/Shooting/VfxSpawner.cs: создан VfxSpawner : MonoBehaviour, IVfxSpawner с регистрацией в GameServices.Awake, ленивым кэшем PoolManager, делегированием Spawn(prefab, position) → Spawn(..., Vector3.zero), спавном через pool.Get, установкой позиции/поворота по direction и запуском PooledVFX.Play(pool)
+Блокер: —
