@@ -1,5 +1,5 @@
 # T122: HitscanController — мгновенный/непрерывный луч
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T119
 - Files:
@@ -44,5 +44,5 @@ Destroy — как в T121 (вызов `destroyModules`, `state = Dead`).
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: HitscanController.cs: создан stateless-контроллер с Tick(ctx, dt) — луч origin→origin+direction*range, Terminal-проход (до maxTargets целей по вдоль-лучу, дедуп по hitTargets, hitModules → keepAlive=false → postHitModules → Destroy по Hit) и Periodic-режим (по nextTickAt с шагом tickRate, дедуп внутри тика, Destroy по lifetime), Dev-маркер ShowBeam
+Блокер: —
