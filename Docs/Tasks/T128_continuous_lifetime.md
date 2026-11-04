@@ -1,5 +1,5 @@
 # T128: Непрерывное самонаведение (Cone) + контракт lifetime
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Depends: T126
 - Files:
@@ -38,5 +38,5 @@
 - (совместно с T130) Flamethrower непрерывно бьёт всех в конусе, пока есть цель; без цели — гаснет.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotContext.cs: Reset ставит lifetime = -1f, задокументированы lifetime и currentTarget; Assets/Scripts/Combat/Shooting/ProjectileController.cs: в Spawn-ветке lifetime = range/speed (или -1 при speed <= 0), проверка срока remainingRange <= 0f || (lifetime > 0f && age >= lifetime), заполняется target.enemy; Assets/Scripts/Combat/Shooting/ConeController.cs: непрерывное самонаведение (поиск ближайшей цели в радиусе, currentTarget как якорь, плоский direction, урон по nextTickAt/tickRate по сектору, нет цели → External + Destroy, проверка lifetime, target.enemy)
+Блокер: —

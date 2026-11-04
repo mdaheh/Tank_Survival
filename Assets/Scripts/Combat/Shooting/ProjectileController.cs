@@ -18,6 +18,9 @@ namespace TankSurvival.Combat.Shooting
             {
                 ctx.state = ShotState.Flight;
                 ctx.remainingRange = ctx.config.range;
+                ctx.lifetime = ctx.buildSnapshot.speed > 0f
+                    ? ctx.config.range / ctx.buildSnapshot.speed
+                    : -1f;
             }
 
             if (ctx.state != ShotState.Flight)
@@ -40,7 +43,7 @@ namespace TankSurvival.Combat.Shooting
             DevVisualizer.ShowBeam(ctx.prevPosition, ctx.position, Time.deltaTime, new Color(1f, 0.5f, 0f, 0.5f));
 #endif
 
-            if (ctx.remainingRange <= 0f || ctx.age >= ctx.lifetime)
+            if (ctx.remainingRange <= 0f || (ctx.lifetime > 0f && ctx.age >= ctx.lifetime))
             {
                 ctx.destroyReason = DestroyReason.Expired;
                 DestroyShot(ctx);
@@ -74,6 +77,7 @@ namespace TankSurvival.Combat.Shooting
                 target.position = enemy.transform.position;
                 target.damageable = enemy.Damageable;
                 target.faction = 0;
+                target.enemy = enemy;
                 ctx.hitTargets.Add(target);
 
                 ctx.hitPoint = hitPoint;

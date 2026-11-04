@@ -7,6 +7,7 @@ namespace TankSurvival.Combat.Shooting
     {
         public ShotState state;
         public float age;
+        // -1 = без таймера; > 0 = секунды жизни
         public float lifetime;
         public bool keepAlive;
         public DestroyReason destroyReason;
@@ -24,13 +25,14 @@ namespace TankSurvival.Combat.Shooting
         public float remainingRange;
         public float tickRate;
         public float nextTickAt;
+        // Для точечной доставки — жертва; для площадной — якорь направления (урон всем из FindTargets)
         public Target currentTarget;
 
         public void Reset()
         {
             state = ShotState.Dead;
             age = 0f;
-            lifetime = 0f;
+            lifetime = -1f;
             keepAlive = false;
             destroyReason = default;
             depth = 0;

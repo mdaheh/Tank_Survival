@@ -8,6 +8,8 @@ namespace TankSurvival.Combat.Shooting
 {
     public class ConeController
     {
+        private const float MinDirectionSqr = 1e-6f;
+
         public void Tick(ShotContext ctx, float dt)
         {
             ctx.age += dt;
@@ -22,6 +24,23 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
+            EnemyController nearest = FindNearest(ctx);
+            if (nearest == null)
+            {
+                ctx.destroyReason = DestroyReason.External;
+                DestroyShot(ctx);
+                return;
+            }
+
+            SetAnchor(ctx, nearest);
+
+            Vector3 toTarget = ctx.currentTarget.position - ctx.position;
+            toTarget.y = 0f;
+            if (toTarget.sqrMagnitude > MinDirectionSqr)
+            {
+                ctx.direction = toTarget.normalized;
+            }
+
             Vector3 origin = ctx.position;
             Vector3 flatDir = ctx.direction;
             flatDir.y = 0f;
@@ -31,20 +50,63 @@ namespace TankSurvival.Combat.Shooting
                 new Color(1f, 0.55f, 0.1f, 0.25f));
 #endif
 
-            if (ctx.age >= ctx.lifetime)
+            if (ctx.age >= ctx.nextTickAt)
+            {
+                ctx.nextTickAt += ctx.config.tickRate;
+                RunSectorHits(ctx, origin, flatDir);
+            }
+
+            if (ctx.lifetime > 0f && ctx.age >= ctx.lifetime)
             {
                 ctx.destroyReason = DestroyReason.Expired;
                 DestroyShot(ctx);
-                return;
             }
+        }
 
-            if (ctx.age < ctx.nextTickAt)
+        private static EnemyController FindNearest(ShotContext ctx)
+        {
+            EnemyController best = null;
+            float bestSqr = float.PositiveInfinity;
+            float rangeSqr = ctx.config.range * ctx.config.range;
+
+            for (int i = 0; i < EnemyController.Active.Count; i++)
             {
-                return;
+                EnemyController enemy = EnemyController.Active[i];
+                if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
+                {
+                    continue;
+                }
+
+                float sqr = (enemy.transform.position - ctx.position).sqrMagnitude;
+                if (sqr > rangeSqr || sqr >= bestSqr)
+                {
+                    continue;
+                }
+
+                bestSqr = sqr;
+                best = enemy;
             }
 
-            ctx.nextTickAt = ctx.age + ctx.config.tickRate;
+            return best;
+        }
 
+        private static void SetAnchor(ShotContext ctx, EnemyController enemy)
+        {
+            Target anchor = ctx.currentTarget;
+            if (anchor == null)
+            {
+                anchor = new Target();
+                ctx.currentTarget = anchor;
+            }
+
+            anchor.position = enemy.transform.position;
+            anchor.damageable = enemy.Damageable;
+            anchor.faction = 0;
+            anchor.enemy = enemy;
+        }
+
+        private static void RunSectorHits(ShotContext ctx, Vector3 origin, Vector3 flatDir)
+        {
             float halfAngle = ctx.config.angle * 0.5f;
             float rangeSqr = ctx.config.range * ctx.config.range;
 
@@ -77,6 +139,7 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = 0;
+            target.enemy = enemy;
 
             return target;
         }
