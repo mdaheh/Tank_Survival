@@ -1,5 +1,5 @@
 # T123: ConeController — конус (Periodic Hit)
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T119
 - Files:
@@ -42,5 +42,5 @@ Destroy — как в T121 (вызов `destroyModules`, `state = Dead`).
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: ConeController.cs: создан stateless-контроллер с Tick(ctx, dt) — Spawn→Flight, flatDir с обнулённым y, Periodic-тик по nextTickAt с шагом tickRate (проверка сектора Vector3.Angle ≤ angle*0.5 и sqrMagnitude ≤ range², hitModules[].OnHit на каждого врага), Destroy по lifetime через destroyModules, Dev-маркер ShowSector
+Блокер: —
