@@ -46,7 +46,7 @@
 - **Phase 10.10 — Аудит P0: guard'ы (Pool/PlayerHealth) + сброс статики GameServices.** [accepted]
 - **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [dropped — заменена Phase 12–17]
 - **Phase 12 — Стрельба v2: фундамент lifecycle (контракты, ShotContext, данные).** [accepted]
-- **Phase 13 — Стрельба v2: логический слой (DeliveryConfig, DamageModule, ShotFactory, контроллеры).** [in-progress]
+- **Phase 13 — Стрельба v2: логический слой (DeliveryConfig, DamageModule, ShotFactory, контроллеры).** [accepted]
 - **Phase 14 — Стрельба v2: интеграция + визуал (ShotView, ShotSystem, TurretController→ShotFactory).** [planned]
 - **Phase 15 — Стрельба v2: миграция on-hit (статусы + area → модули, AoEController).** [planned]
 - **Phase 16 — Стрельба v2: модификаторы Pierce, Homing, Beam Split, Laser Focus.** [planned]

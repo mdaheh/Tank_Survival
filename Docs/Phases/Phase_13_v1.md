@@ -1,5 +1,5 @@
 # Phase 13: Стрельба v2 — логический слой lifecycle
-- Status: in-progress
+- Status: accepted
 - Цель: поверх фундамента Phase 12 ввести поведенческий слой lifecycle-модели
   (`DeliveryConfig`, `DamageModule`, `ShotFactory`, контроллеры Projectile/Hitscan/Cone)
   как изолированный код, не меняя поведение текущей стрельбы.
@@ -13,10 +13,10 @@
 - T123: `ConeController` — конус (Periodic Hit).
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] Текущая стрельба (Hammer/Beam/Laser/Cone + on-hit) работает как до фазы
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] Текущая стрельба (Hammer/Beam/Laser/Cone + on-hit) работает как до фазы
       (фаза изолированная — поведение не меняется).
-- [ ] В `Assets/Scripts/Combat/Shooting/` появились `DeliveryConfig.cs`, `DamageModule.cs`,
+- [x] В `Assets/Scripts/Combat/Shooting/` появились `DeliveryConfig.cs`, `DamageModule.cs`,
       `ShotFactory.cs`, `ProjectileController.cs`, `HitscanController.cs`, `ConeController.cs`.
 
 ## Примечания (контекст рефакторинга)
