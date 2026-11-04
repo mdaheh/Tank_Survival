@@ -1,5 +1,5 @@
 # T127: Разделение hitscan (instant + continuous)
-- Status: [ ]
+- Status: [!]
 - Phase: 14
 - Depends: T126
 - Files:
@@ -36,5 +36,5 @@
 - (совместно с T130) Laser бьёт непрерывно по ближайшей цели; при появлении более близкой перенацеливается; без цели — луч гаснет.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: —
+Блокер: T127: блокер — в ТЗ `ctx.currentTarget = …` без типа, а ShotContext.cs нет в поле Files, тип поля не подтверждён. Вопрос: какого типа поле ShotContext.currentTarget (EnemyController или Target)?
