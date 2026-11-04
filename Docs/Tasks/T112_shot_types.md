@@ -1,5 +1,5 @@
 # T112: ShotTypes — enum состояния, причины и типы доставки
-- Status: [ ]
+- Status: [x]
 - Phase: 12
 - Files:
   - Assets/Scripts/Combat/Shooting/ShotTypes.cs
@@ -21,5 +21,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotTypes.cs — создан файл с enum-ами ShotState (Spawn, Flight, Hit, PostHit, Destroy, Dead), DestroyReason (Hit, Expired, External), DeliveryType (Projectile, Hitscan, Cone, AoE) в namespace TankSurvival.Combat.Shooting.
+Блокер: —
