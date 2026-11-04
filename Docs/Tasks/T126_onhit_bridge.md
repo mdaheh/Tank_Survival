@@ -1,5 +1,5 @@
 # T126: Мост on-hit (Target.enemy + LegacyOnHitModule + ShotFactory)
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Files:
   - Assets/Scripts/Combat/Shooting/Target.cs
@@ -28,5 +28,5 @@
 - (совместно с T127–T130) урон наносится, и у турели с on-hit модулями срабатывают эффекты (Explosion-круг/DoT) как до фазы.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/Target.cs: добавлено поле public EnemyController enemy и using TankSurvival.Enemy; Assets/Scripts/Combat/Shooting/LegacyOnHitModule.cs: создан LegacyOnHitModule : IOnHit с ленивым кэшем OnHitDispatcher через GameServices.Get и вызовом dispatcher.ProcessHit(ctx.hitPoint, target.enemy, ctx.depth); Assets/Scripts/Combat/Shooting/ShotFactory.cs: в Build hitModules = { new DamageModule(), new LegacyOnHitModule() }
+Блокер: —

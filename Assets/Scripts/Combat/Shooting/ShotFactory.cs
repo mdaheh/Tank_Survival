@@ -11,7 +11,7 @@ namespace TankSurvival.Combat.Shooting
             BuildSnapshot buildSnapshot = new BuildSnapshot();
             buildSnapshot.damage = damage;
             buildSnapshot.speed = module.speed;
-            buildSnapshot.hitModules = new IOnHit[] { new DamageModule() };
+            buildSnapshot.hitModules = new IOnHit[] { new DamageModule(), new LegacyOnHitModule() };
 
             DeliveryConfig config = new DeliveryConfig();
             config.range = module.range;
