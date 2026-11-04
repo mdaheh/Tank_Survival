@@ -1,5 +1,5 @@
 # T116: ShotContext — контейнер состояния выстрела
-- Status: [ ]
+- Status: [x]
 - Phase: 12
 - Depends: T113, T115
 - Files:
@@ -24,5 +24,5 @@ Dead. Поля (Shooting.md §4.2, §5):
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotContext.cs — класс ShotContext (не MonoBehaviour) с общими и типоспецифичными полями, списками spawnQueue/hitTargets (создаются один раз, в Reset только Clear()) и методом Reset() в дефолт.
+Блокер: —

@@ -1,5 +1,5 @@
 # Phase 12: Стрельба v2 — фундамент lifecycle
-- Status: in-progress
+- Status: accepted
 - Цель: ввести изолированный слой lifecycle-модели выстрела из `Docs/Shooting.md`
   (контракты стадий, `ShotContext`, `BuildSnapshot`/`SpawnRequest`/`Target`,
   enum-ы, `IVfxSpawner`), не меняя поведение текущей стрельбы.
@@ -13,8 +13,8 @@
 - T117: `IVfxSpawner` (интерфейс спавна косметики).
 
 ## Smoke-тест (проверяет человек)
-- [ ] Проект компилируется без ошибок и предупреждений.
-- [ ] Текущая стрельба (Hammer/Beam/Laser/Cone + on-hit) работает как до фазы.
-- [ ] В `Assets/Scripts/Combat/Shooting/` появились файлы `ShotTypes.cs`,
+- [x] Проект компилируется без ошибок и предупреждений.
+- [x] Текущая стрельба (Hammer/Beam/Laser/Cone + on-hit) работает как до фазы.
+- [x] В `Assets/Scripts/Combat/Shooting/` появились файлы `ShotTypes.cs`,
       `SpawnRequest.cs`, `Target.cs`, `ShotContracts.cs`, `BuildSnapshot.cs`,
       `ShotContext.cs`, `IVfxSpawner.cs` с объявленными типами и полями.

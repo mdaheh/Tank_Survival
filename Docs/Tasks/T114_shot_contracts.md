@@ -1,5 +1,5 @@
 # T114: ShotContracts — контракты стадий выстрела
-- Status: [ ]
+- Status: [x]
 - Phase: 12
 - Depends: T113
 - Files:
@@ -26,5 +26,5 @@ Shooting.md §6, §5):
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotContracts.cs — интерфейсы IOnSpawn (OnSpawn), IOnFlight (OnFlight(ctx, dt)), IOnHit (OnHit(ctx, target)), IOnPostHit (OnPostHit), IOnDestroy (OnDestroy), IResettable (ResetState) без реализаций.
+Блокер: —

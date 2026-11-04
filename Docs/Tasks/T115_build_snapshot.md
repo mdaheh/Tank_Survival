@@ -1,5 +1,5 @@
 # T115: BuildSnapshot — набор модулей и статов выстрела
-- Status: [ ]
+- Status: [x]
 - Phase: 12
 - Depends: T114
 - Files:
@@ -22,5 +22,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/BuildSnapshot.cs — класс BuildSnapshot с массивами spawnModules/flightModules/hitModules/postHitModules/destroyModules, статами damage/speed, статическим Empty и методом Without<T>() (копия снимка без модулей типа T, общие stats сохраняются).
+Блокер: —

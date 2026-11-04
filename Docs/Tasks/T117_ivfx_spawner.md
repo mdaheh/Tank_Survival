@@ -1,5 +1,5 @@
 # T117: IVfxSpawner — интерфейс спавна косметики
-- Status: [ ]
+- Status: [x]
 - Phase: 12
 - Files:
   - Assets/Scripts/Combat/Shooting/IVfxSpawner.cs
@@ -20,5 +20,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/IVfxSpawner.cs — интерфейс IVfxSpawner с единственным методом void Spawn(GameObject prefab, Vector3 position); в ShotContext не входит.
+Блокер: —

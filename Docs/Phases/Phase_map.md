@@ -44,34 +44,36 @@
 - **Phase 10.8 — Dev Menu: переосмысление + каркас паузы.** [accepted]
 - **Phase 10.9 — Debug Overlay: pin + hover preview.** [accepted]
 - **Phase 10.10 — Аудит P0: guard'ы (Pool/PlayerHealth) + сброс статики GameServices.** [accepted]
-- **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [dropped — заменена Phase 12–15]
-- **Phase 12 — Стрельба v2: фундамент lifecycle (контракты, ShotContext, данные).** [in-progress]
-- **Phase 13 — Стрельба v2: контроллеры (Projectile/Hitscan/Cone/AoE) + миграция on-hit.** [planned]
-- **Phase 14 — Стрельба v2: модификаторы Pierce, Homing, Beam Split, Laser Focus.** [planned]
-- **Phase 15 — Стрельба v2: вражеский снаряд + зачистка legacy.** [planned]
-- **Phase 16 — Специализации турелей (8) и три ветки.** [planned]
-- **Phase 17 — Шасси v1.0: Fancy, Veteran + каркас способностей + Boost.** [planned]
-- **Phase 18 — Способности: Nova, Phase, Shield.** [planned]
-- **Phase 19 — Полный level-up: пул апгрейдов (51 SO), кривая 30, cap.** [planned]
-- **Phase 20 — Полная система волн: батч 20, босс на 10-й.** [planned]
-- **Phase 21 — Wave reward: модульные апгрейды (каждая 5-я волна).** [planned]
+- **Phase 11 — On-hit модификаторы: Pierce, Homing, Beam Split, Laser Focus.** [dropped — заменена Phase 12–17]
+- **Phase 12 — Стрельба v2: фундамент lifecycle (контракты, ShotContext, данные).** [accepted]
+- **Phase 13 — Стрельба v2: логический слой (DeliveryConfig, DamageModule, ShotFactory, контроллеры).** [in-progress]
+- **Phase 14 — Стрельба v2: интеграция + визуал (ShotView, ShotSystem, TurretController→ShotFactory).** [planned]
+- **Phase 15 — Стрельба v2: миграция on-hit (статусы + area → модули, AoEController).** [planned]
+- **Phase 16 — Стрельба v2: модификаторы Pierce, Homing, Beam Split, Laser Focus.** [planned]
+- **Phase 17 — Стрельба v2: вражеский снаряд + зачистка legacy.** [planned]
+- **Phase 18 — Специализации турелей (8) и три ветки.** [planned]
+- **Phase 19 — Шасси v1.0: Fancy, Veteran + каркас способностей + Boost.** [planned]
+- **Phase 20 — Способности: Nova, Phase, Shield.** [planned]
+- **Phase 21 — Полный level-up: пул апгрейдов (51 SO), кривая 30, cap.** [planned]
+- **Phase 22 — Полная система волн: батч 20, босс на 10-й.** [planned]
+- **Phase 23 — Wave reward: модульные апгрейды (каждая 5-я волна).** [planned]
 
 ### Осмысленность / мета и UI
 
-- **Phase 22 — Мета-прогрессия: счётчики, LocalStorage, разблокировки.** [planned]
-- **Phase 23 — Все 8 сложностей и последовательное открытие.** [planned]
-- **Phase 24 — UI-экраны: Main Menu, Hangar, Difficulty, Pause + локализация RU/EN.** [planned]
-- **Phase 25 — Round End полный: итоги и уведомления об открытиях.** [planned]
+- **Phase 24 — Мета-прогрессия: счётчики, LocalStorage, разблокировки.** [planned]
+- **Phase 25 — Все 8 сложностей и последовательное открытие.** [planned]
+- **Phase 26 — UI-экраны: Main Menu, Hangar, Difficulty, Pause + локализация RU/EN.** [planned]
+- **Phase 27 — Round End полный: итоги и уведомления об открытиях.** [planned]
 
 ### Запуск
 
-- **Phase 26 — Монетизация: SDK + rewarded-сценарии.** [planned]
-- **Phase 27 — Аудио: фоновая музыка + SFX.** [planned]
-- **Phase 28 — WebGL-сборка и оптимизация (+ финальный смоук v1.0).** [planned]
+- **Phase 28 — Монетизация: SDK + rewarded-сценарии.** [planned]
+- **Phase 29 — Аудио: фоновая музыка + SFX.** [planned]
+- **Phase 30 — WebGL-сборка и оптимизация (+ финальный смоук v1.0).** [planned]
 
 ## Критерии готовности v1.0
 
-Чек-лист ручного прогона после Phase 24:
+Чек-лист ручного прогона v1.0 (по итогу всех фаз):
 
 - [ ] Полный проход раунда на всех 8 сложностях (победа по правилам GDD).
 - [ ] Все 4 шасси + 4 способности работают (Boost/Nova/Phase/Shield).
