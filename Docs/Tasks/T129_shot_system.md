@@ -1,5 +1,5 @@
 # T129: ShotSystem — оркестратор lifecycle
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Depends: T124, T125, T127
 - Files:
@@ -71,5 +71,5 @@
 - (совместно с T130) выстрелы появляются и исчезают, число активных объектов не растёт.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: ShotSystem.cs: создан MonoBehaviour-оркестратор (сериализованные shotViewPrefab/coneVfxPrefab/maxDepth, пул ShotContext, список ActiveShot с id/view/type, контроллеры Projectile/InstantHitscan/ContinuousHitscan/Cone в Awake, ленивые PoolManager и IVfxSpawner через GameServices); Fire — Reset+копирование полей, spawnModules.OnSpawn, FlushSpawnQueue, визуал по типу (Projectile→PoolManager.Get+Bind, Cone→IVfxSpawner.Spawn, hitscan без визуала), возврат id; Update — обратный обход без копий, Tick по типу, FlushSpawnQueue, Release view + возврат ctx в пул + RemoveAt при Dead; IsAlive(id); FlushSpawnQueue с отсечкой child.depth > maxDepth
+Блокер: —
