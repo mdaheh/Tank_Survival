@@ -12,6 +12,7 @@ namespace TankSurvival.Combat.Shooting
         public DestroyReason destroyReason;
         public int depth;
         public BuildSnapshot buildSnapshot;
+        public DeliveryConfig config;
         public List<SpawnRequest> spawnQueue = new List<SpawnRequest>();
         public List<Target> hitTargets = new List<Target>();
         public Vector3 hitPoint;
@@ -34,6 +35,7 @@ namespace TankSurvival.Combat.Shooting
             destroyReason = default;
             depth = 0;
             buildSnapshot = null;
+            config = default;
             spawnQueue.Clear();
             hitTargets.Clear();
             hitPoint = Vector3.zero;

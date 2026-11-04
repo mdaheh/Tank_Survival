@@ -1,5 +1,5 @@
 # T118: DeliveryConfig — параметры доставки
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T113, T116
 - Files:
@@ -30,5 +30,5 @@
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: DeliveryConfig.cs: создан struct DeliveryConfig (range, angle, maxTargets, continuous, tickRate); SpawnRequest.cs: поле config; ShotContext.cs: поле config + сброс config = default в Reset()
+Блокер: —
