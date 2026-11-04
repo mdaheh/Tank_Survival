@@ -1,5 +1,5 @@
 # T130: TurretController → ShotFactory + ShotSystem
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Depends: T129
 - Files:
@@ -33,5 +33,5 @@
 - Play Mode: Hammer стреляет снарядом; Laser/Flamethrower бьют непрерывно и гаснут без цели.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: TurretController.cs: убраны поля delivery/hitscanDelivery/coneDelivery, добавлены ShotSystem shotSystem, ShotFactory _factory и int _continuousShotId (-1); Start оставляет только onHit.SetModules(turret.onHitModules); Update — непрерывный режим инициирует выстрел через shotSystem.Fire(_factory.Build(...)) при _continuousShotId == -1 или !IsAlive и наличии ближайшей цели (кулдаун не используется, при tickRate <= 0 выход), instant/projectile — прежний кулдаун 1/fireRate с Fire по ближайшему врагу без сохранения id; добавлен using TankSurvival.Combat.Shooting
+Блокер: —

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Combat.Shooting;
 using TankSurvival.Core;
 using TankSurvival.Data;
 using TankSurvival.Enemy;
@@ -9,40 +10,18 @@ namespace TankSurvival.Combat
     public class TurretController : MonoBehaviour
     {
         public TurretData turret;
-        public DeliveryHandler delivery;
-        public DeliveryHandler hitscanDelivery;
-        public DeliveryHandler coneDelivery;
+        public ShotSystem shotSystem;
         public OnHitDispatcher onHit;
         public StatBlock statBlock;
+
+        private readonly ShotFactory _factory = new ShotFactory();
+        private int _continuousShotId = -1;
 
         private float _cooldown;
 
         private void Start()
         {
-            if (onHit == null)
-            {
-                return;
-            }
-
-            if (turret != null)
-            {
-                onHit.SetModules(turret.onHitModules);
-            }
-
-            if (delivery != null)
-            {
-                delivery.onHit = onHit;
-            }
-
-            if (hitscanDelivery != null)
-            {
-                hitscanDelivery.onHit = onHit;
-            }
-
-            if (coneDelivery != null)
-            {
-                coneDelivery.onHit = onHit;
-            }
+            onHit.SetModules(turret.onHitModules);
         }
 
         private void Update()
@@ -54,34 +33,11 @@ namespace TankSurvival.Combat
                 return;
             }
 
-            DeliveryHandler active;
-            if (turret.delivery.kind == DeliveryModuleData.DeliveryKind.Hitscan)
-            {
-                active = hitscanDelivery;
-            }
-            else if (turret.delivery.kind == DeliveryModuleData.DeliveryKind.Cone)
-            {
-                active = coneDelivery;
-            }
-            else
-            {
-                active = delivery;
-            }
-
-            if (active == null)
-            {
-                return;
-            }
-
             bool continuous = turret.delivery.duration == DeliveryModuleData.DeliveryDuration.Continuous;
             if (continuous && turret.delivery.tickRate <= 0f)
             {
                 return;
             }
-
-            float interval = continuous
-                ? 1f / turret.delivery.tickRate
-                : 1f / statBlock.fireRate;
 
             Vector3 position = transform.position;
             float closestDistanceSqr = turret.delivery.range * turret.delivery.range;
@@ -104,12 +60,25 @@ namespace TankSurvival.Combat
                 }
             }
 
-            if (closest != null && _cooldown <= 0f)
+            if (continuous)
             {
-                Vector3 direction = (closest.transform.position - position).normalized;
-                active.Fire(direction, statBlock.damage);
-                _cooldown = interval;
+                if ((_continuousShotId == -1 || !shotSystem.IsAlive(_continuousShotId)) && closest != null)
+                {
+                    Vector3 dir = (closest.transform.position - position).normalized;
+                    _continuousShotId = shotSystem.Fire(_factory.Build(turret.delivery, position, dir, statBlock.damage));
+                }
+
+                return;
             }
+
+            if (closest == null || _cooldown > 0f)
+            {
+                return;
+            }
+
+            Vector3 shotDirection = (closest.transform.position - position).normalized;
+            shotSystem.Fire(_factory.Build(turret.delivery, position, shotDirection, statBlock.damage));
+            _cooldown = 1f / statBlock.fireRate;
         }
     }
 }
