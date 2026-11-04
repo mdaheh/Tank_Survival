@@ -1,5 +1,9 @@
 # Phase 11: On-hit модификаторы — Pierce, Homing, Beam Split, Laser Focus
-- Status: in-progress
+
+> СНЯТА. Задачи T106–T111 помечены `[-]`. Функциональность (Pierce/Homing/Beam
+> Split/Laser Focus) перепланируется в lifecycle-модели (`Phase 14`).
+
+- Status: dropped (заменена Phase 12–15: lifecycle-рефакторинг стрельбы)
 - Цель: добавить 4 оставшихся on-hit-модуля как «модификаторы доставки»: Pierce (пробитие) и Homing (самонаведение) работают на уровне снаряда, Beam Split (разлёт лучей) и Laser Focus (накопление урона) — на уровне hitscan. Модули резолвятся delivery-хендлерами через `OnHitDispatcher.GetModule`, интерфейс `IHitHandler` не меняется.
 
 ## Задачи (порядок = приоритет)

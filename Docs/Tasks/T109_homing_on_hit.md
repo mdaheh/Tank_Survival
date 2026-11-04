@@ -1,5 +1,5 @@
 # T109: Homing — самонаведение снаряда
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Depends: T108
 - Files:

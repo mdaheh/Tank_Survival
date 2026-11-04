@@ -23,7 +23,7 @@
                        LoadScene                   владелец объектов)
         │                     │                          │
         │            ┌────────┴─────────┐                ├──► [ Enemy ]       (пул)
-        │            ▼                  ▼                ├──► [ Projectile ]  (пул)
+        │            ▼                  ▼                ├──► [ ShotView ]   (пул)
         │     [ WaveSpawner ]    [ Progression ]        └──► [ VFX ]         (пул)
         │            │                  │
         │            ▼                  │ пишет апгрейды
@@ -37,14 +37,13 @@
         ├──► [ PlayerController ] ── движение ──► StatBlock.move_speed
         ├──► [ PlayerHealth ] ── HP / урон / смерть ──► RoundController (поражение)
         │
-        └──► [ TurretController ] ── кулдаун (aps из StatBlock) ──► [ DeliveryHandler ]
-                                        ├── ProjectileDeliveryHandler ──► [ Projectile ] ──► IDamageable
-                                        └── HitscanDeliveryHandler ────────────────► IDamageable
-                                             │  при попадании
-                                             ▼
-                                        [ IHitHandler ]  (список on_hit, по priority)
-                                        ├── ExplosionOnHitHandler ──► AoE ──► IDamageable + [ VFX ]
-                                        └── BurnOnHitHandler ──► [ StatusEffectSystem ] ──► EnemyHealth (тики)
+        └──► [ TurretController ] ── кулдаун (aps из StatBlock) ──► [ ShotFactory ]
+                                        ├──► SpawnRequest → [ ShotContext ] + контроллер
+                                        │       (Projectile / Hitscan / Cone / AoE) ──► IDamageable
+                                        └──► модули (IOnSpawn / IOnFlight / IOnHit / IOnPostHit / IOnDestroy)
+                                                ├── Explosion / BeamSplit ──► spawnQueue (дочерний ShotContext)
+                                                ├── Burn / Slow / Freeze / Knockback ──► Status / ControlEffectSystem
+                                                └── ShotView / VFX (IVfxSpawner) — косметика, без логики
 
                      [ HUD ]  ← подписан на события RoundController / Progression /
                                 PlayerHealth / WaveSpawner (только чтение, не пишет состояние)
@@ -58,8 +57,8 @@
 | Все подсистемы | Data (SO) | чтение статов/параметров |
 | WaveSpawner | PoolManager | взять/вернуть Enemy |
 | EnemyHealth (смерть) | WaveSpawner | событие смерти → декремент живых врагов волны |
-| TurretController | DeliveryHandler / IHitHandler | делегирование выстрела и on_hit-эффектов |
-| Delivery/OnHit | IDamageable | единый контракт нанесения урона |
+| TurretController | ShotFactory / ShotContext | делегирование выстрела (SpawnRequest) |
+| Контроллеры/модули выстрела | IDamageable | единый контракт нанесения урона |
 | EnemyHealth (смерть) | Progression | событие «+XP» |
 | Progression | StatBlock | применение выбранного апгрейда |
 | PlayerHealth / WaveSpawner | RoundController | события смерти игрока / конца волны |
@@ -78,7 +77,8 @@
 | PlayerHealth | текущее HP игрока | IDamageable-потребители (наносят урон) | начало раунда: HP = StatBlock.max_health |
 | EnemyHealth | текущее HP врага, DoT-статус | IDamageable-потребители, StatusEffectSystem | при возврате в пул (OnReleaseFromPool) |
 | TurretController | кулдаун выстрела, текущая цель | TurretController | начало раунда |
-| StatusEffectSystem | активные DoT-статусы врагов | OnHit-модули (добавить), система (тик) | смерть врага / рестарт раунда |
+| ShotContext | состояние выстрела (стадия, age, position/direction, keepAlive, hitTargets, spawnQueue) | контроллер + модули (только через ctx) | Reset при Spawn; возврат в пул при Dead |
+| StatusEffectSystem | активные DoT-статусы врагов | модули OnHit (контракты), система (тик) | смерть врага / рестарт раунда |
 | PoolManager | списки свободных/занятых инстансов | только PoolManager (get/release) | при загрузке сцены (prewarm) |
 | HUD | отображаемые значения | никто из игровых подсистем; HUD читает события | обновляется по событиям |
 
@@ -103,11 +103,12 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
   в пулы, без `SceneManager.LoadScene`: перезагрузка сцены в WebGL дорогая и рушит пулы.
 - **Весь контент — ScriptableObject.** Код читает данные, не знает конкретных чисел;
   новый контент добавляется `.asset` без правки кода.
-- **Два интерфейса на разных слоях.** `IDamageable` — «это можно повредить» (враг, игрок),
-  единая точка получения урона для всех путей доставки; `IHitHandler` — контракт
-  on_hit-модулей (реакция на попадание). Оба используются в MVP.
-- **Delivery/OnHit — отдельный слой-композиция** (turret → список модулей), а не
-  наследование конкретных турелей: новые модули добавляются без переписывания существующих.
+- **Контракт урона и контракты стадий выстрела.** `IDamageable` — «это можно
+  повредить» (враг, игрок), единая точка получения урона для всех путей доставки;
+  контракты `IOnSpawn`/`IOnFlight`/`IOnHit`/`IOnPostHit`/`IOnDestroy` — реакция
+  модулей на стадии жизненного цикла выстрела (см. `Docs/Shooting.md`).
+- **Модули выстрела — отдельный слой-композиция** (turret → `BuildSnapshot` модулей),
+  а не наследование конкретных турелей: новые модули добавляются без переписывания существующих.
 - **`StatBlock` — единственная изменяемая точка статов игрока.** Апгрейды пишут в него,
   акторы (движение/стрельба/HP) только читают: эффект сохраняется между спавнами.
 - **Generic Object Pool + контракт `IPoolable`.** Prewarm при загрузке, ноль
@@ -131,7 +132,7 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 - Активные способности шасси: поле `ability` в `ChassisData` зарезервировано, в MVP не используется.
 - Continuous hitscan (Laser): поле `duration` в Hitscan-конфиге заложено, MVP использует только `instant`.
-- Специализации турелей и полный набор delivery/on_hit: модульный слой готов, добавляются новые `.asset`/хендлеры без перестройки.
+- Специализации турелей и полный набор delivery/on-hit модулей: слой контрактов стадий готов, добавляются новые `.asset`/модули без перестройки.
 - Модульные апгрейды (wave reward на волнах 5/10/15/20): событийная точка начала волны есть, выбор модуля не реализуется.
 - 8 сложностей и полная кривая уровней (30): `DifficultyData` и `ProgressionSystem` параметризованы, MVP — 2 сложности и линейная кривая.
 - Мета-прогрессия и разблокировки: счётчик убийств за забег и точка сохранения (LocalStorage) зарезервированы, реализуются в v1.0.
@@ -154,8 +155,8 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 - `WaveData.cs` — SO волн: список составов волн, спавн-интервал.
 - `DifficultyData.cs` — SO сложности: множители HP/speed/count/XP, число волн.
 - `UpgradeData.cs` — SO апгрейда: целевой стат, величина, max_stacks.
-- `DeliveryModuleData.cs` — SO delivery-модуля: kind (Projectile/Hitscan) + параметры (speed/range/pellet/max_targets).
-- `OnHitModuleData.cs` — SO on_hit-модуля: kind (Explosion/Burn) + параметры (radius/damage/tick/duration/max_depth).
+- `DeliveryModuleData.cs` — SO delivery-модуля: kind (Projectile/Hitscan/Cone) + параметры (speed/range/pellet/max_targets/tick_rate/duration/angle).
+- `OnHitModuleData.cs` — SO on_hit-модуля: kind (Explosion/Burn/Slow/Freeze/Knockback/Ground/Pierce/Homing/BeamSplit/LaserFocus) + параметры модуля (priority/radius/tick/duration/falloff/...).
 
 **Core — `Assets/Scripts/Core/`**
 
@@ -177,15 +178,26 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 **Combat — `Assets/Scripts/Combat/`**
 
-- `TurretController.cs` — поиск цели, кулдаун по aps из StatBlock, вызов delivery.
-- `DeliveryHandler.cs` — базовый контракт delivery (MonoBehaviour, активный выбирается по kind).
-- `ProjectileDeliveryHandler.cs` — спавн снарядов из пула, распределение по pellet/spread.
-- `HitscanDeliveryHandler.cs` — мгновенный raycast-урон (режим `instant`).
-- `IHitHandler.cs` — интерфейс on_hit-модуля: контракт «реакция на попадание» (вызов по priority).
-- `ExplosionOnHitHandler.cs` — реализация IHitHandler: AoE-урон в радиусе + VFX из пула.
-- `BurnOnHitHandler.cs` — реализация IHitHandler: наложение DoT-статуса на цель.
-- `Projectile.cs` — летящий снаряд (пул), контакт → OnHit.
+- `TurretController.cs` — поиск цели, кулдаун по aps из StatBlock, спавн выстрела через `ShotFactory`.
 - `StatusEffectSystem.cs` — тики DoT (burn) по врагам.
+- `ControlEffectSystem.cs` — slow/freeze/knockback статусы врагов.
+
+**Combat/Shooting — `Assets/Scripts/Combat/Shooting/`** (lifecycle-модель, `Docs/Shooting.md`)
+
+- `ShotTypes.cs` — enum `ShotState`, `DestroyReason`, `DeliveryType`.
+- `ShotContracts.cs` — контракты стадий `IOnSpawn`/`IOnFlight`/`IOnHit`/`IOnPostHit`/`IOnDestroy` + `IResettable`.
+- `ShotContext.cs` — состояние выстрела (пул, `Reset()`).
+- `BuildSnapshot.cs` — модули по стадиям + базовые статы; `Without<T>()`, `Empty`.
+- `SpawnRequest.cs` — запрос спавна (type/position/direction/buildSnapshot/depth).
+- `Target.cs` — цель (position + `IDamageable` + фракция).
+- `IVfxSpawner.cs` — интерфейс спавна косметики (принадлежит контроллеру).
+- `ShotFactory.cs` — фабрика `DeliveryModuleData → SpawnRequest`, выбор контроллера по `DeliveryType`.
+- `ProjectileController.cs` — снаряд (Flight + Terminal Hit + keepAlive).
+- `HitscanController.cs` — луч instant/continuous (Terminal/Periodic).
+- `ConeController.cs` — конус (Periodic).
+- `AoEController.cs` — взрыв/зона (Terminal/Periodic).
+- `ShotView.cs` — тонкий MonoBehaviour из пула (pull `ctx.position/direction`).
+- `Modules/*.cs` — on-hit модули (контракты): Explosion, Burn, Slow, Freeze, Knockback, Ground, Pierce, Homing, BeamSplit, LaserFocus.
 
 **Enemy — `Assets/Scripts/Enemy/`**
 
@@ -207,8 +219,10 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 - `LevelUpUI.cs` — пауза + 3 карточки апгрейда, выбор одной.
 - `RoundEndUI.cs` — победа/поражение + кнопка рестарта раунда.
 
-Итого: **34 файла**. Input System `.inputactions`-обёртка генерируется Unity
-(не рукописный `.cs`), поэтому в список не входит.
+Стрельба реализуется lifecycle-моделью (`Docs/Shooting.md`); состав файлов в
+`Assets/Scripts/Combat/Shooting/` — см. §7 и список выше. Input System
+`.inputactions`-обёртка генерируется Unity (не рукописный `.cs`), поэтому в
+список не входит.
 
 ## 6. Структура папок
 
@@ -235,14 +249,14 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 ---
 
-## 7. Стрельба: lifecycle-модель и маппинг модулей (целевая)
+## 7. Стрельба: lifecycle-модель и маппинг модулей
 
-Целевая архитектура выстрела — lifecycle-модель из `Docs/Shooting.md`
-(`ShotContext` + типоспецифичные контроллеры + модули-контракты). Текущий код
-реализует более простую модель (`DeliveryHandler` + `IHitHandler` +
-`OnHitDispatcher`) — разделы §1/§2/§5 описывают это текущее состояние. Переход
-на lifecycle-модель — отдельная фаза рефакторинга; после неё `DeliveryHandler` /
-`IHitHandler` заменяются контроллерами и контрактами.
+Архитектура выстрела — lifecycle-модель из `Docs/Shooting.md`
+(`ShotContext` + типоспецифичные контроллеры + модули-контракты). Разделы §1/§2/§5
+описывают эту целевую модель. Текущий код находится в процессе миграции с
+legacy-модели (`DeliveryHandler`/`IHitHandler`/`OnHitDispatcher`); до завершения
+рефакторинга legacy-классы остаются в коде, но новые сущности стрельбы создаются
+только по lifecycle-модели.
 
 ### Маппинг: тип доставки → контроллер
 

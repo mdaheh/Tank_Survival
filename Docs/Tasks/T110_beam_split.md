@@ -1,5 +1,5 @@
 # T110: Beam Split — разлёт hitscan-луча
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Depends: T107
 - Files:

@@ -1,5 +1,5 @@
 # T107: OnHitDispatcher.GetModule — поиск модуля по kind
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Depends: T106
 - Files:

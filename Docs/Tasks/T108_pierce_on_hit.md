@@ -1,5 +1,5 @@
 # T108: Pierce — пробитие снарядом
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Depends: T107
 - Files:

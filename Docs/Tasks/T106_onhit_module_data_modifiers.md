@@ -1,5 +1,5 @@
 # T106: OnHitModuleData — kind и поля модификаторов
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Files:
   - Assets/Scripts/Data/OnHitModuleData.cs

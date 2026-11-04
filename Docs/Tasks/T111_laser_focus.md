@@ -1,5 +1,5 @@
 # T111: Laser Focus — накопление урона continuous-луча
-- Status: [ ]
+- Status: [-]
 - Phase: 11
 - Depends: T110
 - Files:
