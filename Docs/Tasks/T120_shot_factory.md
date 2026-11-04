@@ -1,5 +1,5 @@
 # T120: ShotFactory — сборка SpawnRequest из DeliveryModuleData
-- Status: [ ]
+- Status: [x]
 - Phase: 13
 - Depends: T119
 - Files:
@@ -41,5 +41,5 @@ Architecture.md §7) — чистую фабрику, собирающую `Spaw
 - Проект компилируется без ошибок.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: ShotFactory.cs: создана stateless-фабрика Build(module, position, direction, damage, depth) — маппинг DeliveryKind→DeliveryType, buildSnapshot (damage из аргумента, speed из module, hitModules = new IOnHit[] { new DamageModule() }), config (range/angle/maxTargets/continuous/tickRate), position/direction/depth из аргументов
+Блокер: —
