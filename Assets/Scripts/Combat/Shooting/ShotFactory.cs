@@ -21,7 +21,7 @@ namespace TankSurvival.Combat.Shooting
             config.tickRate = module.tickRate;
 
             SpawnRequest request = new SpawnRequest();
-            request.type = MapType(module.kind);
+            request.type = MapType(module.kind, module.duration);
             request.position = position;
             request.direction = direction;
             request.buildSnapshot = buildSnapshot;
@@ -31,12 +31,15 @@ namespace TankSurvival.Combat.Shooting
             return request;
         }
 
-        private static DeliveryType MapType(DeliveryModuleData.DeliveryKind kind)
+        private static DeliveryType MapType(DeliveryModuleData.DeliveryKind kind,
+            DeliveryModuleData.DeliveryDuration duration)
         {
             switch (kind)
             {
                 case DeliveryModuleData.DeliveryKind.Hitscan:
-                    return DeliveryType.Hitscan;
+                    return duration == DeliveryModuleData.DeliveryDuration.Continuous
+                        ? DeliveryType.ContinuousHitscan
+                        : DeliveryType.Hitscan;
                 case DeliveryModuleData.DeliveryKind.Cone:
                     return DeliveryType.Cone;
                 default:

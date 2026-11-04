@@ -10,6 +10,7 @@
 - T128: Непрерывное самонаведение и контракт `lifetime` (`ConeController`, `ProjectileController`, `ShotContext`).
 - T129: `ShotSystem` — оркестратор (`Fire → id`, `IsAlive`, пул контекстов, finalize).
 - T130: `TurretController` → `ShotFactory` + `ShotSystem` (инициация вместо пере-выстрела).
+- T131: `ShotView` — убрать предупреждение сериализации (UAC1001).
 
 ## Smoke-тест (проверяет человек)
 - [ ] Проект компилируется без ошибок и предупреждений.

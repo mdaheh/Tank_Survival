@@ -6,9 +6,10 @@ using TankSurvival.Dev;
 
 namespace TankSurvival.Combat.Shooting
 {
-    public class HitscanController
+    public class ContinuousHitscanController
     {
         private const float HitRadiusSqr = 1f;
+        private const float MinDirectionSqr = 1e-6f;
 
         public void Tick(ShotContext ctx, float dt)
         {
@@ -24,6 +25,31 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
+            EnemyController enemy = FindNearest(ctx);
+            if (enemy == null)
+            {
+                ctx.destroyReason = DestroyReason.External;
+                DestroyShot(ctx);
+                return;
+            }
+
+            if (ctx.currentTarget == null)
+            {
+                ctx.currentTarget = new Target();
+            }
+
+            ctx.currentTarget.position = enemy.transform.position;
+            ctx.currentTarget.damageable = enemy.Damageable;
+            ctx.currentTarget.faction = 0;
+            ctx.currentTarget.enemy = enemy;
+
+            Vector3 toTarget = ctx.currentTarget.position - ctx.position;
+            toTarget.y = 0f;
+            if (toTarget.sqrMagnitude > MinDirectionSqr)
+            {
+                ctx.direction = toTarget.normalized;
+            }
+
             Vector3 origin = ctx.position;
             Vector3 end = origin + ctx.direction * ctx.config.range;
 
@@ -31,66 +57,21 @@ namespace TankSurvival.Combat.Shooting
             DevVisualizer.ShowBeam(origin, end, 0.15f, new Color(1f, 0.9f, 0.2f, 0.6f));
 #endif
 
-            if (ctx.config.continuous)
+            if (ctx.age >= ctx.nextTickAt)
             {
-                TickPeriodic(ctx, origin, end);
-                return;
+                ctx.nextTickAt += ctx.config.tickRate;
+                RunTick(ctx, origin, end);
             }
 
-            TickTerminal(ctx, origin, end);
-        }
-
-        private static void TickTerminal(ShotContext ctx, Vector3 origin, Vector3 end)
-        {
-            float minAlong = float.NegativeInfinity;
-
-            for (int i = 0; i < ctx.config.maxTargets; i++)
-            {
-                float along;
-                EnemyController enemy = FindNext(ctx, origin, end, minAlong, true, out along);
-                if (enemy == null)
-                {
-                    break;
-                }
-
-                minAlong = along;
-
-                Target target = BuildTarget(enemy);
-                ctx.hitTargets.Add(target);
-                RunHitModules(ctx, target);
-            }
-
-            ctx.keepAlive = false;
-
-            IOnPostHit[] postHitModules = ctx.buildSnapshot.postHitModules;
-            for (int i = 0; i < postHitModules.Length; i++)
-            {
-                postHitModules[i].OnPostHit(ctx);
-            }
-
-            if (!ctx.keepAlive)
-            {
-                ctx.destroyReason = DestroyReason.Hit;
-                DestroyShot(ctx);
-            }
-        }
-
-        private static void TickPeriodic(ShotContext ctx, Vector3 origin, Vector3 end)
-        {
-            if (ctx.age >= ctx.lifetime)
+            if (ctx.lifetime > 0f && ctx.age >= ctx.lifetime)
             {
                 ctx.destroyReason = DestroyReason.Expired;
                 DestroyShot(ctx);
-                return;
             }
+        }
 
-            if (ctx.age < ctx.nextTickAt)
-            {
-                return;
-            }
-
-            ctx.nextTickAt = ctx.age + ctx.config.tickRate;
-
+        private static void RunTick(ShotContext ctx, Vector3 origin, Vector3 end)
+        {
             float minAlong = float.NegativeInfinity;
 
             for (int i = 0; i < ctx.config.maxTargets; i++)
@@ -104,8 +85,43 @@ namespace TankSurvival.Combat.Shooting
 
                 minAlong = along;
 
-                RunHitModules(ctx, BuildTarget(enemy));
+                Target target = BuildTarget(enemy);
+                ctx.hitPoint = target.position;
+                RunHitModules(ctx, target);
             }
+
+            IOnPostHit[] postHitModules = ctx.buildSnapshot.postHitModules;
+            for (int i = 0; i < postHitModules.Length; i++)
+            {
+                postHitModules[i].OnPostHit(ctx);
+            }
+        }
+
+        private static EnemyController FindNearest(ShotContext ctx)
+        {
+            float rangeSqr = ctx.config.range * ctx.config.range;
+            EnemyController best = null;
+            float bestSqr = float.PositiveInfinity;
+
+            for (int i = 0; i < EnemyController.Active.Count; i++)
+            {
+                EnemyController enemy = EnemyController.Active[i];
+                if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
+                {
+                    continue;
+                }
+
+                float sqr = (enemy.transform.position - ctx.position).sqrMagnitude;
+                if (sqr > rangeSqr || sqr >= bestSqr)
+                {
+                    continue;
+                }
+
+                bestSqr = sqr;
+                best = enemy;
+            }
+
+            return best;
         }
 
         private static EnemyController FindNext(ShotContext ctx, Vector3 origin, Vector3 end, float minAlong,
@@ -181,6 +197,7 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = 0;
+            target.enemy = enemy;
 
             return target;
         }
