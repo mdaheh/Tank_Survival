@@ -1,5 +1,5 @@
 # T140: ShotSystem — подключить AoEController и ZoneController
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T135, T136
 - Files:
@@ -26,5 +26,5 @@
 - (совместно со smoke) взрыв тикается мгновенно, зона живёт `duration` и тикает `tickRate`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotSystem.cs: добавлены поля `_aoe`/`_zone`, создание `new AoEController()`/`new ZoneController()` в `Awake()`, в `TickShot` добавлены `case DeliveryType.AoE` и `case DeliveryType.Zone` (существующие case-ы и `Fire` не изменены)
+Блокер: —

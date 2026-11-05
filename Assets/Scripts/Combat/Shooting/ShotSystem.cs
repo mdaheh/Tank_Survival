@@ -16,6 +16,8 @@ namespace TankSurvival.Combat.Shooting
         private InstantHitscanController _instantHitscan;
         private ContinuousHitscanController _continuousHitscan;
         private ConeController _cone;
+        private AoEController _aoe;
+        private ZoneController _zone;
 
         private PoolManager _poolManager;
 
@@ -40,6 +42,8 @@ namespace TankSurvival.Combat.Shooting
             _instantHitscan = new InstantHitscanController();
             _continuousHitscan = new ContinuousHitscanController();
             _cone = new ConeController();
+            _aoe = new AoEController();
+            _zone = new ZoneController();
         }
 
         public int Fire(SpawnRequest request)
@@ -149,6 +153,12 @@ namespace TankSurvival.Combat.Shooting
                     break;
                 case DeliveryType.Cone:
                     _cone.Tick(shot.ctx, dt);
+                    break;
+                case DeliveryType.AoE:
+                    _aoe.Tick(shot.ctx, dt);
+                    break;
+                case DeliveryType.Zone:
+                    _zone.Tick(shot.ctx, dt);
                     break;
             }
         }
