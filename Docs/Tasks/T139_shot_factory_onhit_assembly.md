@@ -1,5 +1,5 @@
 # T139: ShotFactory — сборка on-hit модулей из OnHitModuleData[]
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T137, T138
 - Files:
@@ -31,5 +31,5 @@
 - (совместно с T141) on-hit эффекты срабатывают через новые модули; legacy `OnHitDispatcher` не вызывается.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ShotFactory.cs: добавлена перегрузка `Build(DeliveryModuleData, OnHitModuleData[], Vector3, Vector3, float, int = 0)`, старая сигнатура делегирует с `Array.Empty<OnHitModuleData>()` (добавлен `using System;`, `using System.Collections.Generic;`), `buildSnapshot.hitModules = BuildHitModules(onHitModules)` — `DamageModule` первым + модули по `kind` (Burn/Slow/Freeze/Knockback/Explosion/Ground), `null` отфильтрован и приоритеты отсортированы стабильным insertion sort по убыванию `priority` (как в `OnHitDispatcher.SetModules`), `new LegacyOnHitModule()` убран
+Блокер: —
