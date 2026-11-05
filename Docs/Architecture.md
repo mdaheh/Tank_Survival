@@ -193,9 +193,11 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 - `IVfxSpawner.cs` — интерфейс спавна косметики (принадлежит контроллеру).
 - `ShotFactory.cs` — фабрика `DeliveryModuleData → SpawnRequest`, выбор контроллера по `DeliveryType`.
 - `ProjectileController.cs` — снаряд (Flight + Terminal Hit + keepAlive).
-- `HitscanController.cs` — луч instant/continuous (Terminal/Periodic).
+- `InstantHitscanController.cs` — мгновенный луч (Terminal).
+- `ContinuousHitscanController.cs` — непрерывный луч (Periodic).
 - `ConeController.cs` — конус (Periodic).
-- `AoEController.cs` — взрыв/зона (Terminal/Periodic).
+- `AoEController.cs` — взрыв (Terminal AoE).
+- `ZoneController.cs` — наземная зона (Periodic AoE).
 - `ShotView.cs` — тонкий MonoBehaviour из пула (pull `ctx.position/direction`).
 - `Modules/*.cs` — on-hit модули (контракты): Explosion, Burn, Slow, Freeze, Knockback, Ground, Pierce, Homing, BeamSplit, LaserFocus.
 
@@ -263,11 +265,14 @@ legacy-модели (`DeliveryHandler`/`IHitHandler`/`OnHitDispatcher`); до з
 | Тип доставки | Контроллер | Flight | Hit | Дедупликация | keepAlive |
 |---|---|---|---|---|---|
 | Projectile | `ProjectileController` | ✅ | Terminal | `hitTargets` | ✅ (Pierce) |
-| Hitscan (instant) | `HitscanController` | ❌ | Terminal (1 раз) | `hitTargets` | ✅ (обычно false) |
-| Hitscan (continuous) | `HitscanController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
+| Hitscan (instant) | `InstantHitscanController` | ❌ | Terminal (1 раз) | `hitTargets` | ✅ (обычно false) |
+| Hitscan (continuous) | `ContinuousHitscanController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
 | Cone | `ConeController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
+| AoE (взрыв) | `AoEController` | ❌ | Terminal (1 раз) | `hitTargets` | ❌ (всегда Destroy) |
+| Zone (зона) | `ZoneController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
 
-`instant`/`continuous` — флаг `duration` одного `HitscanController`, а не два класса.
+`instant`/`continuous` — разные контроллеры (`InstantHitscanController` / `ContinuousHitscanController`).
+`AoE`/`Zone` — разные контроллеры: Terminal AoE (взрыв) и Periodic AoE (наземная зона).
 
 ### Маппинг: on-hit модуль → контракты
 
@@ -277,7 +282,7 @@ legacy-модели (`DeliveryHandler`/`IHitHandler`/`OnHitDispatcher`); до з
 | Burn | `IOnHit` | статус на цель |
 | Freeze | `IOnHit` | статус на цель |
 | Slow | `IOnHit` | статус на цель |
-| Knockback | `IOnHit` | читает `ctx.damage`; сила = `force × damage_scaling` |
+| Knockback | `IOnHit` | сила = `force × damage_scaling` (направление от `ctx.hitPoint`) |
 | Ground | `IOnHit` + `spawnQueue` (зона-ребёнок Periodic) | зона = логический выстрел (AoE Periodic) |
 | Pierce | `IOnPostHit` | `ctx.keepAlive = true`; счётчик/falloff в `ctx` |
 | Homing | `IOnFlight` | меняет `ctx.direction` каждый тик |
