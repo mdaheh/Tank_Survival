@@ -1,5 +1,5 @@
 # T136: ZoneController — Periodic AoE (наземная зона)
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T134
 - Files:
@@ -31,5 +31,5 @@
 - (совместно с T140/T141) турель с `Ground`: зона наносит периодический урон в радиусе в течение `duration`, debug-круг виден и гаснет по истечении времени.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/ZoneController.cs: создан Periodic AoE-контроллер (`Tick`: `age`, переход `Spawn → Flight` с `lifetime = config.duration`, expiry по `lifetime` → `DestroyReason.Expired` + `DestroyShot`, тики по `nextTickAt += config.tickRate` с обходом `EnemyController.Active` в радиусе `config.range`, `hitPoint = position`, `BuildTarget` → `hitModules`; `DestroyShot`: `destroyModules.OnDestroy` + `state = Dead`, без VFX; debug-круг `DevVisualizer.ShowCircle` под `#if UNITY_EDITOR || DEBUG` с радиусом по остатку жизни)
+Блокер: —
