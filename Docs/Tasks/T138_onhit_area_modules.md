@@ -1,5 +1,5 @@
 # T138: Модули area (Explosion/Ground) — IOnHit + spawnQueue
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T134
 - Files:
@@ -36,5 +36,5 @@
 - (совместно с T135/T136/T139/T140/T141) взрыв и зона порождают дочерние area-выстрелы: взрыв — Terminal AoE-урон, зона — периодический урон в радиусе.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/Modules/ExplosionModule.cs: `IOnHit` + `readonly OnHitModuleData _data`, guard `_data == null` и `ctx.depth >= _data.maxDepth`, `buildSnapshot.Without<ExplosionModule>()` + `child.damage = _data.damage`, `DeliveryConfig` (`range`, `deathVfx`) → `SpawnRequest` (`DeliveryType.AoE`, `hitPoint`, `direction`, `depth + 1`) в `ctx.spawnQueue`; Assets/Scripts/Combat/Shooting/Modules/GroundModule.cs: то же для зоны — `Without<GroundModule>()`, `child.damage = _data.tickDamage`, `DeliveryConfig` (`range`, `tickRate`, `duration`) → `SpawnRequest` (`DeliveryType.Zone`); `DeliveryConfig cfg = default;` вместо `DeliveryConfig cfg;` (иначе CS0165 — структура не definitely assigned)
+Блокер: —
