@@ -1,5 +1,5 @@
 # T137: Модули статусов/контроля (Burn/Slow/Freeze/Knockback)
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Files:
   - Assets/Scripts/Combat/Shooting/Modules/BurnModule.cs
@@ -38,5 +38,5 @@
 - (совместно с T139/T141) статусы работают как legacy: burn тикает уроном, freeze замораживает (стаки до `freezeThreshold`), slow замедляет, knockback отталкивает от точки попадания.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/Modules/BurnModule.cs: `IOnHit`, `readonly OnHitModuleData _data`, `RemoveFreeze` + `ApplyBurn(enemy, tickDamage, tickRate, duration)`; Assets/Scripts/Combat/Shooting/Modules/SlowModule.cs: `ApplySlow(enemy, slowAmount, duration)`; Assets/Scripts/Combat/Shooting/Modules/FreezeModule.cs: `RemoveBurn` + `ApplyFreeze(enemy, slowAmount, duration, freezeThreshold)`; Assets/Scripts/Combat/Shooting/Modules/KnockbackModule.cs: `ApplyKnockback(dir * (force * damageScaling), duration)` от `ctx.hitPoint`; сервисы `StatusEffectSystem`/`ControlEffectSystem` резолвятся лениво через `GameServices.Get` и null-гардятся
+Блокер: —
