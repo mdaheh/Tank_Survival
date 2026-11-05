@@ -48,7 +48,7 @@
 - **Phase 12 — Стрельба v2: фундамент lifecycle (контракты, ShotContext, данные).** [accepted]
 - **Phase 13 — Стрельба v2: логический слой (DeliveryConfig, DamageModule, ShotFactory, контроллеры).** [accepted]
 - **Phase 14 — Стрельба v2: интеграция + визуал (ShotView, ShotSystem, TurretController→ShotFactory).** [accepted]
-- **Phase 15 — Стрельба v2: миграция on-hit (статусы + area → модули, AoEController).** [planned]
+- **Phase 15 — Стрельба v2: миграция on-hit (статусы + area → модули, AoEController).** [accepted]
 - **Phase 16 — Стрельба v2: модификаторы Pierce, Homing, Beam Split, Laser Focus.** [planned]
 - **Phase 17 — Стрельба v2: вражеский снаряд + зачистка legacy.** [planned]
 - **Phase 18 — Специализации турелей (8) и три ветки.** [planned]
