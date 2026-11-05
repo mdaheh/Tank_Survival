@@ -56,6 +56,7 @@ namespace TankSurvival.Combat.Shooting
             ctx.direction = request.direction;
             ctx.buildSnapshot = request.buildSnapshot;
             ctx.damage = request.buildSnapshot.damage;
+            ctx.speed = request.buildSnapshot.speed;
             ctx.config = request.config;
             ctx.depth = request.depth;
             ctx.faction = request.faction;

@@ -1,7 +1,6 @@
 using TankSurvival.Combat;
 using TankSurvival.Core;
 using TankSurvival.Data;
-using TankSurvival.Enemy;
 
 namespace TankSurvival.Combat.Shooting
 {
@@ -31,8 +30,8 @@ namespace TankSurvival.Combat.Shooting
 
         public void OnHit(ShotContext ctx, Target target)
         {
-            EnemyController enemy = target?.enemy;
-            if (enemy == null)
+            IDamageable damageable = target.damageable;
+            if (damageable == null)
             {
                 return;
             }
@@ -40,7 +39,7 @@ namespace TankSurvival.Combat.Shooting
             ControlEffectSystem controlEffects = ControlEffects;
             if (controlEffects != null)
             {
-                controlEffects.ApplySlow(enemy, _data.slowAmount, _data.duration);
+                controlEffects.ApplySlow(damageable, _data.slowAmount, _data.duration);
             }
         }
     }

@@ -37,7 +37,7 @@
         ├──► [ PlayerController ] ── движение ──► StatBlock.move_speed
         ├──► [ PlayerHealth ] ── HP / урон / смерть ──► RoundController (поражение)
         │
-        └──► [ TurretController ] ── кулдаун (aps из StatBlock) ──► [ ShotFactory ]
+        └──► [ TurretController ] ── кулдаун (aps из StatBlock) ──► [ ShotFactory ] ──► [ ShotSystem ]
                                         ├──► SpawnRequest → [ ShotContext ] + контроллер
                                         │       (Projectile / Hitscan / Cone / AoE) ──► IDamageable
                                         └──► модули (IOnSpawn / IOnFlight / IOnHit / IOnPostHit / IOnDestroy)
@@ -57,7 +57,8 @@
 | Все подсистемы | Data (SO) | чтение статов/параметров |
 | WaveSpawner | PoolManager | взять/вернуть Enemy |
 | EnemyHealth (смерть) | WaveSpawner | событие смерти → декремент живых врагов волны |
-| TurretController | ShotFactory / ShotContext | делегирование выстрела (SpawnRequest) |
+| TurretController | ShotFactory → ShotSystem | сборка `SpawnRequest` и `Fire` (возвращает `ShotId`) |
+| ShotSystem | контроллеры / `ShotContext` / `ShotView` | пул контекстов, `IsAlive`/`SetOrigin`, диспетчеризация по `DeliveryType`, finalize |
 | Контроллеры/модули выстрела | IDamageable | единый контракт нанесения урона |
 | EnemyHealth (смерть) | Progression | событие «+XP» |
 | Progression | StatBlock | применение выбранного апгрейда |
@@ -80,6 +81,7 @@
 | ShotContext | состояние выстрела (стадия, age, position/direction, keepAlive, hitTargets, spawnQueue) | контроллер + модули (только через ctx) | Reset при Spawn; возврат в пул при Dead |
 | StatusEffectSystem | активные DoT-статусы врагов | модули OnHit (контракты), система (тик) | смерть врага / рестарт раунда |
 | PoolManager | списки свободных/занятых инстансов | только PoolManager (get/release) | при загрузке сцены (prewarm) |
+| ShotSystem | пул `ShotContext`, реестр активных выстрелов (`ShotId` → ctx) | только ShotSystem (`Fire`/finalize) | сброс раунда (возврат активных выстрелов в пул) |
 | HUD | отображаемые значения | никто из игровых подсистем; HUD читает события | обновляется по событиям |
 
 **Правило сброса:** единственный механизм очистки объекта, возвращаемого в пул, —
@@ -192,6 +194,10 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 - `Target.cs` — цель (position + `IDamageable` + фракция).
 - `Combatants.cs` — реестр противников по фракции (регистрация цели игрока).
 - `IVfxSpawner.cs` — интерфейс спавна косметики (принадлежит контроллеру).
+- `VfxSpawner.cs` — реализация `IVfxSpawner`: спавн косметики через `PoolManager`.
+- `ShotSystem.cs` — оркестратор lifecycle: пул `ShotContext`, `Fire → ShotId`, `IsAlive`/`SetOrigin`, диспетчеризация контроллеров по `DeliveryType`, обработка `spawnQueue`, finalize (возврат `ShotView`/контекста в пул).
+- `DeliveryConfig.cs` — параметры типа доставки (range/angle/maxTargets/tickRate/duration/VFX).
+- `DamageModule.cs` — базовый `IOnHit`-модуль: прямой урон через `IDamageable`.
 - `ShotFactory.cs` — фабрика `DeliveryModuleData → SpawnRequest`, выбор контроллера по `DeliveryType`.
 - `ProjectileController.cs` — снаряд (Flight + Terminal Hit + keepAlive), фракционно-осведомлён.
 - `InstantHitscanController.cs` — мгновенный луч (Terminal).
@@ -264,14 +270,23 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 `Combatants` регистрирует игрока как цель; `ProjectileController` по `ctx.faction`
 выбирает противников (`EnemyController.Active` либо игрок).
 
+Оркестратором lifecycle служит `ShotSystem`: он владеет пулом `ShotContext`, выдаёт
+монотонный `ShotId` (`Fire → id`), отвечает `IsAlive(id)` и `SetOrigin(id, position)`,
+диспетчеризует контроллер по `DeliveryType` и финализирует выстрелы (возврат
+`ShotView`/контекста в пул). Инициаторы (`TurretController`, вражеский Shooter) не
+хранят ссылку на `ShotContext` — только `ShotId` (инвариант 14 из `Docs/Shooting.md`).
+Периодические контроллеры живут до терминального условия, а не до таймера:
+Continuous/Cone — пока есть цель (`External` при отсутствии), Zone — по `duration`;
+`lifetime` для Periodic Hit опционален (`Docs/Shooting.md` §14.3).
+
 ### Маппинг: тип доставки → контроллер
 
 | Тип доставки | Контроллер | Flight | Hit | Дедупликация | keepAlive |
 |---|---|---|---|---|---|
 | Projectile | `ProjectileController` | ✅ | Terminal | `hitTargets` | ✅ (Pierce) |
 | Hitscan (instant) | `InstantHitscanController` | ❌ | Terminal (1 раз) | `hitTargets` | ✅ (обычно false) |
-| Hitscan (continuous) | `ContinuousHitscanController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
-| Cone | `ConeController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
+| Hitscan (continuous) | `ContinuousHitscanController` | ✅ | Periodic | `nextTickAt` | ❌ |
+| Cone | `ConeController` | ✅ | Periodic | `nextTickAt` | ❌ |
 | AoE (взрыв) | `AoEController` | ❌ | Terminal (1 раз) | `hitTargets` | ❌ (всегда Destroy) |
 | Zone (зона) | `ZoneController` | ✅ duration | Periodic | `nextTickAt` | ❌ |
 
@@ -291,4 +306,4 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 | Pierce | `IOnPostHit` | `ctx.keepAlive = true`; счётчик/falloff в `ctx` |
 | Homing | `IOnFlight` | меняет `ctx.direction` каждый тик |
 | Beam Split | `IOnHit` + `spawnQueue` (дети с полным билдом) | на каждую поражённую цель |
-| Laser Focus | `IOnHit` | стаки в `ctx`, сброс при смене `ctx.currentTarget` |
+| Laser Focus | `IOnHit` | стаки в `ctx`, сброс при смене цели (по `IDamageable`) |

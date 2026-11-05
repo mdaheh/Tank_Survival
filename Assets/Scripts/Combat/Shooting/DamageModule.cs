@@ -4,7 +4,7 @@ namespace TankSurvival.Combat.Shooting
     {
         public void OnHit(ShotContext ctx, Target target)
         {
-            if (target == null || target.damageable == null)
+            if (target.damageable == null)
             {
                 return;
             }

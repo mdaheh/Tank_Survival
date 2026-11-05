@@ -1,5 +1,5 @@
+using TankSurvival.Core;
 using TankSurvival.Data;
-using TankSurvival.Enemy;
 
 namespace TankSurvival.Combat.Shooting
 {
@@ -24,15 +24,15 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
-            EnemyController enemy = target?.enemy;
-            if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
+            IDamageable damageable = target.damageable;
+            if (damageable == null || !damageable.IsAlive)
             {
                 return;
             }
 
-            if (ctx.laserFocusedEnemy != enemy)
+            if (ctx.laserFocusedTarget != damageable)
             {
-                ctx.laserFocusedEnemy = enemy;
+                ctx.laserFocusedTarget = damageable;
 
                 if (_data.stackResetOnSwitch)
                 {
@@ -46,7 +46,7 @@ namespace TankSurvival.Combat.Shooting
                 float extra = ctx.buildSnapshot.damage * _data.damageGrowth * stacks;
                 if (extra > 0f)
                 {
-                    target.damageable.TakeDamage(extra);
+                    damageable.TakeDamage(extra);
                 }
             }
 

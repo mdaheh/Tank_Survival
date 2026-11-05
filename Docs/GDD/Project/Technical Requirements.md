@@ -43,8 +43,8 @@ type: system
 | Паттерн | Component-Based Architecture (CBA) |
 | Данные | ScriptableObject |
 | Поведение | MonoBehaviour |
-| Связь | IDamageable — контракт урона; IHitHandler — контракт on_hit-модулей |
-| Композиция | Контейнер + список модулей |
+| Связь | IDamageable — контракт урона; контракты стадий выстрела IOnSpawn/IOnFlight/IOnHit/IOnPostHit/IOnDestroy — реакция on-hit-модулей |
+| Композиция | Контейнер + список модулей: `ShotContext` + `BuildSnapshot` (см. `Docs/Shooting.md`) |
 
 **Запреты:**
 - DOTS, Job System, Burst (не работает в WebGL).

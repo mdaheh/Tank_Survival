@@ -13,6 +13,8 @@ namespace TankSurvival.Player
 
         public float CurrentHealth => currentHealth;
 
+        public bool IsAlive => currentHealth > 0f;
+
         public event Action OnDeath;
         public event Action<float, float> OnHealthChanged;
 

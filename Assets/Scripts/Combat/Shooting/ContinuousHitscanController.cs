@@ -33,15 +33,9 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
-            if (ctx.currentTarget == null)
-            {
-                ctx.currentTarget = new Target();
-            }
-
             ctx.currentTarget.position = enemy.transform.position;
             ctx.currentTarget.damageable = enemy.Damageable;
             ctx.currentTarget.faction = Faction.Enemy;
-            ctx.currentTarget.enemy = enemy;
 
             Vector3 toTarget = ctx.currentTarget.position - ctx.position;
             toTarget.y = 0f;
@@ -197,7 +191,6 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = Faction.Enemy;
-            target.enemy = enemy;
 
             return target;
         }

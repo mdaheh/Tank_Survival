@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using TankSurvival.Enemy;
+using TankSurvival.Core;
 using UnityEngine;
 
 namespace TankSurvival.Combat.Shooting
@@ -34,9 +34,9 @@ namespace TankSurvival.Combat.Shooting
         public float damage;
         // Pierce: оставшиеся пробития; -1 = модуль отсутствует/не срабатывает.
         public int pierceRemaining;
-        // Laser Focus: накопленные стаки и враг, на котором они накоплены.
+        // Laser Focus: накопленные стаки и цель (по IDamageable), на которой они накоплены.
         public int laserStacks;
-        public EnemyController laserFocusedEnemy;
+        public IDamageable laserFocusedTarget;
 
         public void Reset()
         {
@@ -60,11 +60,11 @@ namespace TankSurvival.Combat.Shooting
             remainingRange = 0f;
             tickRate = 0f;
             nextTickAt = 0f;
-            currentTarget = null;
+            currentTarget = default;
             damage = 0f;
             pierceRemaining = -1;
             laserStacks = 0;
-            laserFocusedEnemy = null;
+            laserFocusedTarget = null;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace TankSurvival.Enemy
         public float healthMultiplier = 1f;
         public float currentHealth;
 
+        public bool IsAlive => currentHealth > 0f;
+
         public event Action OnDeath;
 
         public void Init(EnemyData data)

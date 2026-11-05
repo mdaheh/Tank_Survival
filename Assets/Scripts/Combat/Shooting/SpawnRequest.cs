@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TankSurvival.Combat.Shooting
 {
-    public class SpawnRequest
+    public struct SpawnRequest
     {
         public DeliveryType type;
         public Vector3 position;

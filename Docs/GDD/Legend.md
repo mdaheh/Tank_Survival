@@ -349,7 +349,7 @@
 | Паттерн | Component-Based Architecture (CBA) |
 | Данные | ScriptableObject |
 | Поведение | MonoBehaviour |
-| Связь | Интерфейс IHitHandler |
+| Связь | IDamageable + контракты стадий выстрела (IOnSpawn/IOnFlight/IOnHit/IOnPostHit/IOnDestroy) |
 
 **Запреты:** DOTS, Burst, async/await, Instantiate без пула.
 **Обязательно:** Object Pooling, лимит сущностей, depth counter.

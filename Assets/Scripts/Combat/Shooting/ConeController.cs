@@ -71,6 +71,12 @@ namespace TankSurvival.Combat.Shooting
                 ctx.nextTickAt += ctx.config.tickRate;
                 RunSectorHits(ctx, origin, flatDir);
 
+                IOnPostHit[] postHitModules = ctx.buildSnapshot.postHitModules;
+                for (int p = 0; p < postHitModules.Length; p++)
+                {
+                    postHitModules[p].OnPostHit(ctx);
+                }
+
                 IVfxSpawner vfx = Vfx;
                 if (ctx.config.coneVfx != null && vfx != null)
                 {
@@ -114,17 +120,9 @@ namespace TankSurvival.Combat.Shooting
 
         private static void SetAnchor(ShotContext ctx, EnemyController enemy)
         {
-            Target anchor = ctx.currentTarget;
-            if (anchor == null)
-            {
-                anchor = new Target();
-                ctx.currentTarget = anchor;
-            }
-
-            anchor.position = enemy.transform.position;
-            anchor.damageable = enemy.Damageable;
-            anchor.faction = Faction.Enemy;
-            anchor.enemy = enemy;
+            ctx.currentTarget.position = enemy.transform.position;
+            ctx.currentTarget.damageable = enemy.Damageable;
+            ctx.currentTarget.faction = Faction.Enemy;
         }
 
         private static void RunSectorHits(ShotContext ctx, Vector3 origin, Vector3 flatDir)
@@ -161,7 +159,6 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = Faction.Enemy;
-            target.enemy = enemy;
 
             return target;
         }

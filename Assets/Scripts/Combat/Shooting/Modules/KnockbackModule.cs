@@ -1,5 +1,6 @@
+using TankSurvival.Combat;
+using TankSurvival.Core;
 using TankSurvival.Data;
-using TankSurvival.Enemy;
 using UnityEngine;
 
 namespace TankSurvival.Combat.Shooting
@@ -8,24 +9,43 @@ namespace TankSurvival.Combat.Shooting
     {
         private readonly OnHitModuleData _data;
 
+        private ControlEffectSystem _controlEffects;
+
         public KnockbackModule(OnHitModuleData data)
         {
             _data = data;
         }
 
+        private ControlEffectSystem ControlEffects
+        {
+            get
+            {
+                if (_controlEffects == null)
+                {
+                    _controlEffects = GameServices.Get<ControlEffectSystem>();
+                }
+
+                return _controlEffects;
+            }
+        }
+
         public void OnHit(ShotContext ctx, Target target)
         {
-            EnemyController enemy = target?.enemy;
-            if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
+            IDamageable damageable = target.damageable;
+            if (damageable == null || !damageable.IsAlive)
             {
                 return;
             }
 
-            Vector3 dir = enemy.transform.position - ctx.hitPoint;
+            Vector3 dir = target.position - ctx.hitPoint;
             dir.y = 0f;
             dir.Normalize();
 
-            enemy.ApplyKnockback(dir * (_data.force * _data.damageScaling), _data.duration);
+            ControlEffectSystem controlEffects = ControlEffects;
+            if (controlEffects != null)
+            {
+                controlEffects.ApplyKnockback(damageable, dir * (_data.force * _data.damageScaling), _data.duration);
+            }
         }
     }
 }

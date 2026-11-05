@@ -25,8 +25,9 @@ namespace TankSurvival.Combat
             GameServices.Register(this);
         }
 
-        public void ApplyBurn(EnemyController enemy, float tickDamage, float tickRate, float duration)
+        public void ApplyBurn(IDamageable damageable, float tickDamage, float tickRate, float duration)
         {
+            EnemyController enemy = Resolve(damageable);
             if (enemy == null)
                 return;
 
@@ -61,8 +62,9 @@ namespace TankSurvival.Combat
             burns.Add(status);
         }
 
-        public void RemoveBurn(EnemyController enemy)
+        public void RemoveBurn(IDamageable damageable)
         {
+            EnemyController enemy = Resolve(damageable);
             if (enemy == null)
                 return;
 
@@ -74,6 +76,16 @@ namespace TankSurvival.Combat
                     return;
                 }
             }
+        }
+
+        private static EnemyController Resolve(IDamageable damageable)
+        {
+            if (damageable == null)
+            {
+                return null;
+            }
+
+            return EnemyController.TryGetByDamageable(damageable, out EnemyController enemy) ? enemy : null;
         }
 
 #if UNITY_EDITOR || DEBUG

@@ -19,8 +19,8 @@ namespace TankSurvival.Combat.Shooting
             {
                 ctx.state = ShotState.Flight;
                 ctx.remainingRange = ctx.config.range;
-                ctx.lifetime = ctx.buildSnapshot.speed > 0f
-                    ? ctx.config.range / ctx.buildSnapshot.speed
+                ctx.lifetime = ctx.speed > 0f
+                    ? ctx.config.range / ctx.speed
                     : -1f;
             }
 
@@ -35,7 +35,7 @@ namespace TankSurvival.Combat.Shooting
                 flightModules[i].OnFlight(ctx, dt);
             }
 
-            Vector3 velocity = ctx.direction * ctx.buildSnapshot.speed;
+            Vector3 velocity = ctx.direction * ctx.speed;
             ctx.prevPosition = ctx.position;
             ctx.position += velocity * dt;
             ctx.remainingRange -= velocity.magnitude * dt;
@@ -102,7 +102,6 @@ namespace TankSurvival.Combat.Shooting
                 target.position = enemy.transform.position;
                 target.damageable = enemy.Damageable;
                 target.faction = Faction.Enemy;
-                target.enemy = enemy;
                 ctx.hitTargets.Add(target);
 
                 ctx.hitPoint = hitPoint;
@@ -139,7 +138,6 @@ namespace TankSurvival.Combat.Shooting
             target.position = playerPosition;
             target.damageable = player;
             target.faction = Faction.Player;
-            target.enemy = null;
             ctx.hitTargets.Add(target);
 
             ctx.hitPoint = hitPoint;

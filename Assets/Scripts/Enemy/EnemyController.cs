@@ -9,6 +9,7 @@ namespace TankSurvival.Enemy
     public class EnemyController : MonoBehaviour
     {
         public static readonly List<EnemyController> Active = new List<EnemyController>();
+        private static readonly Dictionary<IDamageable, EnemyController> ByDamageable = new Dictionary<IDamageable, EnemyController>();
 
         public EnemyData data;
         public Transform target;
@@ -39,11 +40,30 @@ namespace TankSurvival.Enemy
         private void OnEnable()
         {
             Active.Add(this);
+            if (health != null)
+            {
+                ByDamageable[health] = this;
+            }
         }
 
         private void OnDisable()
         {
             Active.Remove(this);
+            if (health != null)
+            {
+                ByDamageable.Remove(health);
+            }
+        }
+
+        public static bool TryGetByDamageable(IDamageable damageable, out EnemyController enemy)
+        {
+            if (damageable == null)
+            {
+                enemy = null;
+                return false;
+            }
+
+            return ByDamageable.TryGetValue(damageable, out enemy);
         }
 
         public void Init(EnemyData data, Transform target, EnemyKillSystem killSystem)

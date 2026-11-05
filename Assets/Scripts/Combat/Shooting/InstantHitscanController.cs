@@ -128,7 +128,6 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = Faction.Enemy;
-            target.enemy = enemy;
 
             return target;
         }

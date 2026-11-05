@@ -39,6 +39,12 @@ namespace TankSurvival.Combat.Shooting
             {
                 ctx.nextTickAt += ctx.config.tickRate;
                 RunAreaHits(ctx);
+
+                IOnPostHit[] postHitModules = ctx.buildSnapshot.postHitModules;
+                for (int i = 0; i < postHitModules.Length; i++)
+                {
+                    postHitModules[i].OnPostHit(ctx);
+                }
             }
         }
 
@@ -70,7 +76,6 @@ namespace TankSurvival.Combat.Shooting
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
             target.faction = Faction.Enemy;
-            target.enemy = enemy;
 
             return target;
         }

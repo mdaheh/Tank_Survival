@@ -24,8 +24,9 @@ namespace TankSurvival.Combat
             GameServices.Register(this);
         }
 
-        public void ApplySlow(EnemyController enemy, float slowAmount, float duration)
+        public void ApplySlow(IDamageable damageable, float slowAmount, float duration)
         {
+            EnemyController enemy = Resolve(damageable);
             if (!IsValid(enemy))
             {
                 return;
@@ -51,8 +52,9 @@ namespace TankSurvival.Combat
             enemy.controlSpeedMultiplier = 1f - slowAmount;
         }
 
-        public void ApplyFreeze(EnemyController enemy, float slowAmount, float duration, int freezeThreshold)
+        public void ApplyFreeze(IDamageable damageable, float slowAmount, float duration, int freezeThreshold)
         {
+            EnemyController enemy = Resolve(damageable);
             if (!IsValid(enemy))
             {
                 return;
@@ -86,8 +88,9 @@ namespace TankSurvival.Combat
             enemy.controlSpeedMultiplier = status.frozen ? 0f : (1f - slowAmount);
         }
 
-        public void RemoveFreeze(EnemyController enemy)
+        public void RemoveFreeze(IDamageable damageable)
         {
+            EnemyController enemy = Resolve(damageable);
             if (enemy == null)
             {
                 return;
@@ -103,6 +106,27 @@ namespace TankSurvival.Combat
             }
 
             enemy.controlSpeedMultiplier = 1f;
+        }
+
+        public void ApplyKnockback(IDamageable damageable, Vector3 velocity, float duration)
+        {
+            EnemyController enemy = Resolve(damageable);
+            if (enemy == null)
+            {
+                return;
+            }
+
+            enemy.ApplyKnockback(velocity, duration);
+        }
+
+        private static EnemyController Resolve(IDamageable damageable)
+        {
+            if (damageable == null)
+            {
+                return null;
+            }
+
+            return EnemyController.TryGetByDamageable(damageable, out EnemyController enemy) ? enemy : null;
         }
 
 #if UNITY_EDITOR || DEBUG
