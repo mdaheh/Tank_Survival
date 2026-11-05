@@ -7,7 +7,6 @@ namespace TankSurvival.Combat.Shooting
     public class ShotSystem : MonoBehaviour
     {
         [SerializeField] private ShotView shotViewPrefab;
-        [SerializeField] private GameObject coneVfxPrefab;
         [SerializeField] private int maxDepth = 10;
 
         private readonly Stack<ShotContext> _pool = new Stack<ShotContext>();
@@ -19,7 +18,6 @@ namespace TankSurvival.Combat.Shooting
         private ConeController _cone;
 
         private PoolManager _poolManager;
-        private IVfxSpawner _vfx;
 
         private int _nextId;
 
@@ -33,19 +31,6 @@ namespace TankSurvival.Combat.Shooting
                 }
 
                 return _poolManager;
-            }
-        }
-
-        private IVfxSpawner VfxService
-        {
-            get
-            {
-                if (_vfx == null)
-                {
-                    _vfx = GameServices.Get<IVfxSpawner>();
-                }
-
-                return _vfx;
             }
         }
 
@@ -85,14 +70,6 @@ namespace TankSurvival.Combat.Shooting
                     GameObject instance = PoolService.Get(shotViewPrefab.gameObject);
                     view = instance.GetComponent<ShotView>();
                     view.Bind(ctx);
-                    break;
-                case DeliveryType.Cone:
-                    IVfxSpawner vfx = VfxService;
-                    if (vfx != null)
-                    {
-                        vfx.Spawn(coneVfxPrefab, ctx.position, ctx.direction);
-                    }
-
                     break;
             }
 

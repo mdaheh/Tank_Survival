@@ -1,3 +1,4 @@
+using TankSurvival.Core;
 using TankSurvival.Enemy;
 using UnityEngine;
 #if UNITY_EDITOR || DEBUG
@@ -9,6 +10,21 @@ namespace TankSurvival.Combat.Shooting
     public class ConeController
     {
         private const float MinDirectionSqr = 1e-6f;
+
+        private IVfxSpawner _vfx;
+
+        private IVfxSpawner Vfx
+        {
+            get
+            {
+                if (_vfx == null)
+                {
+                    _vfx = GameServices.Get<IVfxSpawner>();
+                }
+
+                return _vfx;
+            }
+        }
 
         public void Tick(ShotContext ctx, float dt)
         {
@@ -54,6 +70,12 @@ namespace TankSurvival.Combat.Shooting
             {
                 ctx.nextTickAt += ctx.config.tickRate;
                 RunSectorHits(ctx, origin, flatDir);
+
+                IVfxSpawner vfx = Vfx;
+                if (ctx.config.coneVfx != null && vfx != null)
+                {
+                    vfx.Spawn(ctx.config.coneVfx, ctx.position, ctx.direction);
+                }
             }
 
             if (ctx.lifetime > 0f && ctx.age >= ctx.lifetime)

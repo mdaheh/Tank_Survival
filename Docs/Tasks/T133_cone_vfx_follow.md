@@ -1,5 +1,5 @@
 # T133: Cone VFX следует за непрерывным конусом
-- Status: [ ]
+- Status: [x]
 - Phase: 14
 - Depends: T132
 - Files:
@@ -52,5 +52,5 @@ damage-тике.
 - VFX не накапливается: объекты конуса возвращаются в пул (`PooledVFX` саморелизуется по `duration`).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/DeliveryConfig.cs: добавлен `using UnityEngine;` и поле `public GameObject coneVfx;`; Assets/Scripts/Combat/Shooting/ShotFactory.cs: в `Build` добавлено `config.coneVfx = module.coneVfx;`; Assets/Scripts/Combat/Shooting/ConeController.cs: добавлен `using TankSurvival.Core;`, приватное поле `_vfx` и ленивое свойство `Vfx` (`GameServices.Get<IVfxSpawner>()`), в damage-тике после `nextTickAt += tickRate` и `RunSectorHits` — спавн `ctx.config.coneVfx` через `vfx.Spawn(...)` в текущих `ctx.position`/`ctx.direction`; Assets/Scripts/Combat/Shooting/ShotSystem.cs: удалены поле `coneVfxPrefab`, поле `_vfx`, свойство `VfxService` и `case DeliveryType.Cone:` из `switch` в `Fire`.
+Блокер: —

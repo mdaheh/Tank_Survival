@@ -19,6 +19,7 @@ namespace TankSurvival.Combat.Shooting
             config.maxTargets = module.maxTargets;
             config.continuous = module.duration == DeliveryModuleData.DeliveryDuration.Continuous;
             config.tickRate = module.tickRate;
+            config.coneVfx = module.coneVfx;
 
             SpawnRequest request = new SpawnRequest();
             request.type = MapType(module.kind, module.duration);

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace TankSurvival.Combat.Shooting
 {
     public struct DeliveryConfig
@@ -7,5 +9,6 @@ namespace TankSurvival.Combat.Shooting
         public int maxTargets;
         public bool continuous;
         public float tickRate;
+        public GameObject coneVfx;
     }
 }
