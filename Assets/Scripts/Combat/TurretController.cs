@@ -62,7 +62,13 @@ namespace TankSurvival.Combat
 
             if (continuous)
             {
-                if ((_continuousShotId == -1 || !shotSystem.IsAlive(_continuousShotId)) && closest != null)
+                if (_continuousShotId != -1 && shotSystem.IsAlive(_continuousShotId))
+                {
+                    shotSystem.SetOrigin(_continuousShotId, position);
+                    return;
+                }
+
+                if (closest != null)
                 {
                     Vector3 dir = (closest.transform.position - position).normalized;
                     _continuousShotId = shotSystem.Fire(_factory.Build(turret.delivery, position, dir, statBlock.damage));

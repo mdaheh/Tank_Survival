@@ -115,6 +115,22 @@ namespace TankSurvival.Combat.Shooting
             return false;
         }
 
+        public bool SetOrigin(int id, Vector3 position)
+        {
+            for (int i = 0; i < _active.Count; i++)
+            {
+                if (_active[i].id != id)
+                {
+                    continue;
+                }
+
+                _active[i].ctx.position = position;
+                return true;
+            }
+
+            return false;
+        }
+
         private void Update()
         {
             float dt = Time.deltaTime;

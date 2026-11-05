@@ -1515,9 +1515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
   turret: {fileID: 11400000, guid: 872844f46610956429e8a923500c86f1, type: 2}
-  delivery: {fileID: 0}
-  hitscanDelivery: {fileID: 0}
-  coneDelivery: {fileID: 563864564}
+  shotSystem: {fileID: 1618588131}
   onHit: {fileID: 563864565}
   statBlock: {fileID: 1245404300}
 --- !u!1 &592908522
@@ -2028,9 +2026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
   turret: {fileID: 11400000, guid: fbd5563e79b1ed24d9249917b2459b5b, type: 2}
-  delivery: {fileID: 0}
-  hitscanDelivery: {fileID: 849836584}
-  coneDelivery: {fileID: 0}
+  shotSystem: {fileID: 1618588131}
   onHit: {fileID: 849836581}
   statBlock: {fileID: 1245404300}
 --- !u!114 &849836584
@@ -2771,9 +2767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
   turret: {fileID: 11400000, guid: a57bbc1af71acdd41b36ad370b11d4a0, type: 2}
-  delivery: {fileID: 0}
-  hitscanDelivery: {fileID: 999279205}
-  coneDelivery: {fileID: 0}
+  shotSystem: {fileID: 0}
   onHit: {fileID: 0}
   statBlock: {fileID: 1245404300}
 --- !u!114 &999279205
@@ -5732,9 +5726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.TurretController
   turret: {fileID: 11400000, guid: eda579dde12ec134cb9c409a84c988b7, type: 2}
-  delivery: {fileID: 2059421237}
-  hitscanDelivery: {fileID: 0}
-  coneDelivery: {fileID: 0}
+  shotSystem: {fileID: 1618588131}
   onHit: {fileID: 2059421240}
   statBlock: {fileID: 1245404300}
 --- !u!4 &2059421239
