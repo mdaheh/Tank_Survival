@@ -19,7 +19,7 @@ namespace TankSurvival.Combat.Shooting
             BuildSnapshot buildSnapshot = new BuildSnapshot();
             buildSnapshot.damage = damage;
             buildSnapshot.speed = module.speed;
-            buildSnapshot.hitModules = BuildHitModules(onHitModules);
+            PopulateModules(buildSnapshot, onHitModules);
 
             DeliveryConfig config = new DeliveryConfig();
             config.range = module.range;
@@ -40,11 +40,16 @@ namespace TankSurvival.Combat.Shooting
             return request;
         }
 
-        private static IOnHit[] BuildHitModules(OnHitModuleData[] onHitModules)
+        private static void PopulateModules(BuildSnapshot buildSnapshot, OnHitModuleData[] onHitModules)
         {
             List<OnHitModuleData> ordered = CollectModules(onHitModules);
-            IOnHit[] hitModules = new IOnHit[1 + ordered.Count];
-            hitModules[0] = new DamageModule();
+
+            List<IOnSpawn> spawnModules = new List<IOnSpawn>();
+            List<IOnFlight> flightModules = new List<IOnFlight>();
+            List<IOnHit> hitModules = new List<IOnHit>();
+            List<IOnPostHit> postHitModules = new List<IOnPostHit>();
+
+            hitModules.Add(new DamageModule());
 
             for (int i = 0; i < ordered.Count; i++)
             {
@@ -53,27 +58,46 @@ namespace TankSurvival.Combat.Shooting
                 switch (data.kind)
                 {
                     case OnHitModuleData.OnHitKind.Burn:
-                        hitModules[i + 1] = new BurnModule(data);
+                        hitModules.Add(new BurnModule(data));
                         break;
                     case OnHitModuleData.OnHitKind.Slow:
-                        hitModules[i + 1] = new SlowModule(data);
+                        hitModules.Add(new SlowModule(data));
                         break;
                     case OnHitModuleData.OnHitKind.Freeze:
-                        hitModules[i + 1] = new FreezeModule(data);
+                        hitModules.Add(new FreezeModule(data));
                         break;
                     case OnHitModuleData.OnHitKind.Knockback:
-                        hitModules[i + 1] = new KnockbackModule(data);
+                        hitModules.Add(new KnockbackModule(data));
                         break;
                     case OnHitModuleData.OnHitKind.Explosion:
-                        hitModules[i + 1] = new ExplosionModule(data);
+                        hitModules.Add(new ExplosionModule(data));
                         break;
                     case OnHitModuleData.OnHitKind.Ground:
-                        hitModules[i + 1] = new GroundModule(data);
+                        hitModules.Add(new GroundModule(data));
+                        break;
+                    case OnHitModuleData.OnHitKind.Pierce:
+                        {
+                            PierceModule module = new PierceModule(data);
+                            spawnModules.Add(module);
+                            postHitModules.Add(module);
+                        }
+                        break;
+                    case OnHitModuleData.OnHitKind.Homing:
+                        flightModules.Add(new HomingModule(data));
+                        break;
+                    case OnHitModuleData.OnHitKind.BeamSplit:
+                        hitModules.Add(new BeamSplitModule(data));
+                        break;
+                    case OnHitModuleData.OnHitKind.LaserFocus:
+                        hitModules.Add(new LaserFocusModule(data));
                         break;
                 }
             }
 
-            return hitModules;
+            buildSnapshot.spawnModules = spawnModules.ToArray();
+            buildSnapshot.flightModules = flightModules.ToArray();
+            buildSnapshot.hitModules = hitModules.ToArray();
+            buildSnapshot.postHitModules = postHitModules.ToArray();
         }
 
         private static List<OnHitModuleData> CollectModules(OnHitModuleData[] onHitModules)

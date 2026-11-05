@@ -9,7 +9,7 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
-            target.damageable.TakeDamage(ctx.buildSnapshot.damage);
+            target.damageable.TakeDamage(ctx.damage);
         }
     }
 }

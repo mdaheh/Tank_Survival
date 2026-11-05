@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.TurretData
   delivery: {fileID: 11400000, guid: 849a7dd2d2fd9884c8f1a5f2b480058c, type: 2}
-  onHitModules: []
+  onHitModules:
+  - {fileID: 11400000, guid: 8f20bdd1f50f7d64d85b8e3758afef52, type: 2}

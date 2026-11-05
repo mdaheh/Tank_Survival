@@ -12,7 +12,11 @@ namespace TankSurvival.Data
             Slow,
             Freeze,
             Knockback,
-            Ground
+            Ground,
+            Pierce,
+            Homing,
+            BeamSplit,
+            LaserFocus
         }
 
         public OnHitKind kind;
@@ -31,6 +35,20 @@ namespace TankSurvival.Data
         public float force;
         public float damageScaling;
         public GameObject groundVfx;
+
+        public int maxPierceCount = 3;
+        public float damageFalloff = 0.8f;
+
+        public float homingStrength = 3f;
+        public float homingRadius = 3f;
+
+        public int splitCount = 3;
+        public float splitAngle = 45f;
+
+        public float damageGrowth = 0.1f;
+        public int maxStacks = 5;
+        public bool stackResetOnSwitch = true;
+
         public int maxDepth = 5;
     }
 }

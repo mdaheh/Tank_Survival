@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TankSurvival.Enemy;
 using UnityEngine;
 
 namespace TankSurvival.Combat.Shooting
@@ -28,6 +29,14 @@ namespace TankSurvival.Combat.Shooting
         // Для точечной доставки — жертва; для площадной — якорь направления (урон всем из FindTargets)
         public Target currentTarget;
 
+        // Per-shot damage: база из buildSnapshot.damage, уменьшается Pierce (falloff).
+        public float damage;
+        // Pierce: оставшиеся пробития; -1 = модуль отсутствует/не срабатывает.
+        public int pierceRemaining;
+        // Laser Focus: накопленные стаки и враг, на котором они накоплены.
+        public int laserStacks;
+        public EnemyController laserFocusedEnemy;
+
         public void Reset()
         {
             state = ShotState.Dead;
@@ -50,6 +59,10 @@ namespace TankSurvival.Combat.Shooting
             tickRate = 0f;
             nextTickAt = 0f;
             currentTarget = null;
+            damage = 0f;
+            pierceRemaining = -1;
+            laserStacks = 0;
+            laserFocusedEnemy = null;
         }
     }
 }
