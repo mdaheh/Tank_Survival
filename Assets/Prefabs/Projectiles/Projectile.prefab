@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1162604729474515798}
   - component: {fileID: 6965035217227943699}
   - component: {fileID: 3558638946460268557}
-  - component: {fileID: 5267292501023014200}
   - component: {fileID: 4755453326353352488}
   m_Layer: 0
   m_Name: Projectile
@@ -114,24 +113,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5267292501023014200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658045355164781374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c85b688136791145a3208fe0cb9f60f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Combat.Projectile
-  damage: 0
-  speed: 0
-  range: 0
-  direction: {x: 0, y: 0, z: 0}
-  pool: {fileID: 0}
-  onHit: {fileID: 0}
 --- !u!114 &4755453326353352488
 MonoBehaviour:
   m_ObjectHideFlags: 0

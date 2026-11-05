@@ -1,3 +1,4 @@
+using TankSurvival.Core;
 using TankSurvival.Enemy;
 using UnityEngine;
 #if UNITY_EDITOR || DEBUG
@@ -50,44 +51,7 @@ namespace TankSurvival.Combat.Shooting
                 return;
             }
 
-            bool hit = false;
-
-            for (int i = 0; i < EnemyController.Active.Count; i++)
-            {
-                EnemyController enemy = EnemyController.Active[i];
-                if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
-                {
-                    continue;
-                }
-
-                if (IsAlreadyHit(ctx, enemy))
-                {
-                    continue;
-                }
-
-                Vector3 hitPoint;
-                if (!TrySweepPoint(ctx.prevPosition, ctx.position, enemy.transform.position, out hitPoint))
-                {
-                    continue;
-                }
-
-                hit = true;
-
-                Target target = new Target();
-                target.position = enemy.transform.position;
-                target.damageable = enemy.Damageable;
-                target.faction = 0;
-                target.enemy = enemy;
-                ctx.hitTargets.Add(target);
-
-                ctx.hitPoint = hitPoint;
-
-                IOnHit[] hitModules = ctx.buildSnapshot.hitModules;
-                for (int m = 0; m < hitModules.Length; m++)
-                {
-                    hitModules[m].OnHit(ctx, target);
-                }
-            }
+            bool hit = ctx.faction == Faction.Enemy ? HitPlayer(ctx) : HitEnemies(ctx);
 
             if (!hit)
             {
@@ -109,11 +73,91 @@ namespace TankSurvival.Combat.Shooting
             }
         }
 
-        private static bool IsAlreadyHit(ShotContext ctx, EnemyController enemy)
+        private static bool HitEnemies(ShotContext ctx)
+        {
+            bool hit = false;
+
+            for (int i = 0; i < EnemyController.Active.Count; i++)
+            {
+                EnemyController enemy = EnemyController.Active[i];
+                if (enemy == null || enemy.health == null || enemy.health.currentHealth <= 0f)
+                {
+                    continue;
+                }
+
+                if (IsAlreadyHit(ctx, enemy.Damageable))
+                {
+                    continue;
+                }
+
+                Vector3 hitPoint;
+                if (!TrySweepPoint(ctx.prevPosition, ctx.position, enemy.transform.position, out hitPoint))
+                {
+                    continue;
+                }
+
+                hit = true;
+
+                Target target = new Target();
+                target.position = enemy.transform.position;
+                target.damageable = enemy.Damageable;
+                target.faction = Faction.Enemy;
+                target.enemy = enemy;
+                ctx.hitTargets.Add(target);
+
+                ctx.hitPoint = hitPoint;
+
+                IOnHit[] hitModules = ctx.buildSnapshot.hitModules;
+                for (int m = 0; m < hitModules.Length; m++)
+                {
+                    hitModules[m].OnHit(ctx, target);
+                }
+            }
+
+            return hit;
+        }
+
+        private static bool HitPlayer(ShotContext ctx)
+        {
+            if (!Combatants.TryGetPlayer(out Vector3 playerPosition, out IDamageable player))
+            {
+                return false;
+            }
+
+            if (IsAlreadyHit(ctx, player))
+            {
+                return false;
+            }
+
+            Vector3 hitPoint;
+            if (!TrySweepPoint(ctx.prevPosition, ctx.position, playerPosition, out hitPoint))
+            {
+                return false;
+            }
+
+            Target target = new Target();
+            target.position = playerPosition;
+            target.damageable = player;
+            target.faction = Faction.Player;
+            target.enemy = null;
+            ctx.hitTargets.Add(target);
+
+            ctx.hitPoint = hitPoint;
+
+            IOnHit[] hitModules = ctx.buildSnapshot.hitModules;
+            for (int m = 0; m < hitModules.Length; m++)
+            {
+                hitModules[m].OnHit(ctx, target);
+            }
+
+            return true;
+        }
+
+        private static bool IsAlreadyHit(ShotContext ctx, IDamageable damageable)
         {
             for (int i = 0; i < ctx.hitTargets.Count; i++)
             {
-                if (ctx.hitTargets[i].damageable == enemy.Damageable)
+                if (ctx.hitTargets[i].damageable == damageable)
                 {
                     return true;
                 }

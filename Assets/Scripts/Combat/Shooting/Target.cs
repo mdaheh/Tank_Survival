@@ -9,6 +9,6 @@ namespace TankSurvival.Combat.Shooting
         public Vector3 position;
         public IDamageable damageable;
         public EnemyController enemy;
-        public int faction;
+        public Faction faction;
     }
 }

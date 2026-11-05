@@ -36,6 +36,30 @@ namespace TankSurvival.Combat.Shooting
             request.buildSnapshot = buildSnapshot;
             request.config = config;
             request.depth = depth;
+            request.faction = Faction.Player;
+
+            return request;
+        }
+
+        public SpawnRequest BuildProjectile(Vector3 position, Vector3 direction, float damage, float speed,
+            float range, Faction faction)
+        {
+            BuildSnapshot buildSnapshot = new BuildSnapshot();
+            buildSnapshot.damage = damage;
+            buildSnapshot.speed = speed;
+            buildSnapshot.hitModules = new IOnHit[] { new DamageModule() };
+
+            DeliveryConfig config = default;
+            config.range = range;
+
+            SpawnRequest request = new SpawnRequest();
+            request.type = DeliveryType.Projectile;
+            request.position = position;
+            request.direction = direction;
+            request.buildSnapshot = buildSnapshot;
+            request.config = config;
+            request.depth = 0;
+            request.faction = faction;
 
             return request;
         }

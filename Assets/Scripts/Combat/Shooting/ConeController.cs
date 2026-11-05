@@ -123,7 +123,7 @@ namespace TankSurvival.Combat.Shooting
 
             anchor.position = enemy.transform.position;
             anchor.damageable = enemy.Damageable;
-            anchor.faction = 0;
+            anchor.faction = Faction.Enemy;
             anchor.enemy = enemy;
         }
 
@@ -160,7 +160,7 @@ namespace TankSurvival.Combat.Shooting
             Target target = new Target();
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
-            target.faction = 0;
+            target.faction = Faction.Enemy;
             target.enemy = enemy;
 
             return target;

@@ -100,7 +100,7 @@ namespace TankSurvival.Waves
             controller.health.healthMultiplier = difficulty.healthMultiplier;
             controller.speedMultiplier = difficulty.speedMultiplier;
             controller.health.OnDeath += () => { HandleEnemyDeath(controller); progression.AddXp(controller.data.xpReward * difficulty.xpMultiplier); };
-            controller.Init(order.enemy, playerTransform, poolManager, killSystem);
+            controller.Init(order.enemy, playerTransform, killSystem);
             _active.Add(controller);
         }
 

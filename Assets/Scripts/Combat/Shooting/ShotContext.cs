@@ -15,6 +15,7 @@ namespace TankSurvival.Combat.Shooting
         public int depth;
         public BuildSnapshot buildSnapshot;
         public DeliveryConfig config;
+        public Faction faction;
         public List<SpawnRequest> spawnQueue = new List<SpawnRequest>();
         public List<Target> hitTargets = new List<Target>();
         public Vector3 hitPoint;
@@ -47,6 +48,7 @@ namespace TankSurvival.Combat.Shooting
             depth = 0;
             buildSnapshot = null;
             config = default;
+            faction = Faction.Player;
             spawnQueue.Clear();
             hitTargets.Clear();
             hitPoint = Vector3.zero;

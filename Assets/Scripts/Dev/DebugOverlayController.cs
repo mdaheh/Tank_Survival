@@ -335,9 +335,6 @@ namespace TankSurvival.Dev
             _builder.Append(" (");
             _builder.Append(_controlEffects != null ? _controlEffects.GetSlowAmount(enemy).ToString("0.##") : "0");
             _builder.Append(")\n");
-            _builder.Append("Ground: ");
-            _builder.Append(IsEnemyInGround(enemy) ? "да" : "нет");
-            _builder.Append('\n');
             _builder.Append("Knockback: ");
             _builder.Append(enemy != null && enemy.KnockbackRemaining > 0f ? "да" : "нет");
             _builder.Append(" (");
@@ -353,21 +350,6 @@ namespace TankSurvival.Dev
                 return 0f;
 
             return enemy.data.speed * enemy.speedMultiplier * enemy.controlSpeedMultiplier;
-        }
-
-        private static bool IsEnemyInGround(EnemyController enemy)
-        {
-            if (enemy == null)
-                return false;
-
-            for (int i = 0; i < GroundZone.Active.Count; i++)
-            {
-                GroundZone zone = GroundZone.Active[i];
-                if (zone != null && zone.Contains(enemy))
-                    return true;
-            }
-
-            return false;
         }
 
         private string BuildStatusText()

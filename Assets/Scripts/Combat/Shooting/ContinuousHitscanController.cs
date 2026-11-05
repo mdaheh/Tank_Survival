@@ -40,7 +40,7 @@ namespace TankSurvival.Combat.Shooting
 
             ctx.currentTarget.position = enemy.transform.position;
             ctx.currentTarget.damageable = enemy.Damageable;
-            ctx.currentTarget.faction = 0;
+            ctx.currentTarget.faction = Faction.Enemy;
             ctx.currentTarget.enemy = enemy;
 
             Vector3 toTarget = ctx.currentTarget.position - ctx.position;
@@ -196,7 +196,7 @@ namespace TankSurvival.Combat.Shooting
             Target target = new Target();
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
-            target.faction = 0;
+            target.faction = Faction.Enemy;
             target.enemy = enemy;
 
             return target;

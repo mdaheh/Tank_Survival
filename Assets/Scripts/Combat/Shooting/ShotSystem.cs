@@ -38,6 +38,7 @@ namespace TankSurvival.Combat.Shooting
 
         private void Awake()
         {
+            GameServices.Register(this);
             _projectile = new ProjectileController();
             _instantHitscan = new InstantHitscanController();
             _continuousHitscan = new ContinuousHitscanController();
@@ -57,6 +58,7 @@ namespace TankSurvival.Combat.Shooting
             ctx.damage = request.buildSnapshot.damage;
             ctx.config = request.config;
             ctx.depth = request.depth;
+            ctx.faction = request.faction;
             ctx.state = ShotState.Spawn;
 
             IOnSpawn[] spawnModules = ctx.buildSnapshot.spawnModules;

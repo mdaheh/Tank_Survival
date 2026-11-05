@@ -70,7 +70,7 @@ namespace TankSurvival.Combat.Shooting
             Target target = new Target();
             target.position = enemy.transform.position;
             target.damageable = enemy.Damageable;
-            target.faction = 0;
+            target.faction = Faction.Enemy;
             target.enemy = enemy;
 
             return target;

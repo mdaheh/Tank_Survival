@@ -26,4 +26,10 @@ namespace TankSurvival.Combat.Shooting
         ContinuousHitscan,
         Zone
     }
+
+    public enum Faction
+    {
+        Player,
+        Enemy
+    }
 }

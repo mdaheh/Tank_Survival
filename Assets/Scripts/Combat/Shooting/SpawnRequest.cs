@@ -10,5 +10,6 @@ namespace TankSurvival.Combat.Shooting
         public BuildSnapshot buildSnapshot;
         public DeliveryConfig config;
         public int depth;
+        public Faction faction;
     }
 }

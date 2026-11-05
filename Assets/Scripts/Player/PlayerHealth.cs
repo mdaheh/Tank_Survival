@@ -1,4 +1,5 @@
 using System;
+using TankSurvival.Combat.Shooting;
 using TankSurvival.Core;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ namespace TankSurvival.Player
         private void Awake()
         {
             statBlock.MaxHealthIncreased += delta => currentHealth += delta;
+            Combatants.RegisterPlayer(transform, this);
+        }
+
+        private void OnDestroy()
+        {
+            Combatants.UnregisterPlayer();
         }
 
         public void Init()

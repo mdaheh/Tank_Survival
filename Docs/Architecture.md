@@ -151,7 +151,7 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 - `ChassisData.cs` — SO шасси: health/speed/turn, зарезервированное поле способности.
 - `TurretData.cs` — SO турели: ссылка на delivery-модуль, список on_hit-модулей, aps/range/damage.
-- `EnemyData.cs` — SO врага: health/speed/damage/xp_reward, behavior (melee).
+- `EnemyData.cs` — SO врага: health/speed/damage/xp_reward, behavior (melee/ranged), параметры стрельбы (shootRange/shootInterval/projectileSpeed).
 - `WaveData.cs` — SO волн: список составов волн, спавн-интервал.
 - `DifficultyData.cs` — SO сложности: множители HP/speed/count/XP, число волн.
 - `UpgradeData.cs` — SO апгрейда: целевой стат, величина, max_stacks.
@@ -184,15 +184,16 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 **Combat/Shooting — `Assets/Scripts/Combat/Shooting/`** (lifecycle-модель, `Docs/Shooting.md`)
 
-- `ShotTypes.cs` — enum `ShotState`, `DestroyReason`, `DeliveryType`.
+- `ShotTypes.cs` — enum `ShotState`, `DestroyReason`, `DeliveryType`, `Faction`.
 - `ShotContracts.cs` — контракты стадий `IOnSpawn`/`IOnFlight`/`IOnHit`/`IOnPostHit`/`IOnDestroy` + `IResettable`.
 - `ShotContext.cs` — состояние выстрела (пул, `Reset()`).
 - `BuildSnapshot.cs` — модули по стадиям + базовые статы; `Without<T>()`, `Empty`.
-- `SpawnRequest.cs` — запрос спавна (type/position/direction/buildSnapshot/depth).
+- `SpawnRequest.cs` — запрос спавна (type/position/direction/buildSnapshot/depth + faction).
 - `Target.cs` — цель (position + `IDamageable` + фракция).
+- `Combatants.cs` — реестр противников по фракции (регистрация цели игрока).
 - `IVfxSpawner.cs` — интерфейс спавна косметики (принадлежит контроллеру).
 - `ShotFactory.cs` — фабрика `DeliveryModuleData → SpawnRequest`, выбор контроллера по `DeliveryType`.
-- `ProjectileController.cs` — снаряд (Flight + Terminal Hit + keepAlive).
+- `ProjectileController.cs` — снаряд (Flight + Terminal Hit + keepAlive), фракционно-осведомлён.
 - `InstantHitscanController.cs` — мгновенный луч (Terminal).
 - `ContinuousHitscanController.cs` — непрерывный луч (Periodic).
 - `ConeController.cs` — конус (Periodic).
@@ -203,7 +204,7 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 **Enemy — `Assets/Scripts/Enemy/`**
 
-- `EnemyController.cs` — движение к игроку, melee-контакт.
+- `EnemyController.cs` — движение к игроку, melee-контакт, ranged-снаряд (Shooter) через `ShotSystem`.
 - `EnemyHealth.cs` — текущее HP врага, получение урона, событие смерти (для XP и волн).
 
 **Waves — `Assets/Scripts/Waves/`**
@@ -255,10 +256,13 @@ WaveSpawner/PlayerHealth/TurretController/StatusEffectSystem) без перез�
 
 Архитектура выстрела — lifecycle-модель из `Docs/Shooting.md`
 (`ShotContext` + типоспецифичные контроллеры + модули-контракты). Разделы §1/§2/§5
-описывают эту целевую модель. Текущий код находится в процессе миграции с
-legacy-модели (`DeliveryHandler`/`IHitHandler`/`OnHitDispatcher`); до завершения
-рефакторинга legacy-классы остаются в коде, но новые сущности стрельбы создаются
-только по lifecycle-модели.
+описывают эту целевую модель. Миграция с legacy-модели (`DeliveryHandler` /
+`IHitHandler` / `OnHitDispatcher` и legacy-обработчики) завершена: выстрелы
+создаются только по lifecycle-модели.
+
+Цель выбирается по фракции: выстрел игрока бьёт врагов, выстрел врага — игрока.
+`Combatants` регистрирует игрока как цель; `ProjectileController` по `ctx.faction`
+выбирает противников (`EnemyController.Active` либо игрок).
 
 ### Маппинг: тип доставки → контроллер
 

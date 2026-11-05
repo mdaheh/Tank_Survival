@@ -12,5 +12,6 @@ namespace TankSurvival.Data
         public string behavior = "melee";
         public float shootRange = 8f;
         public float shootInterval = 1.5f;
+        public float projectileSpeed = 10f;
     }
 }

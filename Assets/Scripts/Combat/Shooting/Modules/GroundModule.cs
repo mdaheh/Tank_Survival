@@ -38,6 +38,7 @@ namespace TankSurvival.Combat.Shooting
             req.buildSnapshot = child;
             req.config = cfg;
             req.depth = ctx.depth + 1;
+            req.faction = ctx.faction;
 
             ctx.spawnQueue.Add(req);
         }
