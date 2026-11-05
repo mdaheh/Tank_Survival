@@ -1,5 +1,5 @@
 # T135: AoEController — Terminal AoE (взрыв)
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T134
 - Files:
@@ -31,5 +31,5 @@
 - (совместно с T140/T141) турель с `Explosion`: при попадании все враги в радиусе получают урон, виден debug-круг (`DevVisualizer.ShowCircle`) и вспышка VFX (`deathVfx`).
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/AoEController.cs: создан Terminal AoE-контроллер (`Tick`: `age`/`hitPoint`, обход `EnemyController.Active` в радиусе `config.range`, `BuildTarget` → `hitTargets` + `hitModules`, `keepAlive = false`, `postHitModules.OnPostHit`, `destroyReason = Hit` + `DestroyShot`; `DestroyShot`: `destroyModules.OnDestroy`, спавн `config.deathVfx` через ленивый `Vfx`, `state = Dead`; debug-круг `DevVisualizer.ShowCircle` под `#if UNITY_EDITOR || DEBUG`; `DestroyShot` сделан инстансным — иначе нет доступа к `Vfx`)
+Блокер: —
