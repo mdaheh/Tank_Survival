@@ -11,18 +11,12 @@ namespace TankSurvival.Combat
     {
         public TurretData turret;
         public ShotSystem shotSystem;
-        public OnHitDispatcher onHit;
         public StatBlock statBlock;
 
         private readonly ShotFactory _factory = new ShotFactory();
         private int _continuousShotId = -1;
 
         private float _cooldown;
-
-        private void Start()
-        {
-            onHit.SetModules(turret.onHitModules);
-        }
 
         private void Update()
         {
@@ -71,7 +65,8 @@ namespace TankSurvival.Combat
                 if (closest != null)
                 {
                     Vector3 dir = (closest.transform.position - position).normalized;
-                    _continuousShotId = shotSystem.Fire(_factory.Build(turret.delivery, position, dir, statBlock.damage));
+                    _continuousShotId = shotSystem.Fire(_factory.Build(turret.delivery, turret.onHitModules,
+                        position, dir, statBlock.damage));
                 }
 
                 return;
@@ -83,7 +78,8 @@ namespace TankSurvival.Combat
             }
 
             Vector3 shotDirection = (closest.transform.position - position).normalized;
-            shotSystem.Fire(_factory.Build(turret.delivery, position, shotDirection, statBlock.damage));
+            shotSystem.Fire(_factory.Build(turret.delivery, turret.onHitModules, position, shotDirection,
+                statBlock.damage));
             _cooldown = 1f / statBlock.fireRate;
         }
     }

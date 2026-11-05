@@ -1,5 +1,5 @@
 # T141: TurretController — on-hit через ShotFactory, убрать OnHitDispatcher
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Depends: T139
 - Files:
@@ -27,5 +27,5 @@
 - Play Mode: on-hit модули, назначенные турели, работают через новую систему (smoke фазы); урон не дублируется.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/TurretController.cs: удалено поле `public OnHitDispatcher onHit;` и метод `Start()`, оба вызова `_factory.Build(...)` переведены на перегрузку с `turret.onHitModules` вторым аргументом (continuous и instant/projectile ветки), ссылок на `OnHitDispatcher` больше нет, `using TankSurvival.Combat.Shooting;` присутствует
+Блокер: —
