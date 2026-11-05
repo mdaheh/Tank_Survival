@@ -23,6 +23,7 @@ namespace TankSurvival.Combat.Shooting
         Hitscan,
         Cone,
         AoE,
-        ContinuousHitscan
+        ContinuousHitscan,
+        Zone
     }
 }

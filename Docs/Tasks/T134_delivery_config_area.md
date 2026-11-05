@@ -1,5 +1,5 @@
 # T134: Площадной конфиг доставки (DeliveryConfig + DeliveryType.Zone)
-- Status: [ ]
+- Status: [x]
 - Phase: 15
 - Files:
   - Assets/Scripts/Combat/Shooting/DeliveryConfig.cs
@@ -26,5 +26,5 @@
 - В `ShotTypes.cs` присутствует `DeliveryType.Zone`; в `DeliveryConfig.cs` появились поля `duration` и `deathVfx`.
 
 ## Отчёт Исполнителя
-Готово:
-Блокер:
+Готово: Assets/Scripts/Combat/Shooting/DeliveryConfig.cs: добавлены поля `duration` (float) и `deathVfx` (GameObject), Assets/Scripts/Combat/Shooting/ShotTypes.cs: в `enum DeliveryType` добавлено значение `Zone` в конец списка
+Блокер: —

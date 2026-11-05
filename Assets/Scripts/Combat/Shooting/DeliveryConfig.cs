@@ -10,5 +10,7 @@ namespace TankSurvival.Combat.Shooting
         public bool continuous;
         public float tickRate;
         public GameObject coneVfx;
+        public float duration;
+        public GameObject deathVfx;
     }
 }
