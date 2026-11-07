@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankSurvival.Data.TurretData
   delivery: {fileID: 11400000, guid: 849a7dd2d2fd9884c8f1a5f2b480058c, type: 2}
   onHitModules:
-  - {fileID: 11400000, guid: a42de606a5f94ed4a9538a30ca1c2565, type: 2}
+  - {fileID: 0}
